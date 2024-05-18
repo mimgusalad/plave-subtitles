@@ -1,0 +1,74 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.App {
+  min-height: 100vh;
+  text-align: center;
+  /* background-color: #181716; */
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 24px;
+  color: white;
+}
+
+#video-container,
+.subtitle-container,
+.language-selector-container {
+  margin-top: 20px; /* Adjust as needed for spacing */
+}
+
+.card-container{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+}
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .subtitle-container {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 30px;
+    color: white;
+  }
+
+  .language-selector-container {
+    display: flex;
+    left: 0;
+    width: 100%;
+    padding: 10px; /* Optional: Add padding for spacing */
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for visual effect */
+  }
+  
