@@ -1,8 +1,8 @@
-import Card from "../components/cards";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Card from "../components/cards";
 
-function Home() {
+function HomePage() {
   const [videos, setVideos] = useState([]);
   // use skeleton when loading
   const fetchData = () => {
@@ -13,7 +13,7 @@ function Home() {
 
   const changeBackgroundColor = () => {
     document.body.style.transition = "background-color 0.5s ease";
-    document.body.style.backgroundColor = "#222222";
+    document.body.style.backgroundColor = "#282828";
   };
 
   const imgUrl = (videoId) => {
@@ -34,4 +34,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

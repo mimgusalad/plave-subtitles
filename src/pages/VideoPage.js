@@ -1,10 +1,10 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import YouTube from "react-youtube";
 import { useState, useEffect, useRef } from "react";
 import { getSubtitles } from "../utils/getSubtitles";
 import { useLocation } from "react-router-dom";
-import LanguageSelector from "../components/LanguageSelector";
 import Subtitles from "../components/Subtitles";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Sidebar from "../components/Sidebar";
 
 function YouTubePlayer() {
   const location = useLocation();
@@ -28,13 +28,13 @@ function YouTubePlayer() {
     } else {
       let selectedSubtitles;
       switch (language) {
-        case "kr":
+        case "ko":
           selectedSubtitles = await getSubtitles(videoId, "korean");
           break;
         case "en":
           selectedSubtitles = await getSubtitles(videoId, "english");
           break;
-        case "jp":
+        case "ja":
           selectedSubtitles = await getSubtitles(videoId, "japanese");
           break;
         default:
@@ -86,10 +86,7 @@ function YouTubePlayer() {
 
   return (
     <div>
-      <LanguageSelector
-        selectedLanguage={selectedLanguage}
-        handleLanguageChange={handleLanguageChange}
-      />
+      <Sidebar handleLanguageChange={handleLanguageChange} />
       <div id="video-container">
         <YouTube
           videoId={videoId}

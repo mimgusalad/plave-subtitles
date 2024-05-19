@@ -1,19 +1,23 @@
 import "./App.css";
 import "./style.css";
-import Home from "./pages/Home";
+import { createGlobalStyle } from "styled-components";
+import HomePage from "./pages/HomePage";
 import YouTubePlayer from "./pages/VideoPage";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+`;
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-          HOME
-        </Link>
-      </header>
-
+      <GlobalStyle />
+      <header className="App-header"></header>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/watch" element={<YouTubePlayer />} />
       </Routes>
     </div>

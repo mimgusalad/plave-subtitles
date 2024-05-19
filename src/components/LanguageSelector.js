@@ -24,4 +24,5 @@ function LanguageSelector({ selectedLanguage, handleLanguageChange }) {
     </ButtonGroup>
   );
 }
+
 export default LanguageSelector;
