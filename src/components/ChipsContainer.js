@@ -1,0 +1,73 @@
+import React, { useEffect, useState, useMemo } from "react";
+import CustomChip2 from "./CustomChip2";
+import { Chip } from "@mui/material";
+
+function ChipsContainer({ videoData, onFilterChange, fullData }) {
+  const initialOptions = ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"];
+  const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#33cc99"];
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleSelectedOptions = (option) => {
+    setSelectedOptions((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((item) => item !== option);
+      } else {
+        return [
+          ...prevSelectedOptions.filter((item) => item !== "all videos"),
+          option,
+        ];
+      }
+    });
+  };
+
+  const handleShowAllVideos = () => {
+    setSelectedOptions([]);
+    onFilterChange(fullData);
+  };
+
+  const filteredVideos = useMemo(() => {
+    if (!videoData) return [];
+    return videoData.filter((video) => {
+      if (selectedOptions.length === 0) {
+        return true; // Show all videos if no options are selected
+      } else {
+        // Check if any actor from selected options is in the video's actors array
+        return selectedOptions.every((actor) =>
+          video.actors.includes(actor.toLowerCase())
+        );
+      }
+    });
+  }, [selectedOptions, videoData]);
+
+  useEffect(() => {
+    onFilterChange(filteredVideos);
+  }, [selectedOptions]);
+
+  console.log(selectedOptions);
+  return (
+    <div>
+      <div className="filter-chips">
+        {initialOptions.map((option, index) => (
+          <CustomChip2
+            key={option}
+            name={option}
+            selected={selectedOptions.includes(option)}
+            selectedColor={memberColors[index]}
+            handleSelectedOptions={handleSelectedOptions}
+          />
+        ))}
+      </div>
+      <Chip
+        clickable
+        label={"SHOW ALL VIDEOS"}
+        onClick={handleShowAllVideos}
+        style={{
+          backgroundColor: "white",
+          opacity: 0.7,
+        }}
+      />
+    </div>
+  );
+}
+
+export default ChipsContainer;

@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../components/cards";
+import Card from "../components/Card";
+import ChipsContainer from "../components/ChipsContainer";
 
 function HomePage() {
-  const [videos, setVideos] = useState([]);
+  const [videoData, setVideoData] = useState([]);
+  const [filteredVideos, setFilteredVideos] = useState([]);
+
+  const handleFilterChange = (videos) => {
+    setFilteredVideos(videos);
+  };
+
   // use skeleton when loading
   const fetchData = () => {
     axios
       .get("https://mimgusalad.github.io/plave/img/data.json")
-      .then((res) => setVideos(res.data.info));
+      .then((res) => {
+        setFilteredVideos(res.data.info);
+        setVideoData(res.data.info);
+      });
   };
 
   const changeBackgroundColor = () => {
@@ -25,12 +35,25 @@ function HomePage() {
     fetchData();
   }, []);
 
+  console.log(filteredVideos);
+
   return (
-    <div className="card-container">
-      {videos.map((video) => (
-        <Card videoId={video.videoId} imgUrl={imgUrl(video.videoId)}></Card>
-      ))}
-    </div>
+    <>
+      <ChipsContainer
+        onFilterChange={handleFilterChange}
+        videoData={filteredVideos}
+        fullData={videoData}
+      />
+      <div className="card-container">
+        {filteredVideos.map((video) => (
+          <Card
+            key={video.videoId}
+            videoId={video.videoId}
+            imgUrl={imgUrl(video.videoId)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
 
