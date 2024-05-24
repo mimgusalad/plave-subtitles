@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import CustomChip from "./CustomChip";
 import { Chip } from "@mui/material";
 
-function ChipsContainer({ videoData, onFilterChange, fullData }) {
+function ChipsContainer({ videoData, onFilterChange, originalData }) {
   const initialOptions = ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"];
   const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#33cc99"];
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -22,14 +22,13 @@ function ChipsContainer({ videoData, onFilterChange, fullData }) {
 
   const handleShowAllVideos = () => {
     setSelectedOptions([]);
-    onFilterChange(fullData);
   };
 
-  const filteredVideos = useMemo(() => {
+  const filteredVideos = () => {
     if (!videoData) return [];
     return videoData.filter((video) => {
       if (selectedOptions.length === 0) {
-        return true; // Show all videos if no options are selected
+        return []; // Show all videos if no options are selected
       } else {
         // Check if any actor from selected options is in the video's actors array
         return selectedOptions.every((actor) =>
@@ -37,12 +36,12 @@ function ChipsContainer({ videoData, onFilterChange, fullData }) {
         );
       }
     });
-  }, [selectedOptions, videoData]);
+  };
 
   useEffect(() => {
     onFilterChange(filteredVideos);
     if (selectedOptions.length === 0) {
-      onFilterChange(fullData);
+      onFilterChange(originalData);
     }
   }, [selectedOptions]);
 

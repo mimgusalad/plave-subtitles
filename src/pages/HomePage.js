@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../components/Card";
+import CardContainer from "../components/CardContainer";
 import ChipsContainer from "../components/ChipsContainer";
 
 function HomePage() {
@@ -19,10 +19,6 @@ function HomePage() {
     document.body.style.overflow = "hidden";
   };
 
-  const imgUrl = (videoId) => {
-    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-  };
-
   useEffect(() => {
     const fetchData = () => {
       axios
@@ -30,15 +26,15 @@ function HomePage() {
         .then((res) => {
           setFilteredVideos(res.data.info);
           setVideoData(res.data.info);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     };
 
     changeBackgroundColor();
     fetchData();
-    console.log("videoData:", videoData);
   }, []);
-
-  console.log("videoData:", videoData);
 
   return (
     <>
@@ -46,16 +42,10 @@ function HomePage() {
       <ChipsContainer
         onFilterChange={handleFilterChange}
         videoData={filteredVideos}
-        fullData={videoData}
+        originalData={videoData}
       />
       <div className="card-container">
-        {filteredVideos.map((video) => (
-          <Card
-            key={video.videoId}
-            videoId={video.videoId}
-            imgUrl={imgUrl(video.videoId)}
-          />
-        ))}
+        <CardContainer videoData={filteredVideos} />
       </div>
     </>
   );

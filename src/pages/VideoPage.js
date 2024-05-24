@@ -47,10 +47,12 @@ function YouTubePlayer() {
 
   useEffect(() => {
     // Apply background color on component mount
-    document.body.style.background = "";
-    document.body.style.transition = "background-color 0.5s ease";
-    document.body.style.backgroundColor = "black";
+    // document.body.style.background = "";
+    // document.body.style.transition = "background-color 0.5s ease";
+    // document.body.style.backgroundColor = "black";
 
+    document.body.style.backgroundImage =
+      "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 10)), url('/img/bg.png')";
     // Fetch initial subtitles
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
   }, []);
