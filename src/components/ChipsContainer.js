@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import CustomChip2 from "./CustomChip2";
+import CustomChip from "./CustomChip";
 import { Chip } from "@mui/material";
 
 function ChipsContainer({ videoData, onFilterChange, fullData }) {
@@ -41,14 +41,17 @@ function ChipsContainer({ videoData, onFilterChange, fullData }) {
 
   useEffect(() => {
     onFilterChange(filteredVideos);
+    if (selectedOptions.length === 0) {
+      onFilterChange(fullData);
+    }
   }, [selectedOptions]);
 
   console.log(selectedOptions);
   return (
-    <div>
+    <div className="filter-chips-container">
       <div className="filter-chips">
         {initialOptions.map((option, index) => (
-          <CustomChip2
+          <CustomChip
             key={option}
             name={option}
             selected={selectedOptions.includes(option)}
@@ -64,6 +67,7 @@ function ChipsContainer({ videoData, onFilterChange, fullData }) {
         style={{
           backgroundColor: "white",
           opacity: 0.7,
+          fontWeight: "bold",
         }}
       />
     </div>

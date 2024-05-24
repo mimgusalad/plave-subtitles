@@ -22,8 +22,10 @@ function HomePage() {
   };
 
   const changeBackgroundColor = () => {
-    document.body.style.transition = "background-color 0.5s ease";
-    document.body.style.backgroundColor = "#282828";
+    document.body.style.transition = "background 1s ease";
+    document.body.style.background =
+      "no-repeat url('/img/bg_blur.png') 0 0 / cover";
+    document.body.style.overflow = "hidden";
   };
 
   const imgUrl = (videoId) => {
@@ -39,6 +41,7 @@ function HomePage() {
 
   return (
     <>
+      <h1 className="title">Plave Subtitles</h1>
       <ChipsContainer
         onFilterChange={handleFilterChange}
         videoData={filteredVideos}

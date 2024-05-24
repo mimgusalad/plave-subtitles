@@ -1,46 +1,51 @@
-import React, { useState } from "react";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
+import { IconButton, Avatar, Typography } from "@mui/material";
 
 function CustomChip({ name, selected, selectedColor, handleSelectedOptions }) {
   const handleChipClick = () => {
     handleSelectedOptions(name);
   };
 
-  const avatarStyle = {
-    width: "40px", // Increase the width of the avatar
-    height: "40px", // Increase the height of the avatar
+  const labelFontStyle = {
+    fontSize: "1.2em",
+    margin: "0 20px 0px 0",
+    color: "white",
+    opacity: selected ? 1 : 0.5,
   };
 
-  if (name === "all videos") {
-    return (
-      <Chip
-        label={name}
-        onClick={handleChipClick}
-        color={selected ? "primary" : "default"}
-        style={{
-          backgroundColor: selected ? selectedColor : "#eeeeee",
-          color: selected ? "#ffffff" : "#333333",
-          fontSize: "1.2em",
-        }}
-      />
-    );
-  }
+  const avatarStyle = {
+    width: "100px", // Increase the width of the avatar
+    height: "100px", // Increase the height of the avatar
+  };
+
+  const chipStyle = {
+    margin: "0 20px 5px 0",
+    backgroundColor: selected ? selectedColor : "",
+    opacity: selected ? 1 : 0.7,
+    color: selected ? "#ffffff" : "#333333",
+    fontSize: "1.2em",
+    padding: "3px", // 보더 굵기
+  };
+
+  const labelContainerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  };
 
   return (
-    <Chip
-      avatar={<Avatar alt={name} src={`/img/${name}.png`} />}
-      label={name}
-      onClick={handleChipClick}
-      color={selected ? "primary" : "default"}
-      style={{
-        backgroundColor: selected ? selectedColor : "#eeeeee",
-        color: selected ? "#ffffff" : "#333333",
-        fontSize: "1.2em",
-        fontWeight: "bold",
-        boxShadow: "0",
-      }}
-    />
+    <div style={labelContainerStyle}>
+      <IconButton
+        onClick={handleChipClick}
+        color={selected ? "primary" : "default"}
+        style={chipStyle}
+      >
+        <Avatar alt={name} src={`/img/${name}.png`} style={avatarStyle} />
+      </IconButton>
+      <Typography variant="caption" style={labelFontStyle}>
+        {name}
+      </Typography>
+    </div>
   );
 }
 

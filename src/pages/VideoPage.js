@@ -47,6 +47,7 @@ function YouTubePlayer() {
 
   useEffect(() => {
     // Apply background color on component mount
+    document.body.style.background = "";
     document.body.style.transition = "background-color 0.5s ease";
     document.body.style.backgroundColor = "black";
 
@@ -87,7 +88,7 @@ function YouTubePlayer() {
   return (
     <div>
       <Sidebar handleLanguageChange={handleLanguageChange} />
-      <div id="video-container">
+      <div className="video-container">
         <YouTube
           videoId={videoId}
           onReady={onReady}

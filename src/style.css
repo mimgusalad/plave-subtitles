@@ -1,16 +1,30 @@
 body {
+  height: 100vh;
+  margin: 0;
+  transition: background-color 0.5s ease-in-out;
+  font-family: 'Roboto', 'Noto Sans', 'Arial', sans-serif;
+}
+
+.title{
+  display: block;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 80px;
+  color: white;
+}
+
+.filter-chips-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  font-family: 'Roboto', 'Noto Sans', 'Arial', sans-serif;
+  margin-top: 20px;
 }
-
 .filter-chips {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
   /* 사이드바 */
   .sidebar{
@@ -61,15 +75,23 @@ body {
   transition: transform 0.3s ease;
   cursor: pointer;
   }
-
+/* 
 .card:hover {
   transform: scale(1.05);
-}
+} */
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.video-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
 }
 
 /* 자막 컨테이너 */
@@ -92,7 +114,6 @@ body {
     min-width: 0;
   }
 
-
   .language-fab-container .language-fab-button{
     box-shadow: none;
     background-color: transparent;
@@ -100,8 +121,4 @@ body {
       background-color: transparent;
       box-shadow: none;
     }
-  }
-
-  #video-container{
-    padding-top: 32px;
   }
