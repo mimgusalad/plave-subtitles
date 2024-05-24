@@ -65,10 +65,13 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: start;
-  margin-top: 50px;
-  margin-left: 200px;
-  margin-right: 200px;
+  align-items: center;
+  margin: 50% auto;
+  margin-top: 40px;
+  padding-top: 11px;
+  width: 50%;
+  height: 45vh;
+  overflow-y: auto;
   /* top: 50%;
     left: 50%;
     width: 50%;
@@ -76,27 +79,26 @@ body {
 }
 
 .card {
+  border-radius: 10%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 0 0 auto;
   cursor: pointer;
   width: 20em;
-  margin: 10px 10px 10px 10px;
+  margin: 0 10px 10px 10px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-
-/* Disable flex effect when viewport width is less than 600px */
 @media (max-width: 720px) {
   .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
-    margin-right: 20px;
+    height: 60vh;
+    overflow-x: visible;
+    overflow-y: auto;
   }
 
   .card {
     width: 320px;
-    margin: 10px 20px 10px 20px;
+    margin:0 10px 10px 10px;
   }
 
 }

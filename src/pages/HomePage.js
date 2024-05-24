@@ -12,17 +12,8 @@ function HomePage() {
   };
 
   // use skeleton when loading
-  const fetchData = () => {
-    axios
-      .get("https://mimgusalad.github.io/plave/img/data.json")
-      .then((res) => {
-        setFilteredVideos(res.data.info);
-        setVideoData(res.data.info);
-      });
-  };
 
   const changeBackgroundColor = () => {
-    document.body.style.transition = "background 1s ease";
     document.body.style.background = "no-repeat url('/img/bg.png')";
     document.body.style.backgroundSize = "fit";
     document.body.style.overflow = "hidden";
@@ -33,11 +24,21 @@ function HomePage() {
   };
 
   useEffect(() => {
+    const fetchData = () => {
+      axios
+        .get("https://mimgusalad.github.io/plave/img/data.json")
+        .then((res) => {
+          setFilteredVideos(res.data.info);
+          setVideoData(res.data.info);
+        });
+    };
+
     changeBackgroundColor();
     fetchData();
+    console.log("videoData:", videoData);
   }, []);
 
-  console.log(filteredVideos);
+  console.log("videoData:", videoData);
 
   return (
     <>

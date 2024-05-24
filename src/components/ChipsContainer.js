@@ -46,7 +46,6 @@ function ChipsContainer({ videoData, onFilterChange, fullData }) {
     }
   }, [selectedOptions]);
 
-  console.log(selectedOptions);
   return (
     <div className="filter-chips-container">
       <div className="filter-chips">
