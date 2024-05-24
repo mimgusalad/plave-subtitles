@@ -23,8 +23,8 @@ function HomePage() {
 
   const changeBackgroundColor = () => {
     document.body.style.transition = "background 1s ease";
-    document.body.style.background =
-      "no-repeat url('/img/bg_blur.png') 0 0 / cover";
+    document.body.style.background = "no-repeat url('/img/bg.png')";
+    document.body.style.backgroundSize = "fit";
     document.body.style.overflow = "hidden";
   };
 

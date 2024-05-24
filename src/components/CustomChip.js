@@ -7,18 +7,20 @@ function CustomChip({ name, selected, selectedColor, handleSelectedOptions }) {
 
   const labelFontStyle = {
     fontSize: "1.2em",
-    margin: "0 20px 0px 0",
+    margin: "0 10px 0px 10px",
     color: "white",
     opacity: selected ? 1 : 0.5,
   };
 
   const avatarStyle = {
-    width: "100px", // Increase the width of the avatar
-    height: "100px", // Increase the height of the avatar
+    // width: "100px", // Increase the width of the avatar
+    // height: "100px", // Increase the height of the avatar
+    width: "5em",
+    height: "5em",
   };
 
   const chipStyle = {
-    margin: "0 20px 5px 0",
+    margin: "0 10px 0px 10px",
     backgroundColor: selected ? selectedColor : "",
     opacity: selected ? 1 : 0.7,
     color: selected ? "#ffffff" : "#333333",
