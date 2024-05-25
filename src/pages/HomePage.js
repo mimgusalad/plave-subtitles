@@ -9,11 +9,14 @@ function HomePage() {
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
 
+  localStorage.setItem("lang", selectedLanguage);
+
   const handleFilterChange = (videos) => {
     setFilteredVideos(videos);
   };
 
   const handleLanguageChange = (language) => {
+    localStorage.setItem("lang", language);
     setSelectedLanguage(language);
   };
 

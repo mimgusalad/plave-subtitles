@@ -2,7 +2,9 @@ import { Chip } from "@mui/material";
 import React, { useState } from "react";
 
 function LanguageSetting({ handleLanguageChange }) {
-  const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("lang") || "en"
+  );
   const languages = {
     ko: "한국어",
     en: "English",
@@ -26,7 +28,7 @@ function LanguageSetting({ handleLanguageChange }) {
   });
 
   return (
-    <>
+    <div className="language-setting">
       {Object.keys(languages).map((lang) => (
         <Chip
           key={lang}
@@ -36,7 +38,7 @@ function LanguageSetting({ handleLanguageChange }) {
           //   color={selectedLanguage === lang ? "primary" : "default"}
         />
       ))}
-    </>
+    </div>
   );
 }
 

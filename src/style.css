@@ -15,9 +15,18 @@ body {
 .title {
   display: block;
   text-align: center;
-  margin-top: 50px;
-  font-size: 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 60px;
   color: white;
+}
+
+.language-setting{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+
 }
 
 .filter-chips-container {
@@ -25,7 +34,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
 }
 
 .filter-chips {

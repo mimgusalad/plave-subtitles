@@ -1,4 +1,4 @@
-import { IconButton, Avatar, Typography } from "@mui/material";
+import { IconButton, Avatar, Typography, Tooltip } from "@mui/material";
 
 function CustomChip({
   selectedLanguage,
@@ -13,6 +13,8 @@ function CustomChip({
     ko: ["예준", "노아", "밤비", "은호", "하민"],
     ja: ["イェジュン", "ノア", "バンビ", "ウノ", "ハミン"],
   };
+
+  const hearts = ["💙", "💜", "💗", "❤️", "🖤"];
 
   const handleChipClick = () => {
     handleSelectedOptions(names.en[index].toLowerCase());
@@ -51,17 +53,26 @@ function CustomChip({
 
   return (
     <div style={labelContainerStyle}>
-      <IconButton
-        onClick={handleChipClick}
-        color={selected ? "primary" : "default"}
-        style={chipStyle}
+      <Tooltip
+        title={hearts[index]}
+        placement="top"
+        arrow
+        sx={{
+          backgroundColor: "white",
+        }}
       >
-        <Avatar
-          alt={names.en[index]}
-          src={`/img/${names.en[index]}.png`}
-          style={avatarStyle}
-        />
-      </IconButton>
+        <IconButton
+          onClick={handleChipClick}
+          color={selected ? "primary" : "default"}
+          style={chipStyle}
+        >
+          <Avatar
+            alt={names.en[index]}
+            src={`/img/${names.en[index]}.png`}
+            style={avatarStyle}
+          />
+        </IconButton>
+      </Tooltip>
       <Typography variant="caption" style={labelFontStyle}>
         {names[selectedLanguage][index]}
       </Typography>

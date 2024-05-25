@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Subtitles from "../components/Subtitles";
 import Sidebar from "../components/Sidebar";
-import ExpandableButton from "../components/ExpandableButton";
 import SettingsButton from "../components/SettingsButton";
 
 function YouTubePlayer() {
