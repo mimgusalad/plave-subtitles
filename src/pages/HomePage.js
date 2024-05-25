@@ -2,16 +2,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CardContainer from "../components/CardContainer";
 import ChipsContainer from "../components/ChipsContainer";
+import LanguageSetting from "../components/LanguageSetting";
 
 function HomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
 
   const handleFilterChange = (videos) => {
     setFilteredVideos(videos);
   };
 
-  // use skeleton when loading
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+  };
 
   const changeBackgroundColor = () => {
     document.body.style.background = "no-repeat url('/img/bg.png')";
@@ -39,7 +43,9 @@ function HomePage() {
   return (
     <>
       <h1 className="title">Plave Subtitles</h1>
+      <LanguageSetting handleLanguageChange={handleLanguageChange} />
       <ChipsContainer
+        selectedLanguage={selectedLanguage}
         onFilterChange={handleFilterChange}
         videoData={filteredVideos}
         originalData={videoData}

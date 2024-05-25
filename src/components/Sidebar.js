@@ -1,29 +1,42 @@
-import { Link } from "react-router-dom";
 import FontSizeController from "./FontSizeController";
-import LanguageFab from "./LanguageFAB";
+import LanguageSelector from "./LanguageSelector";
+import SubtitlesIcon from "@mui/icons-material/Subtitles";
+import CloseIcon from "@mui/icons-material/Close";
+import { useEffect, useState } from "react";
 
-function Sidebar({ handleLanguageChange }) {
+function Sidebar({ selectedLanguage, handleLanguageChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="sidebar">
-      <li>
-        <Link
-          to="/"
-          style={{
-            textDecoration: "none",
-            color: "white",
-            fontWeight: "bold",
-          }}
-        >
-          <h3>HOME</h3>
-        </Link>
-      </li>
+    <div className="setting-container">
+      <button onClick={() => setIsOpen(!isOpen)}>
+        <SubtitlesIcon /> {"Settings"}
+      </button>
+      {isOpen && (
+        <div>
+          <SidebarContent
+            selectedLanguage={selectedLanguage}
+            handleLanguageChange={handleLanguageChange}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SidebarContent({ selectedLanguage, handleLanguageChange }) {
+  return (
+    <ul className="sidebar-content">
       <li>
         <FontSizeController />
       </li>
       <li>
-        <LanguageFab handleSubtitleLanguageChange={handleLanguageChange} />
+        <LanguageSelector
+          handleLanguageChange={handleLanguageChange}
+          selectedLanguage={selectedLanguage}
+        />
       </li>
-    </div>
+    </ul>
   );
 }
 

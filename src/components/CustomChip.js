@@ -1,12 +1,26 @@
 import { IconButton, Avatar, Typography } from "@mui/material";
 
-function CustomChip({ name, selected, selectedColor, handleSelectedOptions }) {
+function CustomChip({
+  selectedLanguage,
+  index,
+  selected,
+  selectedColor,
+  handleSelectedOptions,
+}) {
+  index = Number(index);
+  const names = {
+    en: ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"],
+    ko: ["예준", "노아", "밤비", "은호", "하민"],
+    ja: ["イェジュン", "ノア", "バンビ", "ウノ", "ハミン"],
+  };
+
   const handleChipClick = () => {
-    handleSelectedOptions(name);
+    handleSelectedOptions(names.en[index].toLowerCase());
   };
 
   const labelFontStyle = {
     fontSize: "1.2em",
+    fontWeight: "bold",
     margin: "0 10px 0px 10px",
     color: "white",
     opacity: selected ? 1 : 0.5,
@@ -42,10 +56,14 @@ function CustomChip({ name, selected, selectedColor, handleSelectedOptions }) {
         color={selected ? "primary" : "default"}
         style={chipStyle}
       >
-        <Avatar alt={name} src={`/img/${name}.png`} style={avatarStyle} />
+        <Avatar
+          alt={names.en[index]}
+          src={`/img/${names.en[index]}.png`}
+          style={avatarStyle}
+        />
       </IconButton>
       <Typography variant="caption" style={labelFontStyle}>
-        {name}
+        {names[selectedLanguage][index]}
       </Typography>
     </div>
   );

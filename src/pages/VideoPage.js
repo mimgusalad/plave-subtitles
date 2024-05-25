@@ -3,8 +3,11 @@ import YouTube from "react-youtube";
 import { useState, useEffect, useRef } from "react";
 import { getSubtitles } from "../utils/getSubtitles";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Subtitles from "../components/Subtitles";
 import Sidebar from "../components/Sidebar";
+import ExpandableButton from "../components/ExpandableButton";
+import SettingsButton from "../components/SettingsButton";
 
 function YouTubePlayer() {
   const location = useLocation();
@@ -17,6 +20,7 @@ function YouTubePlayer() {
   const [subtitles, setSubtitles] = useState([]);
   const width = window.innerWidth * 0.7;
   const height = (width * 9) / 16;
+  const home = "Back to GALLERY";
 
   // Cache object to store fetched subtitles
   const subtitleCache = useRef({});
@@ -89,7 +93,20 @@ function YouTubePlayer() {
 
   return (
     <div>
-      <Sidebar handleLanguageChange={handleLanguageChange} />
+      <Link
+        to="/"
+        style={{
+          textDecoration: "none",
+          color: "white",
+          fontWeight: "bold",
+        }}
+      >
+        {home}
+      </Link>
+      <Sidebar
+        handleLanguageChange={handleLanguageChange}
+        selectedLanguage={selectedLanguage}
+      />
       <div className="video-container">
         <YouTube
           videoId={videoId}
@@ -98,6 +115,7 @@ function YouTubePlayer() {
         />
         <Subtitles subtitles={subtitles} />
       </div>
+      <SettingsButton />
     </div>
   );
 }

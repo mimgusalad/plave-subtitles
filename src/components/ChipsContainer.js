@@ -2,10 +2,20 @@ import React, { useEffect, useState } from "react";
 import CustomChip from "./CustomChip";
 import { Chip } from "@mui/material";
 
-function ChipsContainer({ videoData, onFilterChange, originalData }) {
-  const initialOptions = ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"];
+function ChipsContainer({
+  selectedLanguage,
+  videoData,
+  onFilterChange,
+  originalData,
+}) {
   const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#33cc99"];
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const text = {
+    en: "SHOW ALL VIDEOS",
+    ko: "전체 동영상",
+    ja: "全ての動画",
+  };
+  const names = ["yejun", "noah", "bamby", "eunho", "hamin"];
 
   const handleSelectedOptions = (option) => {
     setSelectedOptions((prevSelectedOptions) => {
@@ -48,11 +58,11 @@ function ChipsContainer({ videoData, onFilterChange, originalData }) {
   return (
     <div className="filter-chips-container">
       <div className="filter-chips">
-        {initialOptions.map((option, index) => (
+        {names.map((option, index) => (
           <CustomChip
-            key={option}
-            name={option}
-            selected={selectedOptions.includes(option)}
+            index={index}
+            selectedLanguage={selectedLanguage}
+            selected={selectedOptions.includes(names[index])}
             selectedColor={memberColors[index]}
             handleSelectedOptions={handleSelectedOptions}
           />
@@ -60,7 +70,7 @@ function ChipsContainer({ videoData, onFilterChange, originalData }) {
       </div>
       <Chip
         clickable
-        label={"SHOW ALL VIDEOS"}
+        label={text[selectedLanguage]}
         onClick={handleShowAllVideos}
         style={{
           backgroundColor: "white",

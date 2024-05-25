@@ -1,8 +1,12 @@
 body {
+  font-family: 'RIDIBatang', sans-serif;
   height: 100vh;
   margin: 0;
   transition: background-color 0.5s ease-in-out;
-  font-family: 'Roboto', 'Noto Sans', 'Arial', sans-serif;
+  /* font-family: 'Roboto',
+  'Noto Sans',
+  'Arial',
+  sans-serif; */
   container-name: body;
   container-type: inline-size;
   user-select:none;
@@ -32,32 +36,42 @@ body {
 }
 
 /* 사이드바 */
-.sidebar {
-  position: fixed;
-  right: 0;
-  top: 0;
-  padding-top: 24px;
-  padding-left: 20px;
-  padding-right: 20px;
-  z-index: 1;
-  background-color: black;
-  opacity: 0.8;
-  width: 180px;
-  height: 100vh;
-  list-style-type: none;
+.setting-container {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+
 }
 
-.sidebar li {
-  margin-bottom: 20px;
+.sidebar-content {
+  background-color: white;
+  opacity: 0.8;
+  list-style-type: none;
+  color: black;
+  box-shadow: 0 80px 80px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar li:first-child {
-  margin-bottom: 50px;
+.sidebar-content li ul li {
+  list-style-type: disc;
+  cursor: pointer;
 }
 
-.sidebar li:last-child {
-  margin-bottom: 0;
+/* 폰트 크기 컨트롤러 */
+.font-size-controller {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+
+.font-size-controller .font-size-button {
+  color: black;
 }
 
 .card-container {
@@ -72,10 +86,6 @@ body {
   width: 50%;
   height: 45vh;
   overflow-y: auto;
-  /* top: 50%;
-    left: 50%;
-    width: 50%;
-    transform: translate(-50%, -50%); */
 }
 
 .card {
@@ -97,7 +107,7 @@ body {
 
   .card {
     width: 320px;
-    margin:0 10px 10px 10px;
+    margin: 0 10px 10px 10px;
   }
 
 }
@@ -134,26 +144,4 @@ body {
   margin-top: 30px;
   font-size: 30px;
   color: white;
-}
-
-/* 폰트 크기 컨트롤러 */
-.font-size-controller {
-  color: white;
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: bold;
-}
-
-.font-size-controller .font-size-button {
-  color: white;
-  min-width: 0;
-}
-
-.language-fab-container .language-fab-button {
-  box-shadow: none;
-  background-color: transparent;
-
-  &:hover {
-    background-color: transparent;
-    box-shadow: none;
-  }
 }

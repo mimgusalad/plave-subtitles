@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.expandable-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 25px; /* Start as a circle */
+  background-color: #2196F3;
+  color: white;
+  cursor: pointer;
+  transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+}
+
+.expandable-button span {
+  margin-right: 7px;
+}
+
+.expandable-button.expanded {
+  width: 200px;
+  height: 200px;
+  border-radius: 25px; /* Rectangle with slightly rounded corners */
+}
+
+.material-icons {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.expandable-button.expanded .material-icons {
+  transform: rotate(180deg);
+}
+
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  background-color: white;
+  opacity: 0.8;
+  list-style-type: none;
+  color: black;
+  box-shadow: 0 80px 80px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-content li ul li{
+  list-style-type: disc;
+  cursor: pointer;
+}
+
+/* 폰트 크기 컨트롤러 */
+.font-size-controller {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: bold;
+}
+
+.font-size-controller .font-size-button {
+  color: black;
+}
