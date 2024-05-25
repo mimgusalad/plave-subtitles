@@ -5,8 +5,9 @@ import { getSubtitles } from "../utils/getSubtitles";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Subtitles from "../components/Subtitles";
-import Sidebar from "../components/Sidebar";
-import SettingsButton from "../components/SettingsButton";
+import LanguageSetting from "../components/LanguageSetting";
+import NavBar from "../components/NavBar";
+import zIndex from "@mui/material/styles/zIndex";
 
 function YouTubePlayer() {
   const location = useLocation();
@@ -15,11 +16,12 @@ function YouTubePlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [player, setPlayer] = useState(null);
   const [subtitleHashTable, setSubtitleHashTable] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState("kr");
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("lang") || "ko"
+  );
   const [subtitles, setSubtitles] = useState([]);
   const width = window.innerWidth * 0.7;
   const height = (width * 9) / 16;
-  const home = "Back to GALLERY";
 
   // Cache object to store fetched subtitles
   const subtitleCache = useRef({});
@@ -49,11 +51,6 @@ function YouTubePlayer() {
   };
 
   useEffect(() => {
-    // Apply background color on component mount
-    // document.body.style.background = "";
-    // document.body.style.transition = "background-color 0.5s ease";
-    // document.body.style.backgroundColor = "black";
-
     document.body.style.backgroundImage =
       "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 10)), url('/img/bg.png')";
     // Fetch initial subtitles
@@ -90,22 +87,15 @@ function YouTubePlayer() {
     setSubtitleHashTable(selectedSubtitles);
   };
 
+  const navStyle = {
+    backgroundColor: "black",
+    opacity: "0.7",
+    zIndex: -1,
+  };
+
   return (
     <div>
-      <Link
-        to="/"
-        style={{
-          textDecoration: "none",
-          color: "white",
-          fontWeight: "bold",
-        }}
-      >
-        {home}
-      </Link>
-      <Sidebar
-        handleLanguageChange={handleLanguageChange}
-        selectedLanguage={selectedLanguage}
-      />
+      <NavBar handleLanguageChange={handleLanguageChange} />
       <div className="video-container">
         <YouTube
           videoId={videoId}
@@ -114,7 +104,6 @@ function YouTubePlayer() {
         />
         <Subtitles subtitles={subtitles} />
       </div>
-      <SettingsButton />
     </div>
   );
 }

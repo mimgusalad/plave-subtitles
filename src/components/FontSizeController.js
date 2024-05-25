@@ -25,7 +25,7 @@ const FontSizeController = () => {
 
   return (
     <div className="font-size-controller">
-      <h6>FONT SIZE</h6>
+      {"Font Size"}
       <Box>
         <IconButton className="font-size-button" onClick={decreaseFontSize}>
           <KeyboardArrowDownIcon />

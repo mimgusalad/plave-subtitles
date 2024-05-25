@@ -19,12 +19,13 @@ function LanguageSetting({ handleLanguageChange }) {
     backgroundColor: "white",
     opacity: 0.7,
     fontWeight: "bold",
+    fontSize: "1em",
   };
 
   const getStyle = (lang) => ({
     ...baseStyle,
     backgroundColor: selectedLanguage === lang ? "white" : "transparent",
-    opacity: selectedLanguage === lang ? 1 : 0.7,
+    opacity: selectedLanguage === lang ? 0.7 : 0.7,
   });
 
   return (
