@@ -3,6 +3,8 @@ import axios from "axios";
 import CardContainer from "../components/CardContainer";
 import ChipsContainer from "../components/ChipsContainer";
 import LanguageSetting from "../components/LanguageSetting";
+import AboutPage from "./AboutPage";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [videoData, setVideoData] = useState([]);
@@ -43,8 +45,22 @@ function HomePage() {
     fetchData();
   }, []);
 
+  const tabStyle = {
+    display: "inline-block",
+    fontSize: "1.3em",
+    fontWeight: "bold",
+    textDecoration: "none",
+    color: "white",
+    marginLeft: "20px",
+    marginTop: "10px",
+    padding: "0 10px",
+  };
+
   return (
     <>
+      <Link to="/about" style={tabStyle}>
+        About
+      </Link>
       <h1 className="title">Plave Subtitles</h1>
       <LanguageSetting handleLanguageChange={handleLanguageChange} />
       <ChipsContainer
