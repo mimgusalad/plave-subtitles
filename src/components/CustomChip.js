@@ -1,4 +1,4 @@
-import { IconButton, Avatar, Typography, Tooltip } from "@mui/material";
+import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
 
 function CustomChip({
   selectedLanguage,
@@ -69,7 +69,7 @@ function CustomChip({
         >
           <Avatar
             alt={names.en[index]}
-            src={`/img/${names.en[index]}.png`}
+            src={`/img/${names.en[index].toLowerCase()}.png`}
             style={avatarStyle}
           />
         </IconButton>
