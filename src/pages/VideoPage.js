@@ -1,13 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import YouTube from "react-youtube";
-import { useState, useEffect, useRef } from "react";
-import { getSubtitles } from "../utils/getSubtitles";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Subtitles from "../components/Subtitles";
-import LanguageSetting from "../components/LanguageSetting";
+import YouTube from "react-youtube";
 import NavBar from "../components/NavBar";
-import zIndex from "@mui/material/styles/zIndex";
+import Subtitles from "../components/Subtitles";
+import { getSubtitles } from "../utils/getSubtitles";
 
 function YouTubePlayer() {
   const location = useLocation();
@@ -89,12 +86,6 @@ function YouTubePlayer() {
     setSelectedLanguage(language);
     const selectedSubtitles = await fetchSubtitles(language);
     setSubtitleHashTable(selectedSubtitles);
-  };
-
-  const navStyle = {
-    backgroundColor: "black",
-    opacity: "0.7",
-    zIndex: -1,
   };
 
   return (

@@ -3,7 +3,6 @@ import axios from "axios";
 import CardContainer from "../components/CardContainer";
 import ChipsContainer from "../components/ChipsContainer";
 import LanguageSetting from "../components/LanguageSetting";
-import AboutPage from "./AboutPage";
 import { Link } from "react-router-dom";
 
 function HomePage() {

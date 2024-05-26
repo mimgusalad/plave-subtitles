@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Tooltip } from "@mui/material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Email() {
   const [open, setOpen] = useState(false);
@@ -47,8 +47,6 @@ function Email() {
 }
 
 function AboutPage() {
-  const [copySuccess, setCopySuccess] = useState("");
-
   const tabStyle = {
     display: "inline-block",
     fontSize: "1.3em",
