@@ -59,6 +59,7 @@ function CustomChip({
         arrow
         sx={{
           color: "white",
+          backgroundColor: "white",
         }}
       >
         <IconButton

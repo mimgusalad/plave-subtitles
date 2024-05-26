@@ -51,8 +51,12 @@ function YouTubePlayer() {
   };
 
   useEffect(() => {
-    document.body.style.backgroundImage =
-      "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 10)), url('/img/bg.png')";
+    document.body.style.backgroundImage = "url('/img/bg.png')";
+    document.body.classList.add("background-transition");
+    setTimeout(() => {
+      document.body.classList.add("background-transition");
+    }, 10);
+
     // Fetch initial subtitles
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
   }, []);

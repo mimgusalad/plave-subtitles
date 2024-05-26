@@ -21,9 +21,7 @@ function HomePage() {
   };
 
   const changeBackgroundColor = () => {
-    document.body.style.background = "no-repeat url('/img/bg.png')";
-    document.body.style.backgroundSize = "fit";
-    document.body.style.overflow = "hidden";
+    document.body.classList.remove("background-transition");
   };
 
   useEffect(() => {

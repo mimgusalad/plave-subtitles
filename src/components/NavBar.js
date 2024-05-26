@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import LanguageSetting from "./LanguageSetting";
 import FontSizeController from "./FontSizeController";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import zIndex from "@mui/material/styles/zIndex";
 
 function NavBar({ handleLanguageChange }) {
   const icyblue = "rgb(207, 201, 201)";
