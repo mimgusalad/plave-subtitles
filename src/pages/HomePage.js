@@ -7,7 +7,9 @@ import LanguageSetting from "../components/LanguageSetting";
 function HomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("lang") || "en"
+  );
 
   localStorage.setItem("lang", selectedLanguage);
 
