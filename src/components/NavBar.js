@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import LanguageSetting from "./LanguageSetting";
 import FontSizeController from "./FontSizeController";
+import LanguageSetting from "./LanguageSetting";
 
 function NavBar({ handleLanguageChange }) {
   const icyblue = "rgb(207, 201, 201)";
@@ -9,6 +9,13 @@ function NavBar({ handleLanguageChange }) {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 30px",
+  };
+
+  const mobileStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   };
 
   const innerStyle = {

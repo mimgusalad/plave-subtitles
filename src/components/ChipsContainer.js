@@ -24,6 +24,8 @@ function ChipsContainer({
 }) {
   const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#4fd1a6"];
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
   const text = {
     en: "SHOW ALL VIDEOS",
     ko: "전체 동영상",
@@ -45,6 +47,12 @@ function ChipsContainer({
       }
     });
   };
+
+  useEffect(() => {
+    if (window.innerWidth > 500 && window.innerHeight > 900) {
+      setIsMobile(true);
+    }
+  }, []);
 
   const handleShowAllVideos = () => {
     setSelectedOptions([]);
@@ -74,7 +82,7 @@ function ChipsContainer({
   return (
     <div className="filter-chips-container">
       <div className="filter-chips">
-        {window.innerWidth > 500 ? (
+        {isMobile ? (
           names.map((option, index) => (
             <CustomChip
               key={index}

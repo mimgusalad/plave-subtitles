@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
+import MobileNavBar from "../components/MobileNavBar";
 import NavBar from "../components/NavBar";
 import Subtitles from "../components/Subtitles";
 import { getSubtitles } from "../utils/getSubtitles";
@@ -19,6 +20,16 @@ function YouTubePlayer() {
   const [subtitles, setSubtitles] = useState([]);
   const [videoWidth, setVideoWidth] = useState(window.innerWidth);
   const [videoHeight, setVideoHeight] = useState((window.innerWidth * 9) / 16);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth > 500 && window.innerHeight > 900) {
+      setIsMobile(true);
+    }
+    if (window.innerWidth < window.innerHeight && window.innerWidth < 500) {
+      setIsMobilePortrait(true);
+    }
+  }, []);
 
   const handleResize = () => {
     if (window.innerWidth / window.innerHeight < 1.5) {
@@ -109,14 +120,43 @@ function YouTubePlayer() {
 
   return (
     <div>
-      <NavBar handleLanguageChange={handleLanguageChange} />
+      {isMobile ? (
+        <NavBar handleLanguageChange={handleLanguageChange} />
+      ) : (
+        <MobileNavBar selectedLanguage={selectedLanguage} />
+      )}
       <div className={`video-container`}>
-        <YouTube
-          videoId={videoId}
-          onReady={onReady}
-          opts={{ width: videoWidth, height: videoHeight }}
-        />
-        <div className="subtitle-container">
+        {isMobile ? (
+          <YouTube
+            videoId={videoId}
+            onReady={onReady}
+            opts={{ width: videoWidth, height: videoHeight }}
+          />
+        ) : !isMobilePortrait ? (
+          <YouTube
+            videoId={videoId}
+            onReady={onReady}
+            opts={{
+              width: (window.innerHeight * 16) / 9,
+              height: window.innerHeight,
+            }}
+          />
+        ) : (
+          <YouTube
+            videoId={videoId}
+            onReady={onReady}
+            opts={{ width: videoWidth, height: videoHeight }}
+          />
+        )}
+        <div
+          className={
+            isMobile
+              ? "subtitle-container"
+              : !isMobilePortrait
+              ? "mobile-subtitle-container"
+              : "mobile-portrait-subtitle-container"
+          }
+        >
           <Subtitles subtitles={subtitles} />
         </div>
       </div>
