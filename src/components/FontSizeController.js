@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { IconButton, Box } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Box, IconButton } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 const FontSizeController = () => {
+  let defaultFontSize;
+  if (window.innerHeight < 690) {
+    defaultFontSize = 20;
+  } else {
+    defaultFontSize = 25;
+  }
   const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize")) || 25
+    Number(localStorage.getItem("fontSize")) || defaultFontSize
   ); // Initial font size
 
   const updateFontSize = (newSize) => {

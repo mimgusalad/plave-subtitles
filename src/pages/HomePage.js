@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CardContainer from "../components/CardContainer";
 import ChipsContainer from "../components/ChipsContainer";
 import LanguageSetting from "../components/LanguageSetting";
-import { Link } from "react-router-dom";
 
 function HomePage() {
   const [videoData, setVideoData] = useState([]);
@@ -44,23 +44,15 @@ function HomePage() {
     fetchData();
   }, []);
 
-  const tabStyle = {
-    display: "inline-block",
-    fontSize: "1.3em",
-    fontWeight: "bold",
-    textDecoration: "none",
-    color: "white",
-    marginLeft: "20px",
-    marginTop: "10px",
-    padding: "0 10px",
-  };
-
   return (
     <>
-      <Link to="/about" style={tabStyle}>
-        About
-      </Link>
-      <h1 className="title">Plave Subtitles</h1>
+      <div className="header">
+        <Link to="/about" className="tabStyle">
+          About
+        </Link>
+        <h1 className="title">Plave Subtitles</h1>
+      </div>
+
       <LanguageSetting handleLanguageChange={handleLanguageChange} />
       <ChipsContainer
         selectedLanguage={selectedLanguage}

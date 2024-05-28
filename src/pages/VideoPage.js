@@ -17,8 +17,26 @@ function YouTubePlayer() {
     localStorage.getItem("lang") || "ko"
   );
   const [subtitles, setSubtitles] = useState([]);
-  const width = window.innerWidth * 0.7;
-  const height = (width * 9) / 16;
+  const [videoWidth, setVideoWidth] = useState(window.innerWidth);
+  const [videoHeight, setVideoHeight] = useState((window.innerWidth * 9) / 16);
+
+  const handleResize = () => {
+    if (window.innerWidth / window.innerHeight < 1.5) {
+      setVideoWidth(window.innerWidth);
+      setVideoHeight((window.innerWidth * 9) / 16);
+    } else {
+      setVideoWidth(window.innerWidth * 0.72);
+      setVideoHeight(((window.innerWidth * 9) / 16) * 0.72);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call once to set initial value
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Cache object to store fetched subtitles
   const subtitleCache = useRef({});
@@ -47,6 +65,7 @@ function YouTubePlayer() {
     }
   };
 
+  /** 배경 이미지 transition 넣고 자막 받아오기 */
   useEffect(() => {
     document.body.style.backgroundImage = "url('/img/bg.png')";
     document.body.classList.add("background-transition");
@@ -58,9 +77,9 @@ function YouTubePlayer() {
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
   }, []);
 
+  /* 동영상 시간 구하기 */
   useEffect(() => {
     if (player) {
-      // Update current time every 100ms
       const interval = setInterval(() => {
         setCurrentTime(Math.floor(player.getCurrentTime()));
       }, 100);
@@ -68,8 +87,8 @@ function YouTubePlayer() {
     }
   }, [player]);
 
+  /* 동영상 현재 시간에 따른 자막 송출 */
   useEffect(() => {
-    // Update subtitle based on current time
     if (subtitleHashTable && currentTime in subtitleHashTable) {
       const subtitleText = subtitleHashTable[currentTime].text;
       // Split by speaker labels and keep the labels
@@ -91,13 +110,15 @@ function YouTubePlayer() {
   return (
     <div>
       <NavBar handleLanguageChange={handleLanguageChange} />
-      <div className="video-container">
+      <div className={`video-container`}>
         <YouTube
           videoId={videoId}
           onReady={onReady}
-          opts={{ width: width, height: height }}
+          opts={{ width: videoWidth, height: videoHeight }}
         />
-        <Subtitles subtitles={subtitles} />
+        <div className="subtitle-container">
+          <Subtitles subtitles={subtitles} />
+        </div>
       </div>
     </div>
   );

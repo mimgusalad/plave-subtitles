@@ -1,5 +1,19 @@
 import { Chip } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
+
+const StyledChip = styled(Chip)(({ theme, selectedLanguage, lang }) => ({
+  fontWeight: "bold",
+  fontSize: "1em",
+  backgroundColor: selectedLanguage === lang ? "white" : "transparent",
+  opacity: selectedLanguage === lang ? 0.7 : 0.7,
+  "@media (max-height: 700px)": {
+    fontSize: "12px",
+  },
+  "@media (min-height: 701px) and (max-height: 783px)": {
+    fontSize: "14px",
+  },
+}));
 
 function LanguageSetting({ handleLanguageChange }) {
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -10,33 +24,21 @@ function LanguageSetting({ handleLanguageChange }) {
     en: "English",
     ja: "日本語",
   };
+
   const handleLanguageClick = (lang) => {
     setSelectedLanguage(lang);
     handleLanguageChange(lang);
   };
 
-  const baseStyle = {
-    backgroundColor: "white",
-    opacity: 0.7,
-    fontWeight: "bold",
-    fontSize: "1em",
-  };
-
-  const getStyle = (lang) => ({
-    ...baseStyle,
-    backgroundColor: selectedLanguage === lang ? "white" : "transparent",
-    opacity: selectedLanguage === lang ? 0.7 : 0.7,
-  });
-
   return (
     <div className="language-setting">
       {Object.keys(languages).map((lang) => (
-        <Chip
+        <StyledChip
           key={lang}
           label={languages[lang]}
           onClick={() => handleLanguageClick(lang)}
-          style={getStyle(lang)}
-          //   color={selectedLanguage === lang ? "primary" : "default"}
+          lang={lang}
+          selectedLanguage={selectedLanguage}
         />
       ))}
     </div>
