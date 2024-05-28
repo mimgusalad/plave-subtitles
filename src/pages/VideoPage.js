@@ -23,7 +23,7 @@ function YouTubePlayer() {
   const [isMobile, setIsMobile] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
   useEffect(() => {
-    if (window.innerWidth > 500 && window.innerHeight > 900) {
+    if (window.innerWidth <= 450 && window.innerHeight <= 940) {
       setIsMobile(true);
     }
     if (window.innerWidth < window.innerHeight && window.innerWidth < 500) {
@@ -120,13 +120,13 @@ function YouTubePlayer() {
 
   return (
     <div>
-      {isMobile ? (
+      {!isMobile ? (
         <NavBar handleLanguageChange={handleLanguageChange} />
       ) : (
         <MobileNavBar selectedLanguage={selectedLanguage} />
       )}
       <div className={`video-container`}>
-        {isMobile ? (
+        {!isMobile ? (
           <YouTube
             videoId={videoId}
             onReady={onReady}

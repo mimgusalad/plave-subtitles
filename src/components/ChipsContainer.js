@@ -49,7 +49,7 @@ function ChipsContainer({
   };
 
   useEffect(() => {
-    if (window.innerWidth > 500 && window.innerHeight > 900) {
+    if (window.innerWidth <= 450 && window.innerHeight <= 940) {
       setIsMobile(true);
     }
   }, []);
@@ -82,7 +82,7 @@ function ChipsContainer({
   return (
     <div className="filter-chips-container">
       <div className="filter-chips">
-        {isMobile ? (
+        {!isMobile ? (
           names.map((option, index) => (
             <CustomChip
               key={index}
