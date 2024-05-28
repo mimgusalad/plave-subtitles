@@ -150,7 +150,7 @@ function YouTubePlayer() {
         )}
         <div
           className={
-            isMobile
+            !isMobile
               ? "subtitle-container"
               : !isMobilePortrait
               ? "mobile-subtitle-container"
