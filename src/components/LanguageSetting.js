@@ -2,7 +2,7 @@ import { Chip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 
-const StyledChip = styled(Chip)(({ theme, selectedLanguage, lang }) => ({
+const StyledChip = styled(Chip)(({ selectedLanguage, lang }) => ({
   fontWeight: "bold",
   fontSize: "1em",
   backgroundColor: selectedLanguage === lang ? "white" : "transparent",
@@ -31,7 +31,7 @@ function LanguageSetting({ handleLanguageChange }) {
   };
 
   return (
-    <div className="language-setting">
+    <>
       {Object.keys(languages).map((lang) => (
         <StyledChip
           key={lang}
@@ -41,7 +41,7 @@ function LanguageSetting({ handleLanguageChange }) {
           selectedLanguage={selectedLanguage}
         />
       ))}
-    </div>
+    </>
   );
 }
 

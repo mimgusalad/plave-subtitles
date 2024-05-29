@@ -2,22 +2,27 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Box, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
-const SubtitlePositionController = ({ selectedLanguage, isMobilePortrait }) => {
-  let defaultPosition = isMobilePortrait ? 10 : 30;
+const subText = {
+  en: "Sub Position",
+  ko: "자막 위치",
+  ja: "字幕の位置",
+};
+
+const SubtitlePositionController = ({ selectedLanguage }) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 1439px)" });
+  let defaultPosition = isMobile ? 10 : 30;
   const offset = 10;
   const [position, setPosition] = useState(
     Number(localStorage.getItem("position")) || defaultPosition
   );
 
+  // 여기 수정
   const updatePosition = (newPosition) => {
     const subtitleType = localStorage.getItem("subtitleType");
     const elements = document.getElementsByClassName(
-      !isMobilePortrait
-        ? subtitleType === "0"
-          ? "subtitle-container"
-          : "subtitle-container-2"
-        : "mobile-subtitle-container"
+      isMobile ? "mobile-subtitle-container-landscape" : "subtitle-container"
     );
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.bottom = `${newPosition}px`;
@@ -38,12 +43,6 @@ const SubtitlePositionController = ({ selectedLanguage, isMobilePortrait }) => {
     updatePosition(position);
     localStorage.setItem("position", position);
   }, [position]);
-
-  const subText = {
-    en: "Sub Position",
-    ko: "자막 위치",
-    ja: "字幕の位置",
-  };
 
   return (
     <div className="subtitle-position-controller">

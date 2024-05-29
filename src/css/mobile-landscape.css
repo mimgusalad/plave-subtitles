@@ -1,0 +1,120 @@
+/* 모바일 가로 모드 */
+
+.mobile-title-landscape {
+    font-size: 2em;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+
+/* about 페이지 링크 스타일 */
+.mobile-tab-landscape {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 3px 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 언어 선택*/
+.mobile-language-setting-landscape {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    color: white;
+}
+
+/* 필터링 컨테이너 */
+.mobile-filter-chips-container-landscape {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    top: 35vh;
+    padding-right: 20px;
+}
+
+/* 멤버 필터링 */
+.mobile-filter-chips-landscape {
+    margin: 10px 0;
+}
+
+.mobile-filter-chips-landscape .custom-chip {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: last baseline;
+    margin: 3px 0;
+}
+
+/* 동영상 컨테이너*/
+.mobile-card-container-landscape {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 70vw;
+    height: 90vh;
+    left: 4vh;
+    right: 30vw;
+    top: 7vh;
+    overflow-y: scroll;
+}
+
+.mobile-card-landscape {
+    width: 95%;
+}
+
+.mobile-card-landscape img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/* 비디오 페이지 */
+.mobile-video-container-landscape {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 자막 설정 컨트롤러 (햄버거 메뉴) */
+.subtitle-setting-controller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* 자막 설정 컨트롤러 제목 */
+.subtitle-setting-controller span {
+    color: whitesmoke;
+    font-size: 1em;
+    margin-bottom: 30px;
+    position: fixed;
+    top:5%;
+    margin-top: 3px;
+}
+
+.mobile-font-size-controller {
+}
+
+.subtitle-position-controller {
+    margin-top: 10vh;
+    font-size: 0.8em;
+}
+
+
+/* 자막 텍스트 정렬 */
+.mobile-subtitle-container-landscape {
+    width: max-content;
+    padding: 2px 10px;
+    text-align: left;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    bottom: 0;
+    position: fixed;
+}

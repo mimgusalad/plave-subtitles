@@ -1,39 +1,19 @@
-import { Chip } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Chip, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import MobileChips from "../MobileComponents/MobileChips";
-import CustomChip from "./CustomChip";
+import { useMediaQuery } from "react-responsive";
+import MobileChips from "./MobileChips";
 
-const StyledChip = styled(Chip)(({ theme, selectedLanguage, lang }) => ({
-  backgroundColor: "white",
-  opacity: 0.7,
-  fontWeight: "bold",
-  "@media (max-height: 700px)": {
-    fontSize: "12px",
-  },
-  "@media (min-height: 701px) and (max-height: 783px)": {
-    fontSize: "14px",
-  },
-}));
-
-function ChipsContainer({
+function MobileChipsContainer({
   selectedLanguage,
   videoData,
   onFilterChange,
   originalData,
 }) {
-  const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#4fd1a6"];
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
-
-  const text = {
-    en: "SHOW ALL VIDEOS",
-    ko: "전체 동영상",
-    ja: "全ての動画",
-  };
   const names = ["yejun", "noah", "bamby", "eunho", "hamin"];
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const olders = names.slice(0, 2);
   const youngers = names.slice(2, 5);
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
 
   const handleSelectedOptions = (option) => {
     setSelectedOptions((prevSelectedOptions) => {
@@ -47,12 +27,6 @@ function ChipsContainer({
       }
     });
   };
-
-  useEffect(() => {
-    if (window.innerWidth <= 450 && window.innerHeight <= 940) {
-      setIsMobile(true);
-    }
-  }, []);
 
   const handleShowAllVideos = () => {
     setSelectedOptions([]);
@@ -80,20 +54,17 @@ function ChipsContainer({
   }, [selectedOptions]);
 
   return (
-    <div className="filter-chips-container">
-      <div className="filter-chips">
-        {!isMobile ? (
-          names.map((option, index) => (
-            <CustomChip
-              key={index}
-              index={index}
-              selectedLanguage={selectedLanguage}
-              selected={selectedOptions.includes(names[index])}
-              selectedColor={memberColors[index]}
-              handleSelectedOptions={handleSelectedOptions}
-            />
-          ))
-        ) : (
+    <div
+      className={`mobile-filter-chips-container${
+        isPortrait ? "-portrait" : "-landscape"
+      }`}
+    >
+      <div
+        className={`mobile-filter-chips${
+          isPortrait ? "-portrait" : "-landscape"
+        }`}
+      >
+        {isPortrait ? (
           <>
             <div className="first-row">
               {olders.map((option, index) => (
@@ -118,6 +89,18 @@ function ChipsContainer({
               ))}
             </div>
           </>
+        ) : (
+          <>
+            {names.map((option, index) => (
+              <MobileChips
+                key={index}
+                index={index}
+                selectedLanguage={selectedLanguage}
+                selected={selectedOptions.includes(names[index])}
+                handleSelectedOptions={handleSelectedOptions}
+              />
+            ))}
+          </>
         )}
       </div>
       <StyledChip
@@ -129,4 +112,22 @@ function ChipsContainer({
   );
 }
 
-export default ChipsContainer;
+export default MobileChipsContainer;
+
+const text = {
+  en: "SHOW ALL VIDEOS",
+  ko: "전체 동영상",
+  ja: "全ての動画",
+};
+
+const StyledChip = styled(Chip)(() => ({
+  backgroundColor: "white",
+  opacity: 0.7,
+  fontWeight: "bold",
+  "@media (max-height: 700px)": {
+    fontSize: "12px",
+  },
+  "@media (min-height: 701px) and (max-height: 783px)": {
+    fontSize: "14px",
+  },
+}));

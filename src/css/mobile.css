@@ -1,0 +1,139 @@
+/* 모바일 세로모드 */
+
+.mobile-title-portrait {
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+/* about 페이지 링크 스타일 */
+.mobile-tab-portrait{
+    display: inline-block;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white ;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 0 10px;
+}
+
+/* 언어 선택*/
+.mobile-language-setting-portrait{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+/* 필터링 컨테이너*/
+.mobile-filter-chips-container-portrait{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    padding-bottom: 10px;
+}
+
+.mobile-filter-chips-portrait .first-row, .mobile-filter-chips-portrait .second-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.first-row{
+    margin-bottom: 5%;
+}
+/* 세로 모드 필터칩 두번째 줄 아래 간격 추가 */
+.mobile-filter-chips-portrait .second-row{
+    margin-bottom: 5%;
+}
+
+/* 동영상 컨테이너*/
+.mobile-card-container-portrait{
+    display: flex;
+    flex-direction: column;
+    justify-content: first baseline;
+    align-items: center;
+    margin: 10px;
+    height: 65vh;
+    overflow-y:scroll;
+}
+
+.mobile-card-portrait{
+    margin: 10px auto;
+}
+
+.mobile-card-portrait img{
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/* 
+스크롤바 스타일
+-webkit은 크롬, 사파리 등 웹킷 기반 브라우저에서 사용되는 속성
+responsively app에서는 확인이 불가능함
+*/
+.mobile-card-container-portrait::-webkit-scrollbar {
+    width: 10px; /* Set width for scrollbar */
+}
+
+.mobile-card-container-portrait::-webkit-scrollbar-thumb {
+    background-color: #888; /* Style for scrollbar thumb */
+    border-radius: 10px;
+}
+
+.mobile-card-container-portrait::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Style for scrollbar thumb on hover */
+}
+
+.mobile-card-container-portrait::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Style for scrollbar track */
+}
+
+/* 비디오 페이지 */
+.mobile-video-container-portrait{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 10%;
+}
+
+.mobile-nav-bar-portrait{
+    position: fixed;
+    bottom: 0;
+}
+
+/* 자막 컨테이너 중앙 정렬, 텍스트 왼쪽 정렬 */
+.mobile-subtitle-container-portrait{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    padding: 10px 0;
+    text-align: left;
+    color: white;
+}
+
+/* 네비게이션 바 */
+.mobile-nav-bar-portrait{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 30vh;
+    bottom: 20vh;
+}
+
+.mobile-font-size-controller{
+    margin: 10px;
+    font-size: 0.8em;
+    color: whitesmoke;
+}
+
