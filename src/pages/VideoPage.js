@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import MobileNavBar from "../components/MobileNavBar";
+import SubtitleTypeModal from "../components/Modal";
 import NavBar from "../components/NavBar";
 import Subtitles from "../components/Subtitles";
 import { getSubtitles } from "../utils/getSubtitles";
@@ -13,15 +14,35 @@ function YouTubePlayer() {
   const videoId = searchParams.get("videoId");
   const [currentTime, setCurrentTime] = useState(0);
   const [player, setPlayer] = useState(null);
+  const [subtitles, setSubtitles] = useState([]);
   const [subtitleHashTable, setSubtitleHashTable] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "ko"
   );
-  const [subtitles, setSubtitles] = useState([]);
+
+  /*동영상 크기 변수 */
   const [videoWidth, setVideoWidth] = useState(window.innerWidth);
   const [videoHeight, setVideoHeight] = useState((window.innerWidth * 9) / 16);
   const [isMobile, setIsMobile] = useState(false);
   const [isMobilePortrait, setIsMobilePortrait] = useState(false);
+
+  /** 모달 창 변수 */
+  const [isModalOpen, setIsModalOpen] = useState(
+    localStorage.getItem("modal") === "false" ? false : true
+  );
+
+  const handleConfirm = () => {
+    localStorage.setItem("modal", "false");
+    setIsModalOpen(false);
+    // refresh page to apply new subtitle type
+    window.location.reload();
+  };
+
+  const handleModalClose = () => {
+    localStorage.setItem("modal", "false");
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     if (window.innerWidth <= 450 && window.innerHeight <= 940) {
       setIsMobile(true);
@@ -118,21 +139,44 @@ function YouTubePlayer() {
     setSubtitleHashTable(selectedSubtitles);
   };
 
+  const subtitleType = localStorage.getItem("subtitleType") || 0;
   return (
     <div>
+      {isModalOpen && isMobile ? (
+        <SubtitleTypeModal
+          handleModalClose={handleModalClose}
+          handleConfirm={handleConfirm}
+        />
+      ) : null}
+
       {!isMobile ? (
-        <NavBar handleLanguageChange={handleLanguageChange} />
+        <NavBar
+          handleLanguageChange={handleLanguageChange}
+          selectedLanguage={selectedLanguage}
+        />
       ) : (
         <MobileNavBar selectedLanguage={selectedLanguage} />
       )}
       <div className={`video-container`}>
+        {/* 노트북 ~ 데스크탑 */}
         {!isMobile ? (
-          <YouTube
-            videoId={videoId}
-            onReady={onReady}
-            opts={{ width: videoWidth, height: videoHeight }}
-          />
-        ) : !isMobilePortrait ? (
+          subtitleType === "1" ? (
+            <YouTube
+              videoId={videoId}
+              onReady={onReady}
+              opts={{
+                width: (window.innerHeight * 16) / 9,
+                height: window.innerHeight * 0.95,
+              }}
+            />
+          ) : (
+            <YouTube
+              videoId={videoId}
+              onReady={onReady}
+              opts={{ width: videoWidth, height: videoHeight }}
+            />
+          ) /* 모바일 가로화면 */
+        ) : isMobilePortrait ? (
           <YouTube
             videoId={videoId}
             onReady={onReady}
@@ -142,6 +186,7 @@ function YouTubePlayer() {
             }}
           />
         ) : (
+          /* 모바일 세로화면 */
           <YouTube
             videoId={videoId}
             onReady={onReady}
@@ -151,7 +196,9 @@ function YouTubePlayer() {
         <div
           className={
             !isMobile
-              ? "subtitle-container"
+              ? subtitleType === "1"
+                ? "subtitle-container-2"
+                : "subtitle-container"
               : !isMobilePortrait
               ? "mobile-subtitle-container"
               : "mobile-portrait-subtitle-container"

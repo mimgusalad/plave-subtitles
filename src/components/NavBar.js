@@ -1,21 +1,15 @@
 import { Link } from "react-router-dom";
 import FontSizeController from "./FontSizeController";
 import LanguageSetting from "./LanguageSetting";
+import SubtitlePositionController from "./SubtitlePositionController";
 
-function NavBar({ handleLanguageChange }) {
+function NavBar({ selectedLanguage, handleLanguageChange }) {
   const icyblue = "rgb(207, 201, 201)";
   const style = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "10px 30px",
-  };
-
-  const mobileStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
   };
 
   const innerStyle = {
@@ -40,7 +34,11 @@ function NavBar({ handleLanguageChange }) {
       <div style={innerStyle}>
         <LanguageSetting handleLanguageChange={handleLanguageChange} />
       </div>
-      <FontSizeController />
+      <SubtitlePositionController
+        selectedLanguage={selectedLanguage}
+        isMobilePortrait={false}
+      />
+      <FontSizeController selectedLanguage={selectedLanguage} />
     </div>
   );
 }

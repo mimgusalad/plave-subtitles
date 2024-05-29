@@ -116,8 +116,20 @@ body.background-transition::after {
   color: white;
 }
 
-.subtitle-position-controller{
+.subtitle-container-2 {
+  position: fixed;
+  padding: 2px 10px;
+  text-align: center;
   color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}  
+
+.subtitle-position-controller{
+  color: rgb(207, 201, 201);;
+  position: absolute;
+  position: fixed;
+  right: 20vw;
 }
 
 .mobile-portrait-subtitle-container {
