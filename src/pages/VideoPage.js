@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import MobileNavBar from "../MobileComponents/MobileNavBar";
 import SubtitleTypeModal from "../components/Modal";
-import NavBar from "../components/NavBar";
 import Subtitles from "../components/Subtitles";
 import { getSubtitles } from "../utils/getSubtitles";
 
@@ -23,8 +22,6 @@ function YouTubePlayer() {
   /*동영상 크기 변수 */
   const [videoWidth, setVideoWidth] = useState(window.innerWidth);
   const [videoHeight, setVideoHeight] = useState((window.innerWidth * 9) / 16);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMobilePortrait, setIsMobilePortrait] = useState(false);
 
   /** 모달 창 변수 */
   const [isModalOpen, setIsModalOpen] = useState(
@@ -149,14 +146,7 @@ function YouTubePlayer() {
         />
       ) : null}
 
-      {!isMobile ? (
-        <NavBar
-          handleLanguageChange={handleLanguageChange}
-          selectedLanguage={selectedLanguage}
-        />
-      ) : (
-        <MobileNavBar selectedLanguage={selectedLanguage} />
-      )}
+      {!isMobile ? null : <MobileNavBar selectedLanguage={selectedLanguage} />}
       <div className={`video-container`}>
         {/* 노트북 ~ 데스크탑 */}
         {!isMobile ? (

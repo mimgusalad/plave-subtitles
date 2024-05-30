@@ -14,23 +14,47 @@ const FontSizeController = ({ selectedLanguage }) => {
   const [fontSize, setFontSize] = useState(
     Number(localStorage.getItem("fontSize")) || defaultFontSize
   ); // Initial font size
-  const isMobile = useMediaQuery({ query: "(max-width: 1439px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   let defaultFontSize;
 
+  const getElementName = (isMobile, isPortrait) => {
+    if (isMobile) {
+      if (isPortrait) {
+        return "mobile-subtitle-container-portrait";
+      } else {
+        return "mobile-subtitle-container-landscape";
+      }
+    } else {
+      if (localStorage.getItem("subtitleType") === "0")
+        return "subtitle-container";
+      else return "subtitle-container-2";
+    }
+  };
+
+  const getElementNameBySubtitleType = (subtitleType) => {
+    switch (subtitleType) {
+      case "b1": // BlackFontWithNoGapAndName
+        return "chat-bubble";
+      case "b2": //BlackFontWithGap
+        return "chat-bubble";
+      case "b3": //BlackFontWithNoGap
+      case "w1": //WhiteFontWithGap
+        return "chat-bubble";
+      case "w2": //WhiteFontWithNoGap
+        return "chat-bubble";
+      case "w3": //WhiteFontWithNoGapAndName
+        return "chat-bubble";
+      case "w4": //WhiteFontWithTail
+        return "chat-bubble";
+    }
+  };
+
   const updateFontSize = (newSize) => {
     const subtitleType = localStorage.getItem("subtitleType");
+    let elementName = getElementName(isMobile, isPortrait);
     const elements = document.getElementsByClassName(
-      isMobile
-        ? isPortrait
-          ? "mobile-subtitle-container-portrait"
-          : "mobile-subtitle-container-landscape"
-        : "subtitle-container"
-      // !isMobile
-      //   ? subtitleType === "0"
-      //     ? "subtitle-container"
-      //     : "subtitle-container-2"
-      //   : "mobile-subtitle-container"
+      elementName !== null ? elementName : "chat-bubble"
     );
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.fontSize = `${newSize}px`;
@@ -55,6 +79,8 @@ const FontSizeController = ({ selectedLanguage }) => {
     <div className={`${isMobile ? "mobile-" : ""}font-size-controller`}>
       <Box>
         <IconButton
+          disableRipple
+          disableFocusRipple
           sx={{ color: "white" }}
           className="font-size-button"
           onClick={decreaseFontSize}
@@ -64,6 +90,8 @@ const FontSizeController = ({ selectedLanguage }) => {
         {`${fontText[selectedLanguage]} : `}
         {fontSize}
         <IconButton
+          disableRipple
+          disableFocusRipple
           sx={{ color: "white" }}
           className="font-size-button"
           onClick={increaseFontSize}

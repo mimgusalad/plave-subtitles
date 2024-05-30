@@ -11,19 +11,26 @@ const subText = {
 };
 
 const SubtitlePositionController = ({ selectedLanguage }) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 1439px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   let defaultPosition = isMobile ? 10 : 30;
   const offset = 10;
   const [position, setPosition] = useState(
     Number(localStorage.getItem("position")) || defaultPosition
   );
 
-  // 여기 수정
+  const getElementName = (isMobile) => {
+    if (isMobile) {
+      return "mobile-subtitle-container-landscape";
+    } else {
+      if (localStorage.getItem("subtitleType") === "0")
+        return "subtitle-container";
+      else return "subtitle-container-2";
+    }
+  };
+
   const updatePosition = (newPosition) => {
     const subtitleType = localStorage.getItem("subtitleType");
-    const elements = document.getElementsByClassName(
-      isMobile ? "mobile-subtitle-container-landscape" : "subtitle-container"
-    );
+    const elements = document.getElementsByClassName(getElementName(isMobile));
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.bottom = `${newPosition}px`;
     }
@@ -47,11 +54,21 @@ const SubtitlePositionController = ({ selectedLanguage }) => {
   return (
     <div className="subtitle-position-controller">
       <Box>
-        <IconButton sx={{ color: "white" }} onClick={decreasePosition}>
+        <IconButton
+          disableRipple
+          disableFocusRipple
+          sx={{ color: "white" }}
+          onClick={decreasePosition}
+        >
           <KeyboardArrowDownIcon />
         </IconButton>
         {subText[selectedLanguage]}
-        <IconButton sx={{ color: "white" }} onClick={increasePosition}>
+        <IconButton
+          disableRipple
+          disableFocusRipple
+          sx={{ color: "white" }}
+          onClick={increasePosition}
+        >
           <KeyboardArrowUpIcon />
         </IconButton>
       </Box>

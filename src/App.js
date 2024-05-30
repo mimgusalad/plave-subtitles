@@ -1,6 +1,7 @@
 import { BrowserView, MobileView } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import "./css/desktop.css";
 import "./css/mobile-landscape.css";
 import "./css/mobile.css";
 import AboutPage from "./pages/AboutPage";

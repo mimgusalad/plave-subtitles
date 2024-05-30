@@ -13,7 +13,7 @@ function MobileHomePage() {
     localStorage.getItem("lang") || "en"
   );
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isMobile = useMediaQuery({ query: "(max-width: 1439px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
 
   localStorage.setItem("lang", selectedLanguage);
 

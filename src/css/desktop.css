@@ -1,0 +1,135 @@
+/* 데스크탑 화면에서 사용되는 CSS 파일입니다. */
+
+body {
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s ease-in-out;
+    background-image: url('/public/img/bg.png');
+    background-size: cover;
+    font-family: 'Roboto',
+        'Noto Sans',
+        'Arial',
+        sans-serif;
+    user-select: none;
+    overflow: hidden;
+}
+
+/* 배경 어둡게 하는거 애니메이션 추가 */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 10)), url('/public/img/bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+body.background-transition::after {
+    opacity: 1;
+}
+
+
+/* 타이틀 */
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 4em;
+    color: white;
+}
+
+/* 언어 선택 컨테이너 */
+.desktop-language-setting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 필터링 칩 컨테이너 */
+.filter-chips-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 필터링 칩 */
+.filter-chips {
+    display: inline-flex;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+/* 동영상 컨테이너 */
+.desktop-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    max-width: 1200px;
+}
+
+/* 동영상 한 줄에 3개씩 보이게 하기 */
+.desktop-card {
+    flex: 1 1 calc(33.333% - 20px);
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.desktop-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* 동영상 페이지 */
+
+
+/* 동영상 컨테이너 */
+.desktop-video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* 자막 컨테이너 */
+.subtitle-container {
+    position: fixed;
+    text-align: center;
+    width: max-content;
+    margin-top: 30px;
+    font-size: 25px;
+    color: white;
+    text-align: left;
+}
+
+.subtitle-container-2 {
+    position: fixed;
+    width: max-content;
+    text-align: left;
+    padding: 2px 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+
+.chat-bubble-container, .chat-bubble-container-default{
+    position: fixed;
+    width: max-content;
+    text-align: left;
+    padding: 2px 10px;
+    color: white;
+}
+

@@ -2,8 +2,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
-import FontSizeController from "../components/FontSizeController";
-import SubtitlePositionController from "../components/SubtitlePositionController";
+import FontSizeController from "./FontSizeController";
+import SubtitlePositionController from "./SubtitlePositionController";
 
 const text = {
   en: "Sub Setting",
@@ -11,7 +11,7 @@ const text = {
   ja: "字幕設定",
 };
 
-const MobileMenu = ({ lang }) => {
+const SubtitleSettingController = ({ lang }) => {
   const [open, setOpen] = useState(false);
 
   const handleSettingClick = () => {
@@ -20,7 +20,12 @@ const MobileMenu = ({ lang }) => {
 
   return (
     <>
-      <IconButton style={ButtonStyle} onClick={handleSettingClick}>
+      <IconButton
+        disableRipple
+        disableFocusRipple
+        style={ButtonStyle}
+        onClick={handleSettingClick}
+      >
         {!open && <MenuIcon style={IconStyle} />}
       </IconButton>
       <Menu lang={lang} setOpen={setOpen} open={open} />
@@ -39,7 +44,12 @@ const Menu = ({ lang, setOpen, open }) => {
       style={ControllerStyle(open)}
     >
       <span>{text[lang]}</span>
-      <IconButton style={CloseIconPosition} onClick={handleClose}>
+      <IconButton
+        disableRipple
+        disableFocusRipple
+        style={CloseIconPosition}
+        onClick={handleClose}
+      >
         <CloseIcon style={CloseIconStyle} />
       </IconButton>
       <FontSizeController selectedLanguage={lang} />
@@ -86,4 +96,4 @@ const IconStyle = {
   cursor: "pointer",
 };
 
-export default MobileMenu;
+export default SubtitleSettingController;

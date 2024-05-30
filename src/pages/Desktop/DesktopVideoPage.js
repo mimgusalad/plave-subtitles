@@ -1,9 +1,11 @@
+import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
+import { IconButton } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import SubtitleTypeModal from "../../components/Modal";
-import NavBar from "../../components/NavBar";
+import SubtitleSettingController from "../../components/SubtitleSettingController";
 import Subtitles from "../../components/Subtitles";
 import { getSubtitles } from "../../utils/getSubtitles";
 
@@ -121,13 +123,8 @@ function YouTubePlayer() {
     setPlayer(event.target);
   };
 
-  const handleLanguageChange = async (language) => {
-    setSelectedLanguage(language);
-    const selectedSubtitles = await fetchSubtitles(language);
-    setSubtitleHashTable(selectedSubtitles);
-  };
-
   const subtitleType = localStorage.getItem("subtitleType") || 0;
+
   return (
     <div>
       {isModalOpen && (
@@ -136,18 +133,21 @@ function YouTubePlayer() {
           handleConfirm={handleConfirm}
         />
       )}
-      <NavBar
-        handleLanguageChange={handleLanguageChange}
-        selectedLanguage={selectedLanguage}
-      />
-      <div className={`video-container`}>
+      <div className="desktop-home-link">
+        <Home />
+      </div>
+      <IconButton>
+        <CloseFullscreenIcon />
+      </IconButton>
+      <SubtitleSettingController lang={selectedLanguage} />
+      <div className={`desktop-video-container`}>
         {subtitleType === "1" ? (
           <YouTube
             videoId={videoId}
             onReady={onReady}
             opts={{
-              width: (window.innerHeight * 16) / 9,
-              height: window.innerHeight * 0.95,
+              width: window.innerWidth,
+              height: window.innerHeight,
             }}
           />
         ) : (
@@ -170,3 +170,21 @@ function YouTubePlayer() {
 }
 
 export default YouTubePlayer;
+
+const Home = () => {
+  return (
+    <Link
+      to="/"
+      style={{
+        fontSize: "1.7em",
+        textDecoration: "none",
+        color: "rgb(207, 201, 201)",
+        fontWeight: "bold",
+        position: "absolute",
+        left: "20px",
+      }}
+    >
+      {"HOME"}
+    </Link>
+  );
+};

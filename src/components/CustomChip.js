@@ -87,7 +87,7 @@ function CustomChip({
         >
           <ResponsiveAvatar
             alt={names.en[index]}
-            src={`/img/${names.en[index].toLowerCase()}.png`}
+            src={`/img/profile/${names.en[index].toLowerCase()}.png`}
           />
         </IconButton>
       </Tooltip>

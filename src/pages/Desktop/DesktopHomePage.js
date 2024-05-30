@@ -53,14 +53,16 @@ function DesktopHomePage() {
         <h1 className="title">Plave Subtitles</h1>
       </div>
 
-      <LanguageSetting handleLanguageChange={handleLanguageChange} />
+      <div className="desktop-language-setting">
+        <LanguageSetting handleLanguageChange={handleLanguageChange} />
+      </div>
       <ChipsContainer
         selectedLanguage={selectedLanguage}
         onFilterChange={handleFilterChange}
         videoData={filteredVideos}
         originalData={videoData}
       />
-      <div className="card-container">
+      <div className="desktop-card-container">
         <CardContainer videoData={filteredVideos} />
       </div>
     </>
