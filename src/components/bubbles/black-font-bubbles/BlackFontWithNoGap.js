@@ -92,7 +92,7 @@ const IconStyle = {
   position: "absolute",
   width: "fit-content",
   // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-1.4em",
+  left: "-1em",
   top: "-0.3em", // -0.5em
   zIndex: "1",
 };
@@ -130,7 +130,7 @@ const ChatBubble = (colors, speaker) => ({
 
 const SpeakerLabel = {
   color: "black",
-  marginLeft: "1.7em",
+  marginLeft: "1.4em",
   paddingLeft: "0",
 };
 

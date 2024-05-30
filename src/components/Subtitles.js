@@ -1,4 +1,4 @@
-import BlackFontWithNoGap2 from "./bubbles/black-font-bubbles/BlackFontWithNoGap2";
+import WhiteFontWithTail2 from "./bubbles/white-font-bubbles/WhiteFontWithTail2";
 function Subtitles({ subtitles }) {
   // useEffect(() => {
   //   const subtitleElement =
@@ -10,7 +10,7 @@ function Subtitles({ subtitles }) {
       {subtitles.map((line, index) => (
         // // <div key={index}>{line.trim()}</div>
         // <Bubble1 key={index} speech={line.trim()} />
-        <BlackFontWithNoGap2 key={index} dialog={line.trim()} />
+        <WhiteFontWithTail2 key={index} message={line.trim()} />
       ))}
     </>
   );

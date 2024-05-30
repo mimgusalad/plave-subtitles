@@ -106,7 +106,7 @@ const IconStyle = {
   position: "absolute",
   width: "fit-content",
   // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-2.8em",
+  left: "-2.5em",
   top: "-0.3em", // -0.5em
   zIndex: "1",
 };
