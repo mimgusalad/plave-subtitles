@@ -7,9 +7,7 @@ body {
     background-image: url('/public/img/bg.png');
     background-size: cover;
     font-family: 'Roboto',
-        'Noto Sans',
-        'Arial',
-        sans-serif;
+        'Yu Gothic UI', 'Pretendard-Regular', sans-serif;
     user-select: none;
     overflow: hidden;
 }
@@ -89,6 +87,7 @@ body.background-transition::after {
 .desktop-card img {
     width: 100%;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 /* 동영상 페이지 */
@@ -100,7 +99,6 @@ body.background-transition::after {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 
@@ -125,11 +123,11 @@ body.background-transition::after {
 }
 
 
-.chat-bubble-container, .chat-bubble-container-default{
+.chat-bubble-container,
+.chat-bubble-container-default {
     position: fixed;
     width: max-content;
     text-align: left;
     padding: 2px 10px;
     color: white;
 }
-

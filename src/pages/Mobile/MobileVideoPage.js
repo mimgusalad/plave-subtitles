@@ -118,9 +118,7 @@ function MobileYoutubePlayer() {
             isPortrait ? "-portrait" : "-landscape"
           }`}
         >
-          <span>
-            <Subtitles subtitles={subtitles} />
-          </span>
+          <Subtitles subtitles={subtitles} />
         </div>
       </div>
       <div

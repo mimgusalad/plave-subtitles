@@ -60,7 +60,7 @@ const Menu = ({ lang, setOpen, open }) => {
 
 const ControllerStyle = (open) => ({
   backgroundColor: "rgba(0, 0, 0, 0.9)",
-  width: "35%",
+  width: "max-content",
   height: "100vh",
   position: "fixed",
   top: "0",

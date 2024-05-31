@@ -113,7 +113,7 @@ const DefaultChatBubble = (colors) => ({
   alignItems: "center",
   maxWidth: "80vw",
   minWidth: "100%",
-  wordBreak: "keep-all",
+  wordBreak: "break-all",
   border: `0.11em solid rgb(0,0,0,0.8)`,
   position: "relative",
   fontSize: "1em",
