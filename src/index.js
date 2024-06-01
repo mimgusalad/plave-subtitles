@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./css/desktop.css";
+import "./css/mobile-landscape.css";
+import "./css/mobile.css";
+import reportWebVitals from "./reportWebVitals";
+import "./style.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

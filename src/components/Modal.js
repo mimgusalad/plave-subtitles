@@ -1,188 +1,160 @@
 import CloseIcon from "@mui/icons-material/Close";
-import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { Button, Chip, IconButton, styled } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Button, Chip, IconButton } from "@mui/material";
 import { useState } from "react";
+import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
+import {
+  BlackFont,
+  BlackFont2,
+  BlackFontWithName,
+  BlackFontWithName2,
+  WhiteFont,
+  WhiteFontWithName,
+  WhiteFontWithTail,
+  WhiteFontWithTail2,
+} from "./Bubbles";
 
-const StyledButton = styled(Button)(({ selected }) => ({
-  position: "relative",
-  width: "25vh",
-  height: "15vh",
-  background: "none",
-  overflow: "hidden",
-  borderRadius: "20px",
-  margin: "10px",
-  backgroundColor: "white",
-  boxShadow: "7px 7px 15px rgba(2,28,53,0.08)",
-  "&:hover": {
-    backgroundColor: "white",
-  },
-  "&:focus": {
-    boxShadow: "0 0 0 0.15em #f0b1c4",
-  },
-  boxShadow: selected ? "0 0 0 0.15em #f0b1c4" : "",
-}));
+function Modal({ handleModalClose, handleConfirm, lang }) {
+  const [selected, setSelected] = useState(localStorage.getItem("type") || "a");
+  const items = ["b1", "w1", "b3", "w4", "w2", "b2", "b4", "w3"];
 
-const text = {
-  en: "Subtitles here",
-  ko: "자막이 여기에 표시됩니다",
-  ja: "字幕はここに表示されます",
-};
-
-const title = {
-  en: "🥤Select Subtitle Type🍿",
-  ko: "🥤자막 유형 선택🍿",
-  ja: "🥤字幕タイプを選択🍿",
-};
-
-const confirmText = {
-  en: "Confirm",
-  ko: "확인",
-  ja: "確認",
-};
-
-function Modal({ handleModalClose, handleConfirm }) {
-  const [checkedA, setCheckedA] = useState(true);
-  const [checkedB, setCheckedB] = useState(false);
-
-  const handleConfirmClick = () => {
-    localStorage.setItem("subtitleType", checkedA ? 0 : 1);
-    handleConfirm();
+  const handleChange = (item) => {
+    setSelected(item);
   };
 
-  const handleAClick = () => {
-    setCheckedA(true);
-    setCheckedB(false);
+  const getMessageComponent = (index) => {
+    const components = [
+      <BlackFont message={sampleSubtitle[lang][0]} />, //yejun
+      <WhiteFont message={sampleSubtitle[lang][4]} />, //hamin
+      <BlackFontWithName message={sampleSubtitle[lang][2]} />, //noah
+      <WhiteFontWithTail2 message={sampleSubtitle[lang][7]} />, //bamby
+      <WhiteFontWithName message={sampleSubtitle[lang][5]} />, //eunho
+      <BlackFont2 message={sampleSubtitle[lang][1]} />, //yejun
+      <BlackFontWithName2 message={sampleSubtitle[lang][3]} />, //hamin
+      <WhiteFontWithTail message={sampleSubtitle[lang][6]} />, //eunho
+    ];
+    return components[index];
   };
-  const handleBClick = () => {
-    setCheckedB(true);
-    setCheckedA(false);
-  };
-  return (
-    <div className="modal" style={modalBackgroundStyle}>
-      <div style={outerBoxStyle("column")}>
+
+  const DefaultType = ({ message, type }) => {
+    return (
+      <>
         <IconButton
-          onClick={handleModalClose}
-          style={{
-            top: "10px",
-            right: "10px",
-            position: "absolute",
-          }}
+          disableFocusRipple
+          disableRipple
+          onClick={() => handleChange(type)}
+          style={{ padding: "0", margin: "0", borderRadius: "0" }}
         >
-          <CloseIcon
+          <div
             style={{
-              top: "10px",
-              right: "10px",
-              color: "black",
+              backgroundColor: type === "b" ? "rgb(0,0,0,0.7)" : "",
+              color: "white",
+              padding: "0.1em",
+              minWidth: "max-content",
+              fontSize: "0.9em",
             }}
-          />
+          >
+            {message}
+          </div>
         </IconButton>
-        <h4
-          style={{
-            marginTop: "30px",
-            marginBottom: "10px",
-            fontWeight: "bold",
-            color: "rgb(0,0,0,0.8)",
+        <FavoriteIcon
+          sx={{
+            color: `${selected === type ? "wheat" : "transparent"}`,
+            margin: "0",
+            padding: "0",
+            zIndex: 1,
+            position: "absolute",
+            right: "-11%",
+            transform: "translateY(-30%)",
           }}
-        >
-          {title["en"]}
-        </h4>
-        <div style={outerBoxStyle("row")}>
-          <StyledButton onClick={() => handleAClick()} selected={checkedA}>
-            {!checkedA ? (
-              <RadioButtonUncheckedIcon style={radioButtonStyle} />
-            ) : (
-              <RadioButtonCheckedIcon style={radioButtonStyle} />
-            )}
-            <img src="/img/type_a.png" style={imgStyle} />
-            <span style={subStyle1}>{text["en"]}</span>
-          </StyledButton>
-          <StyledButton onClick={() => handleBClick()} selected={checkedB}>
-            {!checkedB ? (
-              <RadioButtonUncheckedIcon style={radioButtonStyle} />
-            ) : (
-              <RadioButtonCheckedIcon style={radioButtonStyle} />
-            )}
-            <img src="/img/live_bg.png" style={imgStyle2} />
-            <span style={subStyle2}>{text["en"]}</span>
-          </StyledButton>
-        </div>
+        />
+      </>
+    );
+  };
+
+  return (
+    <div className="modal-screen">
+      <div className="modal-close>">
+        <ModalClose handleModalClose={handleModalClose} />
+      </div>
+      <div className="modal-container">
+        <h1>{title[lang].toUpperCase()}</h1>
+        <ul className="type-container">
+          {items.map((item, index) => (
+            <li key={index}>
+              <Button
+                disableFocusRipple
+                disableRipple
+                onClick={() => handleChange(item)}
+                style={{
+                  padding: "0",
+                  margin: "0",
+                }}
+              >
+                {getMessageComponent(index)}
+                <FavoriteIcon
+                  sx={{
+                    color: `${selected === item ? "wheat" : "transparent"}`,
+                    margin: "0",
+                    padding: "0",
+                    zIndex: 1,
+                    position: "absolute",
+                    right: "7%",
+                    transform: "translateY(-50%)",
+                  }}
+                />
+              </Button>
+            </li>
+          ))}
+          <li>
+            {DefaultType({ message: sampleSubtitle[lang][9], type: "a" })}
+          </li>
+          <li>
+            {DefaultType({ message: sampleSubtitle[lang][10], type: "b" })}
+          </li>
+        </ul>
+
+        <span style={{ color: "snow" }}>{additionalText[lang]}</span>
         <Chip
           clickable
-          onClick={handleConfirmClick}
-          label={confirmText["en"]}
-          style={ChipStyle}
+          onClick={() => handleConfirm(selected)}
+          label={confirmText[lang]}
+          style={{
+            position: "relative",
+            backgroundColor: "snow",
+            color: "black",
+            fontWeight: "500",
+            fontSize: "1.5em",
+            marginTop: "1em",
+            padding: "0.8em 0.5em",
+          }}
         />
       </div>
     </div>
   );
 }
-const modalBackgroundStyle = {
-  width: "100vw",
-  height: "100vh",
-  backdropFilter: "blur(10px)",
-  backgroundColor: "rgba(0,0,0,0.5)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  position: "absolute",
-};
-
-const radioButtonStyle = {
-  position: "absolute",
-  top: "10px",
-  right: "10px",
-  zIndex: "1",
-  color: "#f0b1c4",
-};
-
-const ChipStyle = {
-  backgroundColor: "#f0b1c4",
-  color: "white",
-  fontWeight: "bold",
-  fontSize: "1em",
-  marginTop: "20px",
-  marginBottom: "30px",
-  padding: "10px 20px",
-  boxShadow: "7px 7px 15px rgba(2,28,53,0.08)",
-};
-
-const outerBoxStyle = (direction) => ({
-  position: "relative",
-  display: "inline-flex",
-  flexDirection: direction,
-  alignItems: "center",
-  justifyContent: "center",
-  height: "30vh",
-  width: "calc(30vh * 2)",
-  borderRadius: "20px",
-  backgroundColor: "whitesmoke",
-});
-
-const imgStyle = {
-  position: "absolute",
-  width: "75%",
-  top: "10%",
-};
-
-const imgStyle2 = {
-  position: "absolute",
-  width: "90%",
-  top: "8%",
-};
-
-const subStyle1 = {
-  position: "absolute",
-  color: "rgb(0,0,0,0.9)",
-  bottom: "10px",
-};
-
-const subStyle2 = {
-  position: "absolute",
-  color: "white",
-  backgroundColor: "rgb(0,0,0,0.5)",
-  padding: "0px 10px",
-  bottom: "15%",
-};
-
 export default Modal;
+
+function ModalClose({ handleModalClose }) {
+  return (
+    <>
+      <IconButton
+        onClick={handleModalClose}
+        style={{
+          top: "10px",
+          right: "10px",
+          position: "absolute",
+        }}
+      >
+        <CloseIcon
+          style={{
+            top: "10px",
+            right: "10px",
+            color: "white",
+            backgroundColor: "tomato",
+          }}
+        />
+      </IconButton>
+    </>
+  );
+}

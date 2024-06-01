@@ -1,6 +1,7 @@
 import { Chip, styled } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { text } from "../locale";
 import MobileChips from "./MobileChips";
 
 function MobileChipsContainer({
@@ -113,12 +114,6 @@ function MobileChipsContainer({
 }
 
 export default MobileChipsContainer;
-
-const text = {
-  en: "SHOW ALL VIDEOS",
-  ko: "전체 동영상",
-  ja: "全ての動画",
-};
 
 const StyledChip = styled(Chip)(() => ({
   backgroundColor: "white",

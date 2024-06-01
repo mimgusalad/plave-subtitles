@@ -4,11 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
-import SubtitleTypeModal from "../../components/Modal";
+import Modal from "../../components/Modal";
 import SubtitleSettingController from "../../components/SubtitleSettingController";
 import Subtitles from "../../components/Subtitles";
 import { getSubtitles } from "../../utils/getSubtitles";
-
 function YouTubePlayer() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -29,17 +28,18 @@ function YouTubePlayer() {
   const [isModalOpen, setIsModalOpen] = useState(
     localStorage.getItem("modal") === "false" ? false : true
   );
+  const [choice, setChoice] = useState(localStorage.getItem("type"));
 
-  const handleConfirm = () => {
+  const handleConfirm = (selected) => {
     localStorage.setItem("modal", "false");
     setIsModalOpen(false);
-    // refresh page to apply new subtitle type
-    window.location.reload();
+    setChoice(selected);
+    localStorage.setItem("type", selected);
   };
 
   const handleModalClose = () => {
-    localStorage.setItem("modal", "false");
     setIsModalOpen(false);
+    localStorage.setItem("type", choice);
   };
 
   const handleResize = () => {
@@ -53,6 +53,14 @@ function YouTubePlayer() {
   };
 
   useEffect(() => {
+    document.body.classList.add("background-transition");
+    setTimeout(() => {
+      document.body.classList.add("background-transition");
+    }, 10);
+
+    // Fetch initial subtitles
+    fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
+
     window.addEventListener("resize", handleResize);
     handleResize(); // Call once to set initial value
     return () => {
@@ -88,16 +96,16 @@ function YouTubePlayer() {
   };
 
   /** 배경 이미지 transition 넣고 자막 받아오기 */
-  useEffect(() => {
-    document.body.style.backgroundImage = "url('/img/bg.png')";
-    document.body.classList.add("background-transition");
-    setTimeout(() => {
-      document.body.classList.add("background-transition");
-    }, 10);
+  // useEffect(() => {
+  //   document.body.style.backgroundImage = "url('/img/bg.png')";
+  //   document.body.classList.add("background-transition");
+  //   setTimeout(() => {
+  //     document.body.classList.add("background-transition");
+  //   }, 10);
 
-    // Fetch initial subtitles
-    fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
-  }, []);
+  //   // Fetch initial subtitles
+  //   fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
+  // }, []);
 
   /* 동영상 시간 구하기 */
   useEffect(() => {
@@ -123,14 +131,15 @@ function YouTubePlayer() {
     setPlayer(event.target);
   };
 
-  const subtitleType = localStorage.getItem("subtitleType") || 0;
+  const type = localStorage.getItem("type") || 0;
 
   return (
     <div>
       {isModalOpen && (
-        <SubtitleTypeModal
-          handleModalClose={handleModalClose}
+        <Modal
           handleConfirm={handleConfirm}
+          handleModalClose={handleModalClose}
+          lang={selectedLanguage}
         />
       )}
       <div className="desktop-home-link">
@@ -141,7 +150,7 @@ function YouTubePlayer() {
       </IconButton>
       <SubtitleSettingController lang={selectedLanguage} />
       <div className={`desktop-video-container`}>
-        {subtitleType === "1" ? (
+        {type === "1" ? (
           <YouTube
             videoId={videoId}
             onReady={onReady}
@@ -157,12 +166,11 @@ function YouTubePlayer() {
             opts={{ width: videoWidth, height: videoHeight }}
           />
         )}
-        <div
-          className={
-            subtitleType === "0" ? "subtitle-container" : "subtitle-container-2"
-          }
-        >
-          <Subtitles subtitles={subtitles} />
+        <div className="subtitle-container">
+          <Subtitles
+            subtitles={subtitles}
+            type={localStorage.getItem("type")}
+          />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Chip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import { languages } from "../locale";
 
 const StyledChip = styled(Chip)(({ selectedLanguage, lang }) => ({
   fontWeight: "bold",
@@ -19,12 +20,6 @@ function LanguageSetting({ handleLanguageChange }) {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "en"
   );
-  const languages = {
-    ko: "한국어",
-    en: "English",
-    ja: "日本語",
-  };
-
   const handleLanguageClick = (lang) => {
     setSelectedLanguage(lang);
     handleLanguageChange(lang);

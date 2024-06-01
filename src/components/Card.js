@@ -7,7 +7,7 @@ function Card(props) {
 
   return (
     <div className="card" onClick={handleNavigation}>
-      <img src={`${props.imgUrl}`}></img>
+      <img src={`${props.imgUrl}`} />
     </div>
   );
 }

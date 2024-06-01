@@ -1,39 +1,6 @@
-function splitAndReformat(line) {
-  // Use regular expression to match the speaker and dialog
-  const match = line.match(/^\[(.+?)\]\s*(.+)$/);
-  if (match) {
-    const speaker = match[1];
-    const dialog = match[2];
-    // Check if the speaker contains a slash
-    if (speaker.indexOf("/") !== -1) return dialog;
-    return { speaker, dialog };
-  } else {
-    return line;
-  }
-}
-
-function nameConverter(name) {
-  const names = {
-    en: ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"],
-    ko: ["예준", "노아", "밤비", "은호", "하민"],
-    ja: ["イェジュン", "ノア", "バンビ", "ウノ", "ハミン"],
-  };
-
-  let index = names.en.indexOf(name);
-  if (index === -1) {
-    index = names.ko.indexOf(name);
-  }
-  if (index === -1) {
-    index = names.ja.indexOf(name);
-  }
-
-  if (index !== -1) {
-    return names.en[index].toLowerCase();
-  } else {
-    return null; // Or any default value you'd like to return if the name is not found
-  }
-}
-function BlackFontWithNoGapAndName2({ message: line }) {
+import nameConverter from "../../utils/nameConverter";
+import splitAndReformat from "../../utils/splitAndReformat";
+function BlackFontWithName2({ message: line }) {
   const colors = {
     yejun: ["#8fb3d4", "#c8e3ff"],
     noah: ["#a169a3", "#f5c9f2"],
@@ -53,7 +20,11 @@ function BlackFontWithNoGapAndName2({ message: line }) {
             <img
               src={`/img/symbol/${nameConverter(result.speaker)}.png`}
               style={{
-                width: "2.8em",
+                height: `${
+                  nameConverter(result.speaker) === "eunho"
+                    ? "2.68em"
+                    : "2.65em"
+                }`,
               }}
             />
           </i>
@@ -88,7 +59,7 @@ function BlackFontWithNoGapAndName2({ message: line }) {
   );
 }
 
-export default BlackFontWithNoGapAndName2;
+export default BlackFontWithName2;
 
 const BubbleContainer = {
   position: "relative",
@@ -100,8 +71,8 @@ const IconStyle = {
   position: "absolute",
   width: "fit-content",
   // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-1em",
-  top: "-0.3em", // -0.5em
+  left: "-0.5em",
+  top: "-0.59em", // -0.5em
   zIndex: "1",
 };
 
@@ -128,7 +99,6 @@ const ChatBubble = (colors, speaker) => ({
   alignItems: "center",
   maxWidth: "100%",
   wordWrap: "break-word",
-  border: `0.15em solid snow`,
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",

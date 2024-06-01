@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import CardContainer from "../../components/CardContainer";
 import ChipsContainer from "../../components/ChipsContainer";
 import LanguageSetting from "../../components/LanguageSetting";
+import { images } from "../../locale";
 
 function DesktopHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
+  const [imageCache, setImageCache] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "en"
   );
@@ -38,6 +40,15 @@ function DesktopHomePage() {
         .catch((err) => {
           console.log(err);
         });
+    };
+    const preloadImages = () => {
+      const cache = {};
+      images.forEach((image) => {
+        const img = new Image();
+        img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
+        cache[image] = img;
+      });
+      setImageCache(cache);
     };
 
     changeBackgroundColor();

@@ -2,14 +2,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
+import { informationText } from "../locale";
 import FontSizeController from "./FontSizeController";
 import SubtitlePositionController from "./SubtitlePositionController";
-
-const text = {
-  en: "Sub Setting",
-  ko: "자막 설정",
-  ja: "字幕設定",
-};
 
 const SubtitleSettingController = ({ lang }) => {
   const [open, setOpen] = useState(false);
@@ -43,7 +38,7 @@ const Menu = ({ lang, setOpen, open }) => {
       className={"subtitle-setting-controller"}
       style={ControllerStyle(open)}
     >
-      <span>{text[lang]}</span>
+      <span>{informationText[lang]}</span>
       <IconButton
         disableRipple
         disableFocusRipple

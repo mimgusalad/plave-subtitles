@@ -2,20 +2,8 @@ import { Chip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import MobileChips from "../MobileComponents/MobileChips";
+import { text } from "../locale";
 import CustomChip from "./CustomChip";
-
-const StyledChip = styled(Chip)(({ theme, selectedLanguage, lang }) => ({
-  backgroundColor: "white",
-  opacity: 0.7,
-  fontWeight: "bold",
-  "@media (max-height: 700px)": {
-    fontSize: "12px",
-  },
-  "@media (min-height: 701px) and (max-height: 783px)": {
-    fontSize: "14px",
-  },
-}));
-
 function ChipsContainer({
   selectedLanguage,
   videoData,
@@ -25,12 +13,6 @@ function ChipsContainer({
   const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#4fd1a6"];
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
-
-  const text = {
-    en: "SHOW ALL VIDEOS",
-    ko: "전체 동영상",
-    ja: "全ての動画",
-  };
   const names = ["yejun", "noah", "bamby", "eunho", "hamin"];
   const olders = names.slice(0, 2);
   const youngers = names.slice(2, 5);
@@ -130,3 +112,15 @@ function ChipsContainer({
 }
 
 export default ChipsContainer;
+
+const StyledChip = styled(Chip)(({ theme, selectedLanguage, lang }) => ({
+  backgroundColor: "white",
+  opacity: 0.7,
+  fontWeight: "bold",
+  "@media (max-height: 700px)": {
+    fontSize: "12px",
+  },
+  "@media (min-height: 701px) and (max-height: 783px)": {
+    fontSize: "14px",
+  },
+}));

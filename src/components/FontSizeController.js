@@ -4,11 +4,7 @@ import { Box, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-const fontText = {
-  en: "Font Size",
-  ko: "자막 크기",
-  ja: "フォントサイズ",
-};
+import { fontText } from "../locale";
 
 const FontSizeController = ({ selectedLanguage }) => {
   const [fontSize, setFontSize] = useState(
@@ -25,25 +21,22 @@ const FontSizeController = ({ selectedLanguage }) => {
       } else {
         return "mobile-subtitle-container-landscape";
       }
-    } else {
-      if (localStorage.getItem("subtitleType") === "0")
-        return "subtitle-container";
-      else return "subtitle-container-2";
     }
+    return "subtitle-container";
   };
 
-  const getElementNameBySubtitleType = (subtitleType) => {
-    switch (subtitleType) {
-      case "b1": // BlackFontWithNoGapAndName
+  const getElementNameBySubtitleType = (type) => {
+    switch (type) {
+      case "b1": // BlackFontWithName
         return "chat-bubble";
       case "b2": //BlackFontWithGap
         return "chat-bubble";
-      case "b3": //BlackFontWithNoGap
+      case "b3": //BlackFont
       case "w1": //WhiteFontWithGap
         return "chat-bubble";
-      case "w2": //WhiteFontWithNoGap
+      case "w2": //WhiteFont
         return "chat-bubble";
-      case "w3": //WhiteFontWithNoGapAndName
+      case "w3": //WhiteFontWithName
         return "chat-bubble";
       case "w4": //WhiteFontWithTail
         return "chat-bubble";
@@ -51,7 +44,7 @@ const FontSizeController = ({ selectedLanguage }) => {
   };
 
   const updateFontSize = (newSize) => {
-    const subtitleType = localStorage.getItem("subtitleType");
+    const type = localStorage.getItem("type");
     let elementName = getElementName(isMobile, isPortrait);
     const elements = document.getElementsByClassName(
       elementName !== null ? elementName : "chat-bubble"

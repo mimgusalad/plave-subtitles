@@ -1,11 +1,12 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/desktop.css";
 import "./css/mobile-landscape.css";
 import "./css/mobile.css";
+import { images } from "./locale";
 import AboutPage from "./pages/AboutPage";
 import DesktopHomePage from "./pages/Desktop/DesktopHomePage";
 import YouTubePlayer from "./pages/Desktop/DesktopVideoPage";
@@ -14,22 +15,21 @@ import MobileYoutubePlayer from "./pages/Mobile/MobileVideoPage";
 import "./style.css";
 
 function App() {
+  const [imageCache, setImageCache] = useState({});
+  // 이미지 프리로딩
   useEffect(() => {
-    const images = [
-      "yejun.png",
-      "noah.png",
-      "bamby.png",
-      "eunho.png",
-      "hamin.png",
-    ];
+    const cache = {};
     images.forEach((image) => {
       const img = new Image();
       img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
+      cache[image] = img;
     });
     images.forEach((image) => {
       const img = new Image();
       img.src = process.env.PUBLIC_URL + "/img/symbol/" + image;
+      cache[image] = img;
     });
+
     images.forEach((image) => {
       const img = new Image();
       img.src =
@@ -37,6 +37,7 @@ function App() {
         "/img/tail/" +
         image.split(".")[0] +
         "_tail.png";
+      cache[image] = img;
     });
   }, []);
   return (

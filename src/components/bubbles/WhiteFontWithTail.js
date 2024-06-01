@@ -1,39 +1,7 @@
-function splitAndReformat(line) {
-  // Use regular expression to match the speaker and dialog
-  const match = line.match(/^\[(.+?)\]\s*(.+)$/);
-  if (match) {
-    const speaker = match[1];
-    const dialog = match[2];
-    // Check if the speaker contains a slash
-    if (speaker.indexOf("/") !== -1) return dialog;
-    return { speaker, dialog };
-  } else {
-    return line;
-  }
-}
+import nameConverter from "../../utils/nameConverter";
+import splitAndReformat from "../../utils/splitAndReformat";
 
-function nameConverter(name) {
-  const names = {
-    en: ["Yejun", "Noah", "Bamby", "Eunho", "Hamin"],
-    ko: ["예준", "노아", "밤비", "은호", "하민"],
-    ja: ["イェジュン", "ノア", "バンビ", "ウノ", "ハミン"],
-  };
-
-  let index = names.en.indexOf(name);
-  if (index === -1) {
-    index = names.ko.indexOf(name);
-  }
-  if (index === -1) {
-    index = names.ja.indexOf(name);
-  }
-
-  if (index !== -1) {
-    return names.en[index].toLowerCase();
-  } else {
-    return null; // Or any default value you'd like to return if the name is not found
-  }
-}
-function BlackFontWithNoGap2({ message: line }) {
+function WhiteFontWithTail({ message: line }) {
   const colors = {
     yejun: ["#8fb3d4", "#c8e3ff"],
     noah: ["#a169a3", "#f5c9f2"],
@@ -51,9 +19,14 @@ function BlackFontWithNoGap2({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
+              draggable="false"
               src={`/img/symbol/${nameConverter(result.speaker)}.png`}
               style={{
-                width: "2.8em",
+                height: `${
+                  nameConverter(result.speaker) === "eunho"
+                    ? "2.68em"
+                    : "2.65em"
+                }`,
               }}
             />
           </i>
@@ -64,6 +37,14 @@ function BlackFontWithNoGap2({ message: line }) {
             <span class="speaker-label" style={SpeakerLabel}></span>
             <span class="speech" style={Speech}>
               {result.dialog}
+            </span>
+            <span class="tail" style={TailStyle}>
+              <img
+                src={`/img/tail/${nameConverter(result.speaker)}_tail.png`}
+                style={{
+                  width: "1em",
+                }}
+              />
             </span>
           </div>
         </div>
@@ -80,7 +61,13 @@ function BlackFontWithNoGap2({ message: line }) {
   );
 }
 
-export default BlackFontWithNoGap2;
+export default WhiteFontWithTail;
+
+const TailStyle = {
+  position: "absolute",
+  left: "-0.1em", // "-0.5em",
+  bottom: "-0.5em", // "-0.5em",
+};
 
 const BubbleContainer = {
   position: "relative",
@@ -91,14 +78,30 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-1em",
-  top: "-0.3em", // -0.5em
-  zIndex: "1",
+  left: "-1.9em",
+  top: "-0.59em", // -0.5em
 };
 
+const ChatBubble = (colors, speaker) => ({
+  backgroundColor: colors[speaker][0],
+  borderRadius: "1.1em",
+  padding: "0 1em 0 0",
+  display: "flex",
+  alignItems: "center",
+  maxWidth: "100%",
+  wordWrap: "break-word",
+  // border: `0.1em solid snow`,
+  // boxShadow: `0 0 0 0.15em ${colors[speaker][0]}`,
+  outline: `0.09em solid snow`,
+  outlineOffset: "-0.2em",
+  boxShadow: `0 0 0 0.04em ${colors[speaker][0]}`,
+  position: "relative",
+  margin: "0.2em 0",
+  fontSize: "1em",
+});
+
 const DefaultChatBubble = (colors) => ({
-  backgroundColor: "snow",
+  backgroundColor: "rgb(0,0,0,0.8)",
   borderRadius: "1.1em",
   padding: "0 1em",
   display: "flex",
@@ -106,29 +109,14 @@ const DefaultChatBubble = (colors) => ({
   maxWidth: "80vw",
   minWidth: "100%",
   wordBreak: "break-all",
-  border: `0.11em solid snow`,
+  border: `0.11em solid rgb(0,0,0,0.8)`,
   position: "relative",
   fontSize: "1em",
   textAlign: "center",
 });
-
-const ChatBubble = (colors, speaker) => ({
-  backgroundColor: "snow",
-  borderRadius: "1.1em",
-  padding: "0 1em 0 0",
-  display: "flex",
-  alignItems: "center",
-  maxWidth: "100%",
-  wordWrap: "break-word",
-  border: `0.15em solid snow`,
-  position: "relative",
-  margin: "0.2em 0",
-  fontSize: "1em",
-});
-
 const SpeakerLabel = {
   color: "black",
-  marginLeft: "1.4em",
+  marginLeft: "1em",
   paddingLeft: "0",
 };
 
@@ -140,4 +128,5 @@ const Separator = (color) => ({
 const Speech = {
   color: "black",
   flex: "1",
+  color: "snow",
 };
