@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link, useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
-import MobileNavBar from "../../MobileComponents/MobileNavBar";
 import Subtitles from "../../components/Subtitles";
+import MobileNavBar from "../../mobile_only_components/MobileNavBar";
 import { getSubtitles } from "../../utils/getSubtitles";
 
 function MobileYoutubePlayer() {
@@ -82,6 +82,17 @@ function MobileYoutubePlayer() {
     setPlayer(event.target);
   };
 
+  const opts = {
+    width: (window.innerHeight * 16) / 9,
+    height: window.innerHeight,
+    playerVars: {
+      fs: 0, // 전체화면 버튼 제거
+      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
+      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
+    },
+  };
+  const youtubeRef = useRef(null);
+
   return (
     <>
       <div
@@ -92,11 +103,11 @@ function MobileYoutubePlayer() {
         {isPortrait ? (
           <YouTube
             videoId={videoId}
-            onReady={onReady}
             opts={{
               width: window.innerWidth,
               height: (window.innerWidth * 9) / 16,
             }}
+            onReady={onReady}
           />
         ) : (
           <>
@@ -104,12 +115,10 @@ function MobileYoutubePlayer() {
               <ArrowBackIosIcon style={ArrowStyle} />
             </Link>
             <YouTube
+              iframeClassName="youtube-iframe"
               videoId={videoId}
               onReady={onReady}
-              opts={{
-                width: (window.innerHeight * 16) / 9,
-                height: window.innerHeight,
-              }}
+              opts={opts}
             />
           </>
         )}

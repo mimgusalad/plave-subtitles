@@ -80,28 +80,9 @@
     align-items: center;
 }
 
-/* 자막 설정 컨트롤러 (햄버거 메뉴) */
-.subtitle-setting-controller {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
-}
-
-/* 자막 설정 컨트롤러 제목 */
-.subtitle-setting-controller span {
-    color: whitesmoke;
-    font-size: 1em;
-    margin-bottom: 30px;
-    position: fixed;
-    top:5%;
-    margin-top: 3px;
-}
-
-.subtitle-position-controller {
-    margin-top: 10vh;
+/* .subtitle-position-controller {
     font-size: 0.8em;
-}
+} */
 
 
 /* 자막 텍스트 정렬 */

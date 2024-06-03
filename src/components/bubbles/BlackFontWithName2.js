@@ -11,6 +11,8 @@ function BlackFontWithName2({ message: line }) {
   };
 
   const result = splitAndReformat(line);
+  const name = nameConverter(result.speaker);
+  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
 
   return (
     <>
@@ -18,7 +20,7 @@ function BlackFontWithName2({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
-              src={`/img/symbol/${nameConverter(result.speaker)}.png`}
+              src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${
                   nameConverter(result.speaker) === "eunho"
@@ -70,10 +72,39 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-0.5em",
+  left: "-0.31em",
   top: "-0.59em", // -0.5em
   zIndex: "1",
+};
+
+const ChatBubble = (colors, speaker) => ({
+  backgroundColor: "snow",
+  borderRadius: "1.1em",
+  display: "flex",
+  alignItems: "center",
+  maxWidth: "100%",
+  wordWrap: "break-word",
+  position: "relative",
+  margin: "0.2em 0",
+  fontSize: "1em",
+
+  padding: "0 0.8em 0 0",
+});
+
+const SpeakerLabel = {
+  color: "black",
+  marginLeft: "1.3em",
+  paddingLeft: "0",
+};
+
+const Separator = (color) => ({
+  color: color,
+  position: "relative",
+  fontSize: "1em",
+});
+const Speech = {
+  color: "black",
+  flex: "1",
 };
 
 const DefaultChatBubble = (colors) => ({
@@ -90,32 +121,3 @@ const DefaultChatBubble = (colors) => ({
   fontSize: "1em",
   textAlign: "center",
 });
-
-const ChatBubble = (colors, speaker) => ({
-  backgroundColor: "snow",
-  borderRadius: "1.1em",
-  padding: "0 1em 0 0",
-  display: "flex",
-  alignItems: "center",
-  maxWidth: "100%",
-  wordWrap: "break-word",
-  position: "relative",
-  margin: "0.2em 0",
-  fontSize: "1em",
-});
-
-const SpeakerLabel = {
-  color: "black",
-  marginLeft: "1.4em",
-  paddingLeft: "0",
-};
-
-const Separator = (color) => ({
-  color: color,
-  position: "relative",
-  fontSize: "1em",
-});
-const Speech = {
-  color: "black",
-  flex: "1",
-};

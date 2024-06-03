@@ -7,9 +7,8 @@ function splitAndReformat(line) {
     // Check if the speaker contains a slash
     if (speaker.indexOf("/") !== -1) return dialog;
     return { speaker, dialog };
-  } else {
-    return line;
   }
+  return line;
 }
 
 export default splitAndReformat;

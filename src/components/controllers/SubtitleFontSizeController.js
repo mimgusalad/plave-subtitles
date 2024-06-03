@@ -4,15 +4,14 @@ import { Box, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { fontText } from "../locale";
+import { fontText } from "../../locale";
 
-const FontSizeController = ({ selectedLanguage }) => {
+const SubtitleFontSizeController = ({ selectedLanguage }) => {
   const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize")) || defaultFontSize
-  ); // Initial font size
+    Number(localStorage.getItem("fontSize"))
+  );
   const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  let defaultFontSize;
 
   const getElementName = (isMobile, isPortrait) => {
     if (isMobile) {
@@ -25,30 +24,9 @@ const FontSizeController = ({ selectedLanguage }) => {
     return "subtitle-container";
   };
 
-  const getElementNameBySubtitleType = (type) => {
-    switch (type) {
-      case "b1": // BlackFontWithName
-        return "chat-bubble";
-      case "b2": //BlackFontWithGap
-        return "chat-bubble";
-      case "b3": //BlackFont
-      case "w1": //WhiteFontWithGap
-        return "chat-bubble";
-      case "w2": //WhiteFont
-        return "chat-bubble";
-      case "w3": //WhiteFontWithName
-        return "chat-bubble";
-      case "w4": //WhiteFontWithTail
-        return "chat-bubble";
-    }
-  };
-
   const updateFontSize = (newSize) => {
-    const type = localStorage.getItem("type");
     let elementName = getElementName(isMobile, isPortrait);
-    const elements = document.getElementsByClassName(
-      elementName !== null ? elementName : "chat-bubble"
-    );
+    const elements = document.getElementsByClassName(elementName);
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.fontSize = `${newSize}px`;
     }
@@ -96,4 +74,4 @@ const FontSizeController = ({ selectedLanguage }) => {
   );
 };
 
-export default FontSizeController;
+export default SubtitleFontSizeController;

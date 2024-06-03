@@ -1,6 +1,7 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
+import { useMediaQuery } from "react-responsive";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/desktop.css";
@@ -8,38 +9,18 @@ import "./css/mobile-landscape.css";
 import "./css/mobile.css";
 import { images } from "./locale";
 import AboutPage from "./pages/AboutPage";
-import DesktopHomePage from "./pages/Desktop/DesktopHomePage";
-import YouTubePlayer from "./pages/Desktop/DesktopVideoPage";
-import MobileHomePage from "./pages/Mobile/MobileHomePage";
-import MobileYoutubePlayer from "./pages/Mobile/MobileVideoPage";
+import DesktopHomePage from "./pages/desktop/DesktopHomePage";
+import YouTubePlayer from "./pages/desktop/DesktopVideoPage";
+import MobileHomePage from "./pages/mobile/MobileHomePage";
+import MobileYoutubePlayer from "./pages/mobile/MobileVideoPage";
 import "./style.css";
 
 function App() {
-  const [imageCache, setImageCache] = useState({});
-  // 이미지 프리로딩
+  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   useEffect(() => {
-    const cache = {};
-    images.forEach((image) => {
-      const img = new Image();
-      img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
-      cache[image] = img;
-    });
-    images.forEach((image) => {
-      const img = new Image();
-      img.src = process.env.PUBLIC_URL + "/img/symbol/" + image;
-      cache[image] = img;
-    });
-
-    images.forEach((image) => {
-      const img = new Image();
-      img.src =
-        process.env.PUBLIC_URL +
-        "/img/tail/" +
-        image.split(".")[0] +
-        "_tail.png";
-      cache[image] = img;
-    });
+    preloadImages();
   }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
@@ -78,3 +59,24 @@ const theme = createTheme({
     fontFamily: "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif",
   },
 });
+
+const preloadImages = () => {
+  const cache = {};
+  images.forEach((image) => {
+    const img = new Image();
+    img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
+    cache[image] = img;
+  });
+  images.forEach((image) => {
+    const img = new Image();
+    img.src = process.env.PUBLIC_URL + "/img/symbol/" + image;
+    cache[image] = img;
+  });
+
+  images.forEach((image) => {
+    const img = new Image();
+    img.src =
+      process.env.PUBLIC_URL + "/img/tail/" + image.split(".")[0] + "_tail.png";
+    cache[image] = img;
+  });
+};

@@ -1,7 +1,6 @@
-import CloseIcon from "@mui/icons-material/Close";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Button, Chip, IconButton } from "@mui/material";
+import { Chip } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
 import {
   BlackFont,
@@ -12,14 +11,22 @@ import {
   WhiteFontWithName,
   WhiteFontWithTail,
   WhiteFontWithTail2,
-} from "./Bubbles";
+} from "./Bubble_index";
 
-function Modal({ handleModalClose, handleConfirm, lang }) {
-  const [selected, setSelected] = useState(localStorage.getItem("type") || "a");
-  const items = ["b1", "w1", "b3", "w4", "w2", "b2", "b4", "w3"];
+function Modal({ handleConfirm, lang }) {
+  const [selected, setSelected] = useState(localStorage.getItem("type") || "b");
+  const [isMounted, setIsMounted] = useState(true);
+  const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
-  const handleChange = (item) => {
+  const handleClick = (item) => {
     setSelected(item);
+  };
+
+  const handleConfirmButton = (selected) => {
+    setIsMounted(false);
+    setTimeout(() => {
+      handleConfirm(selected);
+    }, 1000);
   };
 
   const getMessageComponent = (index) => {
@@ -30,94 +37,55 @@ function Modal({ handleModalClose, handleConfirm, lang }) {
       <WhiteFontWithTail2 message={sampleSubtitle[lang][7]} />, //bamby
       <WhiteFontWithName message={sampleSubtitle[lang][5]} />, //eunho
       <BlackFont2 message={sampleSubtitle[lang][1]} />, //yejun
-      <BlackFontWithName2 message={sampleSubtitle[lang][3]} />, //hamin
       <WhiteFontWithTail message={sampleSubtitle[lang][6]} />, //eunho
+      <BlackFontWithName2 message={sampleSubtitle[lang][3]} />, //hamin
     ];
     return components[index];
   };
 
   const DefaultType = ({ message, type }) => {
     return (
-      <>
-        <IconButton
-          disableFocusRipple
-          disableRipple
-          onClick={() => handleChange(type)}
-          style={{ padding: "0", margin: "0", borderRadius: "0" }}
-        >
-          <div
-            style={{
-              backgroundColor: type === "b" ? "rgb(0,0,0,0.7)" : "",
-              color: "white",
-              padding: "0.1em",
-              minWidth: "max-content",
-              fontSize: "0.9em",
-            }}
-          >
-            {message}
-          </div>
-        </IconButton>
-        <FavoriteIcon
-          sx={{
-            color: `${selected === type ? "wheat" : "transparent"}`,
-            margin: "0",
-            padding: "0",
-            zIndex: 1,
-            position: "absolute",
-            right: "-11%",
-            transform: "translateY(-30%)",
-          }}
-        />
-      </>
+      <div
+        className={`default-type-button ${selected === type ? "selected" : ""}`}
+        onClick={() => handleClick(type)}
+        style={{
+          backgroundColor: type === "b" ? "rgb(0,0,0,0.7)" : "",
+          color: "white",
+          padding: "0.1em",
+          minWidth: "max-content",
+          fontSize: "1.3em",
+          cursor: "pointer",
+        }}
+      >
+        {message}
+      </div>
     );
   };
 
   return (
-    <div className="modal-screen">
-      <div className="modal-close>">
-        <ModalClose handleModalClose={handleModalClose} />
-      </div>
+    <div className={`modal-screen ${isMounted ? "mounted" : "unmounted"}`}>
+      <Home />
       <div className="modal-container">
         <h1>{title[lang].toUpperCase()}</h1>
         <ul className="type-container">
           {items.map((item, index) => (
-            <li key={index}>
-              <Button
-                disableFocusRipple
-                disableRipple
-                onClick={() => handleChange(item)}
-                style={{
-                  padding: "0",
-                  margin: "0",
-                }}
-              >
-                {getMessageComponent(index)}
-                <FavoriteIcon
-                  sx={{
-                    color: `${selected === item ? "wheat" : "transparent"}`,
-                    margin: "0",
-                    padding: "0",
-                    zIndex: 1,
-                    position: "absolute",
-                    right: "7%",
-                    transform: "translateY(-50%)",
-                  }}
-                />
-              </Button>
+            <li
+              className={`type-button ${selected === item ? "selected" : ""}`}
+              key={index}
+              onClick={() => handleClick(item)}
+            >
+              {getMessageComponent(index)}
             </li>
           ))}
           <li>
-            {DefaultType({ message: sampleSubtitle[lang][9], type: "a" })}
-          </li>
-          <li>
-            {DefaultType({ message: sampleSubtitle[lang][10], type: "b" })}
+            {DefaultType({ message: sampleSubtitle[lang][9], type: "b" })}
           </li>
         </ul>
 
         <span style={{ color: "snow" }}>{additionalText[lang]}</span>
         <Chip
           clickable
-          onClick={() => handleConfirm(selected)}
+          onClick={() => handleConfirmButton(selected)}
           label={confirmText[lang]}
           style={{
             position: "relative",
@@ -134,27 +102,21 @@ function Modal({ handleModalClose, handleConfirm, lang }) {
   );
 }
 export default Modal;
-
-function ModalClose({ handleModalClose }) {
+const Home = () => {
   return (
-    <>
-      <IconButton
-        onClick={handleModalClose}
-        style={{
-          top: "10px",
-          right: "10px",
-          position: "absolute",
-        }}
-      >
-        <CloseIcon
-          style={{
-            top: "10px",
-            right: "10px",
-            color: "white",
-            backgroundColor: "tomato",
-          }}
-        />
-      </IconButton>
-    </>
+    <Link
+      to="/"
+      style={{
+        fontSize: "1.7em",
+        textDecoration: "none",
+        color: "rgb(207, 201, 201)",
+        fontWeight: "bold",
+        position: "fixed",
+        left: "20px",
+        top: "20px",
+      }}
+    >
+      {"HOME"}
+    </Link>
   );
-}
+};

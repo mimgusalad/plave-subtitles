@@ -12,7 +12,8 @@ function BlackFont({ message: line }) {
   };
 
   const result = splitAndReformat(line);
-  const speakerImage = `${nameConverter(result.speaker)}.png`;
+  const name = nameConverter(result.speaker);
+  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
 
   return (
     <>
@@ -20,7 +21,6 @@ function BlackFont({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
-              // src={`/img/symbol/${nameConverter(result.speaker)}.png`}
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${
@@ -65,8 +65,7 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  // transform: "translate(-70%, 25%)", // 'translate(-50%, -50%)
-  left: "-0.5em",
+  left: "-0.31em",
   top: "-0.59em", // -0.5em
   zIndex: "1",
 };
@@ -74,34 +73,19 @@ const IconStyle = {
 const ChatBubble = (colors, speaker) => ({
   backgroundColor: "snow",
   borderRadius: "1.1em",
-  padding: "0.01em 0.8em 0.01em 0",
   display: "flex",
   alignItems: "center",
   maxWidth: "100%",
   wordWrap: "break-word",
-  outline: `0.1em solid ${colors[speaker][0]}`,
-  outlineOffset: "-0.2em",
-  // border: `0.15em solid ${colors[speaker][1]}`,
-  // boxShadow: `0 0 0 0.1em ${colors[speaker][1]}`,
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",
-});
 
-const DefaultChatBubble = (colors) => ({
-  backgroundColor: "snow",
-  borderRadius: "1.1em",
-  padding: "0 1em",
-  display: "flex",
-  alignItems: "center",
-  maxWidth: "80vw",
-  minWidth: "100%",
-  wordBreak: "break-all",
-  // border: `0.11em solid snow`,
-  // boxShadow: `0 0 0 0.11em snow`,
-  position: "relative",
-  fontSize: "1em",
-  textAlign: "center",
+  padding: "0.01em 0.8em 0.01em 0",
+  outline: `0.1em solid ${
+    colors[speaker] === undefined ? "white" : colors[speaker][0]
+  }`,
+  outlineOffset: "-0.2em",
 });
 
 const SpeakerLabel = {
@@ -114,3 +98,16 @@ const Speech = {
   color: "black",
   flex: "1",
 };
+const DefaultChatBubble = (colors) => ({
+  backgroundColor: "snow",
+  borderRadius: "1.1em",
+  padding: "0 1em",
+  display: "flex",
+  alignItems: "center",
+  maxWidth: "80vw",
+  minWidth: "100%",
+  wordBreak: "break-all",
+  position: "relative",
+  fontSize: "1em",
+  textAlign: "center",
+});

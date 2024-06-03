@@ -1,33 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CardContainer from "../../components/CardContainer";
-import ChipsContainer from "../../components/ChipsContainer";
-import LanguageSetting from "../../components/LanguageSetting";
-import { images } from "../../locale";
+import CardContainer from "../../components/cards/CardContainer";
+import LanguageSettingController from "../../components/controllers/LanguageSettingController";
+import ChipsContainer from "../../components/profile_chips/ChipsContainer";
 
 function DesktopHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
-  const [imageCache, setImageCache] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "en"
+    localStorage.getItem("lang") || "ko"
   );
 
-  localStorage.setItem("lang", selectedLanguage);
-
-  const handleFilterChange = (videos) => {
-    setFilteredVideos(videos);
-  };
-
-  const handleLanguageChange = (language) => {
-    localStorage.setItem("lang", language);
-    setSelectedLanguage(language);
-  };
-
-  const changeBackgroundColor = () => {
-    document.body.classList.remove("background-transition");
-  };
+  useEffect(() => {
+    localStorage.setItem("lang", selectedLanguage);
+  }, [selectedLanguage]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -41,19 +28,23 @@ function DesktopHomePage() {
           console.log(err);
         });
     };
-    const preloadImages = () => {
-      const cache = {};
-      images.forEach((image) => {
-        const img = new Image();
-        img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
-        cache[image] = img;
-      });
-      setImageCache(cache);
+
+    const changeBackgroundColor = () => {
+      document.body.classList.remove("background-transition");
     };
 
     changeBackgroundColor();
     fetchData();
   }, []);
+
+  const handleFilterChange = (videos) => {
+    setFilteredVideos(videos);
+  };
+
+  const handleLanguageChange = (language) => {
+    localStorage.setItem("lang", language);
+    setSelectedLanguage(language);
+  };
 
   return (
     <>
@@ -65,7 +56,9 @@ function DesktopHomePage() {
       </div>
 
       <div className="desktop-language-setting">
-        <LanguageSetting handleLanguageChange={handleLanguageChange} />
+        <LanguageSettingController
+          handleLanguageChange={handleLanguageChange}
+        />
       </div>
       <ChipsContainer
         selectedLanguage={selectedLanguage}

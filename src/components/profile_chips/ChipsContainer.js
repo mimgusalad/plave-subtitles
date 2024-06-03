@@ -1,8 +1,8 @@
 import { Chip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
-import MobileChips from "../MobileComponents/MobileChips";
-import { text } from "../locale";
+import { text } from "../../locale";
+import MobileChips from "../../mobile_only_components/MobileChips";
 import CustomChip from "./CustomChip";
 function ChipsContainer({
   selectedLanguage,

@@ -14,6 +14,8 @@ function WhiteFontWithTail({ message: line }) {
   };
 
   const result = splitAndReformat(line);
+  const name = nameConverter(result.speaker);
+  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
 
   return (
     <>
@@ -21,7 +23,7 @@ function WhiteFontWithTail({ message: line }) {
         <div className="chat-bubble-container" style={BubbleContainer}>
           <i className="icon" style={IconStyle}>
             <img
-              src={`/img/symbol/${nameConverter(result.speaker)}.png`}
+              src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${
                   nameConverter(result.speaker) === "eunho"
@@ -35,7 +37,6 @@ function WhiteFontWithTail({ message: line }) {
             className="chat-bubble"
             style={ChatBubble(colors, nameConverter(result.speaker), isMobile)}
           >
-            <span className="speaker-label" style={SpeakerLabel}></span>
             <span className="speech" style={Speech}>
               {result.dialog}
             </span>
@@ -71,6 +72,7 @@ const TailStyle = {
   position: "absolute",
   left: "-0.1em", // "-0.5em",
   bottom: "-0.4em", // "-0.5em",
+  zIndex: "-1",
 };
 
 const BubbleContainer = {
@@ -104,7 +106,7 @@ const DefaultChatBubble = (colors, isMobile) => ({
 const ChatBubble = (colors, speaker, isMobile) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: "1.1em",
-  padding: "0 1em 0 0",
+  padding: "0 0.8em",
   display: "flex",
   alignItems: "center",
   maxWidth: !isMobile ? "80vw" : "70vw",
@@ -114,13 +116,14 @@ const ChatBubble = (colors, speaker, isMobile) => ({
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",
+  zIndex: "2",
 });
 
-const SpeakerLabel = {
-  color: "black",
-  marginLeft: "1em",
-  paddingLeft: "0",
-};
+// const SpeakerLabel = {
+//   color: "black",
+//   marginLeft: "1em",
+//   paddingLeft: "0",
+// };
 
 const Separator = (color) => ({
   color: color,

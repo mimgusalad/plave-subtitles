@@ -21,14 +21,70 @@
   align-items: center;
 }
 
-
-.tabStyle{
+.tabStyle {
   display: inline-block;
   font-size: 1.3em;
   font-weight: bold;
-  color: white ;
+  color: white;
   text-decoration: none;
   margin-top: 10px;
   margin-left: 20px;
   padding: 0 10px;
+}
+
+
+/* 자막 설정 컨트롤러 (햄버거 메뉴) */
+
+
+/* 자막 설정 컨트롤러 제목 */
+
+
+.subtitle-position-controller,
+.subtitle-font-size-controller,
+.language-selector {
+  margin: 1em;
+}
+
+ul.language-selector li {
+  cursor: pointer;
+  width: max-content;
+  margin: 0.5em 0;
+  height: min-content;
+
+}
+
+.test-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: scroll;
+  background-color: transparent
+}
+
+.for-test {
+  font-size: 1em;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  list-style-type: none;
+  overflow-x: scroll;
+  margin: 1em 0;
+  font-size: 1.2em;
+}
+
+.for-test li {
+  cursor: pointer;
+}
+
+.for-test li:nth-child(5),
+.for-test li:nth-child(6) {
+  margin-left: 1.5em;
+}
+
+.for-test .chat-bubble-container {
+  margin: 0.8em 0;
 }

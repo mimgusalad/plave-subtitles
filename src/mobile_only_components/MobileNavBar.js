@@ -1,7 +1,7 @@
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
-import FontSizeController from "../components/FontSizeController";
 import SubtitleSettingController from "../components/SubtitleSettingController";
+import SubtitleFontSizeController from "../components/controllers/SubtitleFontSizeController";
 
 function MobileNavBar({ selectedLanguage }) {
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
@@ -10,7 +10,7 @@ function MobileNavBar({ selectedLanguage }) {
     <>
       {isPortrait ? (
         <>
-          <FontSizeController selectedLanguage={selectedLanguage} />
+          <SubtitleFontSizeController selectedLanguage={selectedLanguage} />
           <Home className="mobile-home-portrait" />
         </>
       ) : (

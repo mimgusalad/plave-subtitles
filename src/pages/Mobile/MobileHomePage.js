@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
-import MobileChipsContainer from "../../MobileComponents/MobileChipsContainer";
-import CardContainer from "../../components/CardContainer";
-import LanguageSetting from "../../components/LanguageSetting";
+import CardContainer from "../../components/cards/CardContainer";
+import LanguageSettingController from "../../components/controllers/LanguageSettingController";
+import MobileChipsContainer from "../../mobile_only_components/MobileChipsContainer";
 
 function MobileHomePage() {
   const [videoData, setVideoData] = useState([]);
@@ -73,7 +73,9 @@ function MobileHomePage() {
         </h1>
       </div>
       <div className={getClassName(isMobile, isPortrait)}>
-        <LanguageSetting handleLanguageChange={handleLanguageChange} />
+        <LanguageSettingController
+          handleLanguageChange={handleLanguageChange}
+        />
         {getClassName}
       </div>
       <MobileChipsContainer

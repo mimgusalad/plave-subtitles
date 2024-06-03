@@ -1,7 +1,7 @@
 import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { hearts, names } from "../locale";
-import nameConverter from "../utils/nameConverter";
+import { hearts, names } from "../../locale";
+import nameConverter from "../../utils/nameConverter";
 
 function CustomChip({
   selectedLanguage,

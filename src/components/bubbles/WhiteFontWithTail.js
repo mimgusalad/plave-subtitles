@@ -12,6 +12,8 @@ function WhiteFontWithTail({ message: line }) {
   };
 
   const result = splitAndReformat(line);
+  const name = nameConverter(result.speaker);
+  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
 
   return (
     <>
@@ -20,7 +22,7 @@ function WhiteFontWithTail({ message: line }) {
           <i class="icon" style={IconStyle}>
             <img
               draggable="false"
-              src={`/img/symbol/${nameConverter(result.speaker)}.png`}
+              src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${
                   nameConverter(result.speaker) === "eunho"
@@ -34,7 +36,6 @@ function WhiteFontWithTail({ message: line }) {
             class="chat-bubble"
             style={ChatBubble(colors, nameConverter(result.speaker))}
           >
-            <span class="speaker-label" style={SpeakerLabel}></span>
             <span class="speech" style={Speech}>
               {result.dialog}
             </span>
@@ -66,7 +67,8 @@ export default WhiteFontWithTail;
 const TailStyle = {
   position: "absolute",
   left: "-0.1em", // "-0.5em",
-  bottom: "-0.5em", // "-0.5em",
+  bottom: "-0.4em", // "-0.5em",
+  zIndex: "-1",
 };
 
 const BubbleContainer = {
@@ -78,14 +80,14 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-1.9em",
-  top: "-0.59em", // -0.5em
+  left: "-1.7em",
+  top: "-0.45em", // -0.5em
 };
 
 const ChatBubble = (colors, speaker) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: "1.1em",
-  padding: "0 1em 0 0",
+  padding: "0.05em 0.8em",
   display: "flex",
   alignItems: "center",
   maxWidth: "100%",
@@ -98,6 +100,7 @@ const ChatBubble = (colors, speaker) => ({
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",
+  zIndex: "2",
 });
 
 const DefaultChatBubble = (colors) => ({
@@ -114,17 +117,7 @@ const DefaultChatBubble = (colors) => ({
   fontSize: "1em",
   textAlign: "center",
 });
-const SpeakerLabel = {
-  color: "black",
-  marginLeft: "1em",
-  paddingLeft: "0",
-};
 
-const Separator = (color) => ({
-  color: color,
-  position: "relative",
-  fontSize: "1em",
-});
 const Speech = {
   color: "black",
   flex: "1",

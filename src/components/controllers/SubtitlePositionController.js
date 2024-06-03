@@ -3,14 +3,13 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Box, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { subtitlePositionText } from "../locale";
+import { subtitlePositionText } from "../../locale";
 
 const SubtitlePositionController = ({ selectedLanguage }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
-  let defaultPosition = isMobile ? 10 : 30;
   const offset = 10;
   const [position, setPosition] = useState(
-    Number(localStorage.getItem("position")) || defaultPosition
+    Number(localStorage.getItem("offset"))
   );
 
   const getElementName = (isMobile) => {
@@ -19,7 +18,6 @@ const SubtitlePositionController = ({ selectedLanguage }) => {
   };
 
   const updatePosition = (newPosition) => {
-    const type = localStorage.getItem("type");
     const elements = document.getElementsByClassName(getElementName(isMobile));
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.bottom = `${newPosition}px`;
@@ -38,7 +36,7 @@ const SubtitlePositionController = ({ selectedLanguage }) => {
 
   useEffect(() => {
     updatePosition(position);
-    localStorage.setItem("position", position);
+    localStorage.setItem("offset", position);
   }, [position]);
 
   return (

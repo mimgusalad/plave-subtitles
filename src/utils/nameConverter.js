@@ -11,7 +11,7 @@ function nameConverter(name) {
   if (index !== -1) {
     return names.en[index].toLowerCase();
   } else {
-    return null; // Or any default value you'd like to return if the name is not found
+    return name; // Or any default value you'd like to return if the name is not found
   }
 }
 
