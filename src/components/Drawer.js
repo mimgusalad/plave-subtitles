@@ -23,6 +23,8 @@ function SubtitleSettingDrawer({
   handleLanguageChange,
   handleOffsetChange,
   currentOffset,
+  handleFontSizeChange,
+  fontSize,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const drawerRef = useRef(null);
@@ -78,7 +80,11 @@ function SubtitleSettingDrawer({
             size="large"
           />
         </Divider>
-        <FontSizeController lang={lang} />
+        <FontSizeController
+          lang={lang}
+          handleFontSizeChange={handleFontSizeChange}
+          fontSize={fontSize}
+        />
         <Divider textAlign="left">
           <Chip
             sx={{ color: "snow" }}
@@ -138,25 +144,18 @@ function SubtitleSettingDrawer({
 
 export default SubtitleSettingDrawer;
 
-function FontSizeController({ lang }) {
-  const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize"))
-  );
-
+function FontSizeController({ lang, handleFontSizeChange, fontSize }) {
   const updateFontSize = (newSize) => {
-    const elements = document.getElementsByClassName("subtitle-container");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.fontSize = `${newSize}px`;
-    }
+    handleFontSizeChange(newSize);
   };
 
   const increaseFontSize = () => {
-    setFontSize((prevSize) => prevSize + 1);
+    handleFontSizeChange((prevSize) => prevSize + 1);
     updateFontSize(fontSize + 1);
   };
 
   const decreaseFontSize = () => {
-    setFontSize((prevSize) => prevSize - 1);
+    handleFontSizeChange((prevSize) => prevSize - 1);
     updateFontSize(fontSize - 1);
   };
 

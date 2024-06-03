@@ -13,8 +13,12 @@ function YouTubePlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [player, setPlayer] = useState(null);
   const [subtitles, setSubtitles] = useState([]);
-  const [type, setType] = useState(localStorage.getItem("type") || "b");
   const [subtitleHashTable, setSubtitleHashTable] = useState({});
+  const [type, setType] = useState(localStorage.getItem("type") || "b");
+  const [fontSize, setFontSize] = useState(
+    Number(localStorage.getItem("fontSize")) || 22
+  );
+
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "ko"
   );
@@ -41,6 +45,16 @@ function YouTubePlayer() {
     localStorage.getItem("modal") === "false" ? false : true
   );
 
+  // Resize video player based on window size
+  const handleResize = () => {
+    setVideoWidth((window.innerHeight * 16) / 9);
+    setVideoHeight(window.innerHeight);
+    if (window.innerWidth / window.innerHeight < 16 / 9) {
+      setVideoWidth(window.innerWidth);
+      setVideoHeight((window.innerWidth * 9) / 16);
+    }
+  };
+
   const handleConfirm = (selected) => {
     setIsModalOpen(false);
     localStorage.setItem("modal", "false");
@@ -49,6 +63,7 @@ function YouTubePlayer() {
 
   const handleTypeChange = (selected) => {
     setType(selected);
+    localStorage.setItem("type", selected);
   };
 
   const handleOffsetChange = (offset) => {
@@ -62,20 +77,22 @@ function YouTubePlayer() {
     setSubtitleHashTable(selectedSubtitles);
   };
 
-  // Resize video player based on window size
-  const handleResize = () => {
-    setVideoWidth((window.innerHeight * 16) / 9);
-    setVideoHeight(window.innerHeight);
-    if (window.innerWidth / window.innerHeight < 16 / 9) {
-      setVideoWidth(window.innerWidth);
-      setVideoHeight((window.innerWidth * 9) / 16);
-    }
+  const handleFontSizeChange = (fontSize) => {
+    setFontSize(fontSize);
+    localStorage.setItem("fontSize", fontSize);
   };
 
   useEffect(() => {
     const element = document.getElementsByClassName("subtitle-container")[0];
     element.style.bottom = window.innerHeight * 0.05 - currentOffset + "px";
   }, [currentOffset]);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".subtitle-container");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.fontSize = `${fontSize}px`;
+    }
+  }, [fontSize]);
 
   // Fetch initial subtitles and set up event listeners
   useEffect(() => {
@@ -177,6 +194,8 @@ function YouTubePlayer() {
           handleLanguageChange={handleLanguageChange}
           currentOffset={currentOffset}
           handleOffsetChange={handleOffsetChange}
+          handleFontSizeChange={handleFontSizeChange}
+          fontSize={fontSize}
         />
       </div>
     </div>

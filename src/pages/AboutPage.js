@@ -70,7 +70,7 @@ function AboutPage() {
         {"HOME"}
       </Link>
       <div className="about-content" style={contentStyle}>
-        <p>안녕하세요</p>
+        <p>안녕하세요왜 안나오냐고</p>
         <Email />
       </div>
     </>

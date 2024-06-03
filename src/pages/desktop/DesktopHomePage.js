@@ -54,7 +54,6 @@ function DesktopHomePage() {
         </Link>
         <h1 className="title">Plave Subtitles</h1>
       </div>
-
       <div className="desktop-language-setting">
         <LanguageSettingController
           handleLanguageChange={handleLanguageChange}
