@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { BrowserView } from "react-device-detect";
 import { useMediaQuery } from "react-responsive";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
@@ -11,8 +11,8 @@ import { images } from "./locale";
 import AboutPage from "./pages/AboutPage";
 import DesktopHomePage from "./pages/desktop/DesktopHomePage";
 import YouTubePlayer from "./pages/desktop/DesktopVideoPage";
-import MobileHomePage from "./pages/mobile/MobileHomePage";
-import MobileYoutubePlayer from "./pages/mobile/MobileVideoPage";
+// import MobileHomePage from "./pages/mobile/MobileHomePage";
+// import MobileYoutubePlayer from "./pages/mobile/MobileVideoPage";
 import "./style.css";
 
 function App() {
@@ -32,13 +32,13 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </BrowserView>
-        <MobileView>
+        {/* <MobileView>
           <Routes>
             <Route path="/" element={<MobileHomePage />} />
             <Route path="/watch" element={<MobileYoutubePlayer />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
-        </MobileView>
+        </MobileView> */}
       </div>
     </ThemeProvider>
   );
