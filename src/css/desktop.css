@@ -73,8 +73,8 @@ body.background-transition::after {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    top: 0;
     max-width: 1200px;
+    margin: auto;
 }
 
 /* 동영상 카드 한 줄에 3개씩 보이게 하기 */
@@ -94,36 +94,46 @@ body.background-transition::after {
 
 /* 동영상 페이지 */
 
-
 /* 동영상 컨테이너 */
 .desktop-video-container {
     position: relative;
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
     height: 100vh;
 }
 
 .youtube-player {
     position: relative;
+    height: auto;
+    display: block;
 }
 
 /* 자막 컨테이너 */
 .subtitle-container {
+    /* position: relative;
+    top: -150px; */
     position: fixed;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, -5%);
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: flex-start;
-    height: min-content;
+    align-self: baseline;
+    height: 25%;
+    max-height: max-content;
+    width: max-content;
     color: white;
+    z-index: 3;
 }
-
 
 .chat-bubble-container,
 .chat-bubble-container-default {
     padding: 2px 10px;
     color: white;
-    
 }
 
 /* 모달 */
@@ -137,6 +147,7 @@ body.background-transition::after {
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/public/img/bg.png');
+    z-index: 10;
 }
 
 .modal-screen.mounted {
@@ -152,7 +163,6 @@ body.background-transition::after {
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 1;
     }
@@ -162,13 +172,10 @@ body.background-transition::after {
     0% {
         opacity: 1;
     }
-
     100% {
         opacity: 0;
     }
 }
-
-
 
 .modal-container {
     display: flex;
@@ -191,7 +198,7 @@ body.background-transition::after {
     background-color: rgb(97, 97, 97, 0.5);
     /* background-color: #0088d6; */
     /* background-color: dimgray; */
-    padding: 1.5em 1em;
+    padding: 1.5em 0 1.5em 1em;
     list-style-type: none;
     justify-content: center;
     border-radius: 2em;
@@ -223,8 +230,6 @@ body.background-transition::after {
 }
 
 .type-button.selected {
-    /* background-color: rgba(255, 255, 255, 0.2); */
-    /* box-shadow: 0 0 1em 0.4em rgba(255, 255, 255, 0.2); */
     filter: drop-shadow(0 0 0.75em rgba(255, 255, 255, 0.6));
     transition: box-shadow 0.2s, background-color 0.2s;
     border-radius: 2em;
@@ -240,11 +245,11 @@ body.background-transition::after {
 
 
 .type-container .chat-bubble-container i {
-    margin-left: -0.2em;
+    /* margin-left: -0.2em; */
 }
 
-.type-container li:nth-child(5),
-.type-container li:nth-child(6) {
+.type-container li:nth-child(4),
+.type-container li:nth-child(7) {
     margin-left: 1.9em;
 }
 
@@ -252,10 +257,13 @@ body.background-transition::after {
     margin-left: -0.8em;
 }
 
-.type-container li:nth-child(9),
-.type-container li:nth-child(10) {
+.type-container li:last-child{
     margin: 0.6em 0.6em 0 0.6em;
-    /* padding: 0.1em 0.5em; */
-
     position: relative;
+}
+
+.drawer .drawer-button{
+    position: fixed;
+    top: 0;
+    right: 0;
 }

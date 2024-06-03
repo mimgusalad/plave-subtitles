@@ -9,19 +9,17 @@ import {
   WhiteFontWithTail2,
 } from "../Bubble_index";
 
-function SubtitleTypeController({ handleTypeChange }) {
-  const lang = localStorage.getItem("lang") || "ko";
+function SubtitleTypeController({ handleTypeChange, lang }) {
+  const paragraphs = document.querySelectorAll(".for-test .speaker-label");
+  const regex = /(예준|노아|밤비|은호|하민|Name|名前|이름)/g;
 
   useEffect(() => {
-    const paragraphs = document.querySelectorAll(".for-test .speaker-label");
-    const regex = /(예준|노아|밤비|은호|하민)/g;
-
     paragraphs.forEach((paragraph) => {
       const text3 = paragraph.textContent;
       const replacedText = text3.replace(regex, text2[lang]);
       paragraph.textContent = replacedText;
     });
-  }, [text2, lang]); // Run effect when text2 or lang changes
+  }, [lang]); // Run effect when lang changes
 
   return (
     <ul className="for-test">

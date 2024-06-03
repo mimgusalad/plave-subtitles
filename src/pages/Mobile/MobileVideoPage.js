@@ -5,7 +5,6 @@ import { useMediaQuery } from "react-responsive";
 import { Link, useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import Subtitles from "../../components/Subtitles";
-import MobileNavBar from "../../mobile_only_components/MobileNavBar";
 import { getSubtitles } from "../../utils/getSubtitles";
 
 function MobileYoutubePlayer() {
@@ -132,9 +131,7 @@ function MobileYoutubePlayer() {
       </div>
       <div
         className={`mobile-nav-bar${isPortrait ? "-portrait" : "-landscape"}`}
-      >
-        <MobileNavBar selectedLanguage={selectedLanguage} />
-      </div>
+      ></div>
     </>
   );
 }

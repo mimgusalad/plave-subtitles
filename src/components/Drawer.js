@@ -10,20 +10,21 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   currentFontText,
   fontText,
+  informationText,
   language,
   subtitleDesignText,
   subtitlePositionText,
 } from "../locale";
-import getBottom from "../utils/getBottom";
 import SubtitleTypeController from "./controllers/SubtitleTypeController";
 
-function SubtitleSettingDrawer({ handleTypeChange, handleLanguageChange }) {
-  const [state, setState] = useState({
-    right: false,
-  });
-
+function SubtitleSettingDrawer({
+  lang,
+  handleTypeChange,
+  handleLanguageChange,
+  handleOffsetChange,
+  currentOffset,
+}) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const lang = localStorage.getItem("lang") || "ko";
   const drawerRef = useRef(null);
 
   const toggleDrawer = (open) => (event) => {
@@ -63,37 +64,60 @@ function SubtitleSettingDrawer({ handleTypeChange, handleLanguageChange }) {
     >
       <List>
         <Divider textAlign="left">
-          <Chip sx={{ color: "snow" }} label={language[lang]} size="small" />
+          <Chip
+            sx={{ color: "snow" }}
+            label={`📌 ${language[lang]}`}
+            size="large"
+          />
         </Divider>
         <LanguageSelector handleLanguageChange={handleLanguageChange} />
         <Divider textAlign="left">
-          <Chip sx={{ color: "snow" }} label={fontText[lang]} size="small" />
+          <Chip
+            sx={{ color: "snow" }}
+            label={`📌 ${fontText[lang]}`}
+            size="large"
+          />
         </Divider>
         <FontSizeController lang={lang} />
         <Divider textAlign="left">
           <Chip
             sx={{ color: "snow" }}
-            label={subtitlePositionText[lang]}
-            size="small"
+            label={`📌 ${subtitlePositionText[lang]}`}
+            size="large"
           />
         </Divider>
-        <PositionController lang={lang} />
+        <PositionController
+          lang={lang}
+          handleOffsetChange={handleOffsetChange}
+          currentOffset={currentOffset}
+        />
         <Divider textAlign="left">
           <Chip
             sx={{ color: "snow" }}
-            label={subtitleDesignText[lang]}
-            size="small"
+            label={`📌 ${subtitleDesignText[lang]}`}
+            size="large"
           />
         </Divider>
-        <SubtitleTypeController handleTypeChange={handleTypeChange} />
+        <SubtitleTypeController
+          handleTypeChange={handleTypeChange}
+          lang={lang}
+        />
       </List>
       <Divider />
     </Box>
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>Open Right Drawer</Button>
+    <div className="drawer">
+      {!isDrawerOpen && (
+        <Button
+          className="drawer-button"
+          sx={{ fontSize: "1.3em", fontWeight: "bold", color: "snow" }}
+          onClick={toggleDrawer(true)}
+        >
+          {`🛸 ${informationText[lang]} 🛸`}
+        </Button>
+      )}
       <Drawer
         sx={{
           "& .MuiDrawer-paper": {
@@ -169,31 +193,25 @@ function FontSizeController({ lang }) {
   );
 }
 
-function PositionController({ lang }) {
-  const [currentOffset, setOffset] = useState(
-    localStorage.getItem("offset") || 200
-  );
+function PositionController({ lang, handleOffsetChange, currentOffset }) {
   const offset = 10;
 
   const updatePosition = (newPosition) => {
-    const elements = document.getElementsByClassName("subtitle-container");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.top = getBottom() - newPosition + "px";
-    }
+    handleOffsetChange(newPosition);
   };
 
   const increasePosition = () => {
-    setOffset((prevPosition) => prevPosition + currentOffset);
-    updatePosition(offset + currentOffset);
+    handleOffsetChange(currentOffset - offset);
+    updatePosition(currentOffset - offset);
   };
 
   const decreasePosition = () => {
-    setOffset((prevPosition) => prevPosition - currentOffset);
-    updatePosition(offset - currentOffset);
+    handleOffsetChange(currentOffset + offset);
+    updatePosition(currentOffset + offset);
   };
 
   useEffect(() => {
-    updatePosition(offset);
+    updatePosition(currentOffset);
     localStorage.setItem("offset", currentOffset);
   }, [currentOffset]);
 

@@ -1,6 +1,5 @@
 import { Chip } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
 import {
   BlackFont,
@@ -12,6 +11,7 @@ import {
   WhiteFontWithTail,
   WhiteFontWithTail2,
 } from "./Bubble_index";
+import Home from "./HomeButton";
 
 function Modal({ handleConfirm, lang }) {
   const [selected, setSelected] = useState(localStorage.getItem("type") || "b");
@@ -102,21 +102,3 @@ function Modal({ handleConfirm, lang }) {
   );
 }
 export default Modal;
-const Home = () => {
-  return (
-    <Link
-      to="/"
-      style={{
-        fontSize: "1.7em",
-        textDecoration: "none",
-        color: "rgb(207, 201, 201)",
-        fontWeight: "bold",
-        position: "fixed",
-        left: "20px",
-        top: "20px",
-      }}
-    >
-      {"HOME"}
-    </Link>
-  );
-};

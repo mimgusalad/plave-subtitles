@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import SubtitleSettingDrawer from "../../components/Drawer";
 import Modal from "../../components/Modal";
 import Subtitles from "../../components/Subtitles";
 // import { getBottom } from "../../utils/getBottom";
+import Home from "../../components/HomeButton";
 import { getSubtitles } from "../../utils/getSubtitles";
 
 function YouTubePlayer() {
@@ -16,6 +17,9 @@ function YouTubePlayer() {
   const [subtitleHashTable, setSubtitleHashTable] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "ko"
+  );
+  const [currentOffset, setOffset] = useState(
+    Number(localStorage.getItem("offset")) || 100
   );
 
   const location = useLocation();
@@ -47,10 +51,10 @@ function YouTubePlayer() {
     setType(selected);
   };
 
-  // const handleLanguageChange = (language) => {
-  //   localStorage.setItem("lang", language);
-  //   setSelectedLanguage(language);
-  // };
+  const handleOffsetChange = (offset) => {
+    setOffset(offset);
+    localStorage.setItem("offset", offset);
+  };
 
   const handleLanguageChange = async (language) => {
     setSelectedLanguage(language);
@@ -66,13 +70,17 @@ function YouTubePlayer() {
       setVideoWidth(window.innerWidth);
       setVideoHeight((window.innerWidth * 9) / 16);
     }
-    // let subtitleContainer =
-    //   document.getElementsByClassName("subtitle-container")[0];
-    // subtitleContainer.style.top = getBottom() - 200 + "px";
   };
+
+  useEffect(() => {
+    const element = document.getElementsByClassName("subtitle-container")[0];
+    element.style.bottom = window.innerHeight * 0.05 - currentOffset + "px";
+  }, [currentOffset]);
 
   // Fetch initial subtitles and set up event listeners
   useEffect(() => {
+    const element = document.getElementsByClassName("subtitle-container")[0];
+    element.style.bottom = window.innerHeight * 0.05 - currentOffset + "px";
     document.body.classList.add("background-transition");
     // Fetch initial subtitles
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
@@ -147,6 +155,7 @@ function YouTubePlayer() {
 
   return (
     <div>
+      <Home />
       {isModalOpen && (
         <Modal handleConfirm={handleConfirm} lang={selectedLanguage} />
       )}
@@ -162,8 +171,11 @@ function YouTubePlayer() {
           <Subtitles subtitles={subtitles} type={type} />
         </div>
         <SubtitleSettingDrawer
+          lang={selectedLanguage}
           handleTypeChange={handleTypeChange}
           handleLanguageChange={handleLanguageChange}
+          currentOffset={currentOffset}
+          handleOffsetChange={handleOffsetChange}
         />
       </div>
     </div>
@@ -171,23 +183,3 @@ function YouTubePlayer() {
 }
 
 export default YouTubePlayer;
-
-const Home = () => {
-  return (
-    <div className="desktop-home-link" style={{ zIndex: "0" }}>
-      <Link
-        to="/"
-        style={{
-          fontSize: "1.7em",
-          textDecoration: "none",
-          color: "snow",
-          fontWeight: "bold",
-          position: "absolute",
-          left: "20px",
-        }}
-      >
-        {"HOME"}
-      </Link>
-    </div>
-  );
-};
