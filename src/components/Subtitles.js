@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   BlackFont,
   BlackFont2,
@@ -11,18 +10,6 @@ import {
 } from "./Bubble_index";
 
 function Subtitles({ subtitles, type }) {
-  useEffect(() => {
-    const subtitleElement =
-      document.getElementsByClassName("subtitle-container")[0];
-    if (subtitleElement && type === "b") {
-      subtitleElement.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-      subtitleElement.style.padding = "0.1em 0.5em";
-    } else if (subtitleElement) {
-      subtitleElement.style.backgroundColor = "";
-      subtitleElement.style.padding = "";
-    }
-  }, [type]);
-
   return (
     <>
       {subtitles.map((line, index) => {
@@ -45,7 +32,19 @@ function Subtitles({ subtitles, type }) {
           case "8":
             return <BlackFontWithName2 key={index} message={trimmedLine} />;
           default:
-            return trimmedLine;
+            return (
+              <div
+                className="default-subtitle"
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.8)",
+                  padding: "0.1em 0.5em",
+                  color: "white",
+                  height: "fit-content",
+                }}
+              >
+                {trimmedLine}
+              </div>
+            );
         }
       })}
     </>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 function Home() {
   return (
-    <div className="desktop-home-link" style={{ zIndex: "0" }}>
+    <div className="desktop-home-link" style={{ zIndex: "100" }}>
       <Link
         to="/"
         style={{
@@ -15,6 +15,7 @@ function Home() {
           marginTop: "10px",
           marginLeft: "20px",
           padding: "0 10px",
+          cursor: "pointer",
         }}
       >
         {"HOME"}

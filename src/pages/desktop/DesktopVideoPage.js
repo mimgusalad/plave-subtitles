@@ -19,7 +19,7 @@ function YouTubePlayer() {
     localStorage.getItem("lang") || "ko"
   );
   const [currentOffset, setOffset] = useState(
-    Number(localStorage.getItem("offset")) || 100
+    Number(localStorage.getItem("offset")) || -100
   );
 
   const location = useLocation();
@@ -155,11 +155,12 @@ function YouTubePlayer() {
 
   return (
     <div>
-      <Home />
       {isModalOpen && (
         <Modal handleConfirm={handleConfirm} lang={selectedLanguage} />
       )}
+
       <div className="desktop-video-container">
+        <Home />
         <YouTube
           className="youtube-player"
           videoId={videoId}
