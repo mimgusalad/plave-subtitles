@@ -19,33 +19,9 @@ function CustomChip({
     handleSelectedOptions(names.en[index].toLowerCase());
   };
 
-  const chipStyle = {
-    margin: "0 10px 0px 10px",
-    backgroundColor: selected ? selectedColor : "",
-    opacity: selected ? 1 : 0.7,
-    color: selected ? "#ffffff" : "#333333",
-    fontSize: "1.2em",
-    padding: "3px", // 보더 굵기
-  };
-
-  const chipStyleMobile = {
-    margin: "0 0.2em",
-    backgroundColor: selected ? selectedColor : "",
-    opacity: selected ? 1 : 0.7,
-    color: selected ? "#ffffff" : "#333333",
-    fontSize: "0.5em",
-    padding: "3px", // 보더 굵기
-  };
-
-  const labelContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
   const Chips = {
-    default: (
+    // 데스크탑 화면
+    desktop: (
       <Tooltip
         title={hearts[index]}
         placement="top"
@@ -58,40 +34,50 @@ function CustomChip({
         <IconButton
           onClick={handleChipClick}
           color={selected ? "primary" : "default"}
-          style={chipStyle}
+          style={chipStyle({ selected, selectedColor })}
         >
           <ResponsiveAvatar
-            size="5em"
+            size="4.3em" // 프로필 사진 크기
             alt={names.en[index]}
             src={profileImage}
           />
         </IconButton>
       </Tooltip>
     ),
+    // 태블릿 화면
     tablet: (
       <IconButton
         onClick={handleChipClick}
         color={selected ? "primary" : "default"}
-        style={chipStyle}
+        style={chipStyle({ selected, selectedColor })}
       >
-        <ResponsiveAvatar size="4em" alt={names.en[index]} src={profileImage} />
+        <ResponsiveAvatar
+          size="4em" // 프로필 사진 크기
+          alt={names.en[index]}
+          src={profileImage}
+        />
       </IconButton>
     ),
+    // 모바일 화면
     mobile: (
       <IconButton
         onClick={handleChipClick}
         color={selected ? "primary" : "default"}
-        style={chipStyleMobile}
+        style={chipStyleMobile({ selected, selectedColor })}
       >
-        <ResponsiveAvatar size="3em" alt={names.en[index]} src={profileImage} />
+        <ResponsiveAvatar
+          size="3em" // 프로필 사진 크기
+          alt={names.en[index]}
+          src={profileImage}
+        />
       </IconButton>
     ),
   };
 
   return (
     <div className="custom-chip" style={labelContainerStyle}>
-      {Chips[isTablet ? "tablet" : isMobile ? "mobile" : "default"]}
-      <ResponsiveTypography selected={selected}>
+      {Chips[isTablet ? "tablet" : isMobile ? "mobile" : "desktop"]}
+      <ResponsiveTypography selected={selected} isMobile={isMobile}>
         {names[selectedLanguage][index]}
       </ResponsiveTypography>
     </div>
@@ -106,10 +92,35 @@ const ResponsiveAvatar = styled(Avatar)(({ size }) => ({
   pointerEvents: "none",
 }));
 
-const ResponsiveTypography = styled(Typography)(({ selected }) => ({
-  fontSize: "1.2em",
+const ResponsiveTypography = styled(Typography)(({ selected, isMobile }) => ({
+  fontSize: !isMobile ? "1em" : "12px",
   fontWeight: "bold",
-  margin: "5px 10px 0px 10px",
-  color: "white",
+  marginTop: "5px",
+  color: "snow",
   opacity: selected ? 1 : 0.5,
 }));
+
+const chipStyle = ({ selected, selectedColor }) => ({
+  margin: "0 10px 0px 10px",
+  backgroundColor: selected ? selectedColor : "rgb(97, 97, 97, 0.1)",
+  opacity: selected ? 1 : 0.7,
+  color: selected ? "#ffffff" : "#333333",
+  fontSize: "1.2em",
+  padding: "3px",
+});
+
+const chipStyleMobile = ({ selected, selectedColor }) => ({
+  margin: "0 0.2em",
+  backgroundColor: selected ? selectedColor : "rgb(97, 97, 97, 0.1)",
+  opacity: selected ? 1 : 0.7,
+  color: selected ? "#ffffff" : "#333333",
+  fontSize: "0.5em",
+  padding: "3px",
+});
+
+const labelContainerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+};

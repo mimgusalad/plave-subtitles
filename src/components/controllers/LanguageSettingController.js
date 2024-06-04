@@ -1,20 +1,18 @@
 import { Chip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
+import { isMobile, isTablet } from "react-device-detect";
 import { languages } from "../../locale";
 
-const StyledChip = styled(Chip)(({ selectedLanguage, lang }) => ({
-  fontWeight: "bold",
-  fontSize: "1em",
-  backgroundColor: selectedLanguage === lang ? "white" : "transparent",
-  opacity: selectedLanguage === lang ? 0.7 : 0.7,
-  "@media (max-height: 700px)": {
-    fontSize: "12px",
-  },
-  "@media (min-height: 701px) and (max-height: 783px)": {
-    fontSize: "14px",
-  },
-}));
+const StyledChip = styled(Chip)(
+  ({ selectedLanguage, lang, isMobile, isTablet }) => ({
+    fontWeight: "bold",
+    height: "2em",
+    fontSize: isMobile && !isTablet ? "12px" : "1em",
+    backgroundColor: selectedLanguage === lang ? "white" : "transparent",
+    opacity: selectedLanguage === lang ? 0.7 : 0.7,
+  })
+);
 
 function LanguageSettingController({ handleLanguageChange }) {
   const [selectedLanguage, setSelectedLanguage] = useState(
@@ -34,6 +32,8 @@ function LanguageSettingController({ handleLanguageChange }) {
           onClick={() => handleLanguageClick(lang)}
           lang={lang}
           selectedLanguage={selectedLanguage}
+          isMobile={isMobile}
+          isTablet={isTablet}
         />
       ))}
     </>

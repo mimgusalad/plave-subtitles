@@ -12,7 +12,7 @@ function ChipsContainer({
   originalData,
 }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#4fd1a6"];
+  const memberColors = ["#33ccff", "#9933ff", "#ff3366", "#cc3300", "#4fd1a6"]; // 칩 클릭했을때 색깔
   const names = ["yejun", "noah", "bamby", "eunho", "hamin"];
 
   const handleSelectedOptions = (option) => {
@@ -76,6 +76,8 @@ function ChipsContainer({
         clickable
         label={text[selectedLanguage]}
         onClick={handleShowAllVideos}
+        isMobile={isMobile}
+        isTablet={isTablet}
       />
     </div>
   );
@@ -83,8 +85,10 @@ function ChipsContainer({
 
 export default ChipsContainer;
 
-const StyledChip = styled(Chip)(() => ({
+const StyledChip = styled(Chip)(({ isMobile, isTablet }) => ({
   backgroundColor: "white",
   opacity: 0.7,
   fontWeight: "bold",
+  height: "2em",
+  fontSize: isMobile && !isTablet ? "12px" : "1em",
 }));

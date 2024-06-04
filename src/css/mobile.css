@@ -10,7 +10,7 @@
 /* about 페이지 링크 스타일 */
 .mobile-tab {
     display: inline-block;
-    font-size: 1.3em;
+    font-size: 1em;
     font-weight: bold;
     color: white;
     text-decoration: none;
@@ -25,7 +25,7 @@
 
 .filter-chips-mobile {
     display: inline-flex;
-    margin: 1.5em 0.5em 0 0.5em;
+    margin-top: 12px;
     padding-bottom: 10px;
 }
 
