@@ -1,45 +1,46 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
+import { isMobile, isTablet } from "react-device-detect";
 import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
-import SubtitleSettingDrawer from "../../components/Drawer";
-import Modal from "../../components/Modal";
-import Subtitles from "../../components/Subtitles";
-// import { getBottom } from "../../utils/getBottom";
-import { isMobile, isTablet } from "react-device-detect";
-import Home from "../../components/HomeButton";
-import { getSubtitles } from "../../utils/getSubtitles";
+import DisplaySubtitles from "../components/DisplaySubtitles";
+import SubtitleSettingDrawer from "../components/Drawer";
+import Home from "../components/HomeButton";
+import Modal from "../components/Modal";
+import { getSubtitles } from "../utils/getSubtitles";
 
 function YouTubePlayer() {
-  usePageRotation("/watch");
-
-  const [currentTime, setCurrentTime] = useState(0);
-  const [player, setPlayer] = useState(null);
-  const [subtitles, setSubtitles] = useState([]);
-  const [subtitleHashTable, setSubtitleHashTable] = useState({});
-  const [type, setType] = useState(localStorage.getItem("type") || "b");
-  const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize")) || isMobile ? 14 : 22
-  );
-
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "ko"
-  );
-  const [currentOffset, setOffset] = useState(
-    Number(localStorage.getItem("offset")) || isMobile ? -10 : -100
-  );
-
+  usePageRotation("/watch"); // 모바일 화면 회전
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const videoId = searchParams.get("videoId");
 
-  /*동영상 크기 변수 */
+  /** 자막 불러올때 사용하는 변수 */
+  const [subtitleHashTable, setSubtitleHashTable] = useState({});
+  const [subtitles, setSubtitles] = useState([]);
+
+  /** 자막 조작하는 변수 */
+  const [type, setType] = useState(localStorage.getItem("type") || "b"); // 자막바 타입 변수
+  const [fontSize, setFontSize] = useState(
+    Number(localStorage.getItem("fontSize")) || isMobile ? 14 : 22
+  ); // 폰트 사이즈 변수
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    localStorage.getItem("lang") || "ko"
+  ); // 선택된 언어 변수
+  const [currentOffset, setOffset] = useState(
+    Number(localStorage.getItem("offset")) || isMobile ? -10 : -100
+  ); // 자막 위치 변수
+
+  /** 동영상 관련 변수 */
+  const [currentTime, setCurrentTime] = useState(0);
+  const [player, setPlayer] = useState(null);
+  // 동영상 크기 변수
   const [videoWidth, setVideoWidth] = useState(window.innerWidth * 0.8);
   const [videoHeight, setVideoHeight] = useState(
     (window.innerHeight * 0.8 * 9) / 16
   );
 
-  /** 모달 창 변수 */
+  // 자막바 디자인 선택하는 모달 창 변수
   const [isModalOpen, setIsModalOpen] = useState(
     localStorage.getItem("modal") === "false" ? false : true
   );
@@ -81,11 +82,13 @@ function YouTubePlayer() {
     localStorage.setItem("fontSize", fontSize);
   };
 
+  // Set subtitle position based on current offset
   useEffect(() => {
     const element = document.getElementsByClassName("subtitle-container")[0];
     element.style.bottom = window.innerHeight * 0.05 - currentOffset + "px";
   }, [currentOffset]);
 
+  // Set subtitle font size based on current font size
   useEffect(() => {
     const elements = document.querySelectorAll(".subtitle-container");
     for (let i = 0; i < elements.length; i++) {
@@ -159,34 +162,6 @@ function YouTubePlayer() {
     setPlayer(event.target);
   };
 
-  const opts = {
-    width: videoWidth,
-    height: videoHeight,
-    playerVars: {
-      fs: 0, // 전체화면 버튼 제거
-      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
-      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
-    },
-  };
-  const optsMobile = {
-    width: (window.innerWidth * 16) / 9,
-    height: window.innerWidth,
-    playerVars: {
-      fs: 0, // 전체화면 버튼 제거
-      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
-      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
-    },
-  };
-  const optsTablet = {
-    width: window.innerWidth,
-    height: (window.innerWidth * 9) / 16,
-    playerVars: {
-      fs: 0, // 전체화면 버튼 제거
-      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
-      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
-    },
-  };
-
   return (
     <div
       className={`${isMobile && !isTablet ? "mobile" : "desktop"}-video-page`}
@@ -204,12 +179,18 @@ function YouTubePlayer() {
         <YouTube
           className="youtube-player"
           videoId={videoId}
-          opts={isMobile ? (isTablet ? optsTablet : optsMobile) : opts}
+          opts={
+            isMobile
+              ? isTablet
+                ? optsTablet
+                : optsMobile
+              : optsDesktop(videoWidth, videoHeight)
+          }
           onReady={onReady}
           onEnd={() => player.stopVideo()} // not really needed
         />
         <div className="subtitle-container">
-          <Subtitles subtitles={subtitles} type={type} />
+          <DisplaySubtitles subtitles={subtitles} type={type} />
         </div>
         <SubtitleSettingDrawer
           lang={selectedLanguage}
@@ -248,3 +229,28 @@ function usePageRotation(pathToRotate) {
     }
   }, [location, pathToRotate]);
 }
+
+const baseOpts = {
+  playerVars: {
+    fs: 0, // 전체화면 버튼 제거
+    rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
+    showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
+  },
+};
+
+const optsDesktop = (videoWidth, videoHeight) => ({
+  ...baseOpts,
+  width: videoWidth,
+  height: videoHeight,
+});
+
+const optsMobile = {
+  ...baseOpts,
+  width: (window.innerWidth * 16) / 9,
+  height: window.innerWidth,
+};
+const optsTablet = {
+  ...baseOpts,
+  width: window.innerWidth,
+  height: (window.innerWidth * 9) / 16,
+};

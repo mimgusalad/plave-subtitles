@@ -4,10 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./css/desktop.css";
 import "./css/mobile.css";
+import "./css/style.css";
 import "./css/tablet.css";
 import reportWebVitals from "./reportWebVitals";
-import "./style.css";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>

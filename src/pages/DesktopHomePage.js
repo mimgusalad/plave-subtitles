@@ -2,10 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
-import CardContainer from "../../components/CardContainer";
-import LanguageSettingController from "../../components/controllers/LanguageSettingController";
-import ChipsContainer from "../../components/profile_chips/ChipsContainer";
-
+import CardContainer from "../components/CardContainer";
+import LanguageSettingController from "../components/controllers/LanguageSettingController";
+import ChipsContainer from "../components/profile_chips/ChipsContainer";
 function DesktopHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
@@ -30,11 +29,7 @@ function DesktopHomePage() {
         });
     };
 
-    const changeBackgroundColor = () => {
-      document.body.classList.remove("background-transition");
-    };
-
-    changeBackgroundColor();
+    document.body.classList.remove("background-transition");
     fetchData();
   }, []);
 

@@ -11,12 +11,12 @@ import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/desktop.css";
 import "./css/mobile.css";
+import "./css/style.css";
 import "./css/tablet.css";
 import AboutPage from "./pages/AboutPage";
-import DesktopHomePage from "./pages/desktop/DesktopHomePage";
-import YouTubePlayer from "./pages/desktop/DesktopVideoPage";
-import MobileHomePage from "./pages/mobile/MobileHomePage";
-import "./style.css";
+import DesktopHomePage from "./pages/DesktopHomePage";
+import MobileHomePage from "./pages/MobileHomePage";
+import YouTubePlayer from "./pages/VideoPage";
 import preloadImages from "./utils/preloadImages";
 
 function App() {

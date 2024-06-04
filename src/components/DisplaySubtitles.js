@@ -9,7 +9,7 @@ import {
   WhiteFontWithTail2,
 } from "./Bubble_index";
 
-function Subtitles({ subtitles, type }) {
+function DisplaySubtitles({ subtitles, type }) {
   return (
     <>
       {subtitles.map((line, index) => {
@@ -51,4 +51,4 @@ function Subtitles({ subtitles, type }) {
   );
 }
 
-export default Subtitles;
+export default DisplaySubtitles;
