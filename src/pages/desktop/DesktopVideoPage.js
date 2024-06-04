@@ -169,10 +169,8 @@ function YouTubePlayer() {
     },
   };
   const optsMobile = {
-    // width: (window.innerWidth * 16) / 9,
-    // height: window.innerWidth,
-    width: "600px",
-    height: "300px",
+    width: (window.innerWidth * 16) / 9,
+    height: window.innerWidth,
     playerVars: {
       fs: 0, // 전체화면 버튼 제거
       rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
