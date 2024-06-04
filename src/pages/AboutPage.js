@@ -59,7 +59,7 @@ function AboutPage() {
   };
 
   const contentStyle = {
-    height: "50vh",
+    height: "50dvh",
     padding: "20px 30px",
     margin: "20px 30px",
     color: "black",

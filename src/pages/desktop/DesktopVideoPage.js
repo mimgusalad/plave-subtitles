@@ -222,8 +222,8 @@ function usePageRotation(pathToRotate) {
       // Apply rotation
       htmlElement.style.transform = "rotate(-90deg)";
       htmlElement.style.transformOrigin = "left top";
-      htmlElement.style.width = "100vh";
-      htmlElement.style.height = "100vw";
+      htmlElement.style.width = "100dvh";
+      htmlElement.style.height = "100dvw";
       htmlElement.style.overflowX = "hidden";
       htmlElement.style.position = "absolute";
       htmlElement.style.top = "100%";
