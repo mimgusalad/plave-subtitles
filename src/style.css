@@ -1,3 +1,13 @@
+:root{
+  --vh: 100%;
+}
+
+html,
+body {
+    height: 100vh;
+    height: var(--vh);
+}
+
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');

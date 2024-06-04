@@ -38,7 +38,7 @@ function MobileHomePage() {
     htmlElement.style.top = "";
     htmlElement.style.left = "";
     document.body.style.width = "100vw";
-    document.body.style.height = "100vh";
+    document.body.style.height = "calc(var(--vh, 1vh) * 100)";
     const fetchData = () => {
       axios
         .get("https://mimgusalad.github.io/plave/img/data.json")

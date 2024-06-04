@@ -35,7 +35,7 @@
     justify-content: first baseline;
     align-items: center;
     margin: 10px;
-    height: 60vh;
+    height: calc(var(--vh, 1vh) * 60);
     overflow-y: scroll;
 }
 
@@ -49,7 +49,7 @@
     border-radius: 10px;
 }
 
-.mobile-video-page{
+.mobile-video-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,7 +82,7 @@
 
 /* 모달 */
 .modal-screen-mobile {
-    width: 100vh;
+    width: calc(var(--vh, 1vh) * 100);
     height: auto;
     backdrop-filter: blur(15px);
     justify-content: center;
@@ -139,7 +139,7 @@
     margin-left: -0.8em;
 }
 
-.type-container-mobile li:last-child{
+.type-container-mobile li:last-child {
     margin: 0.6em 0.6em 0 0.6em;
     position: relative;
 }

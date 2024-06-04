@@ -243,7 +243,7 @@ function usePageRotation(pathToRotate) {
       htmlElement.style.position = "absolute";
       htmlElement.style.top = "100%";
       htmlElement.style.left = "0";
-      document.body.style.width = "100vh";
+      document.body.style.width = "calc(var(--vh, 1vh) * 100)";
       document.body.style.height = "100vw";
     }
   }, [location, pathToRotate]);
