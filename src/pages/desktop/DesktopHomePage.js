@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
-import CardContainer from "../../components/cards/CardContainer";
+import CardContainer from "../../components/CardContainer";
 import LanguageSettingController from "../../components/controllers/LanguageSettingController";
 import ChipsContainer from "../../components/profile_chips/ChipsContainer";
 
@@ -54,7 +55,7 @@ function DesktopHomePage() {
         </Link>
         <h1 className="title">Plave Subtitles</h1>
       </div>
-      <div className="desktop-language-setting">
+      <div className="language-setting">
         <LanguageSettingController
           handleLanguageChange={handleLanguageChange}
         />
@@ -65,7 +66,7 @@ function DesktopHomePage() {
         videoData={filteredVideos}
         originalData={videoData}
       />
-      <div className="desktop-card-container">
+      <div className={`${isTablet ? "tablet" : "desktop"}-card-container`}>
         <CardContainer videoData={filteredVideos} />
       </div>
     </>

@@ -1,6 +1,6 @@
 /* 모바일 세로모드 */
 
-.mobile-title-portrait {
+.mobile-title {
     font-size: 2em;
     display: flex;
     justify-content: center;
@@ -8,129 +8,143 @@
 }
 
 /* about 페이지 링크 스타일 */
-.mobile-tab-portrait{
+.mobile-tab {
     display: inline-block;
     font-size: 1.3em;
     font-weight: bold;
-    color: white ;
+    color: white;
     text-decoration: none;
     margin-top: 10px;
     margin-left: 20px;
     padding: 0 10px;
 }
 
-/* 언어 선택*/
-.mobile-language-setting-portrait{
-    display: flex;
-    justify-content: center;
-    color: white;
+.mobile-nav .filter-chips-container {
+    padding-bottom: 1em;
 }
 
-/* 필터링 컨테이너*/
-.mobile-filter-chips-container-portrait{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5%;
+.filter-chips-mobile {
+    display: inline-flex;
+    margin: 1.5em 0.5em 0 0.5em;
     padding-bottom: 10px;
 }
 
-.mobile-filter-chips-portrait .first-row, .mobile-filter-chips-portrait .second-row{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.first-row{
-    margin-bottom: 5%;
-}
-/* 세로 모드 필터칩 두번째 줄 아래 간격 추가 */
-.mobile-filter-chips-portrait .second-row{
-    margin-bottom: 5%;
-}
-
-/* 동영상 컨테이너*/
-.mobile-card-container-portrait{
+.mobile-card-container {
     display: flex;
     flex-direction: column;
     justify-content: first baseline;
     align-items: center;
     margin: 10px;
     height: 65vh;
-    overflow-y:scroll;
+    overflow-y: scroll;
 }
 
-.mobile-card-portrait{
-    margin: 10px auto;
+.mobile-card {
+    margin: 0.2em auto;
 }
 
-.mobile-card-portrait img{
+.mobile-card img {
     width: 100%;
     display: block;
     border-radius: 10px;
 }
 
-/* 
-스크롤바 스타일
--webkit은 크롬, 사파리 등 웹킷 기반 브라우저에서 사용되는 속성
-responsively app에서는 확인이 불가능함
-*/
-.mobile-card-container-portrait::-webkit-scrollbar {
-    width: 10px; /* Set width for scrollbar */
-}
-
-.mobile-card-container-portrait::-webkit-scrollbar-thumb {
-    background-color: #888; /* Style for scrollbar thumb */
-    border-radius: 10px;
-}
-
-.mobile-card-container-portrait::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Style for scrollbar thumb on hover */
-}
-
-.mobile-card-container-portrait::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Style for scrollbar track */
-}
-
-/* 비디오 페이지 */
-.mobile-video-container-portrait{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.mobile-video-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     justify-content: center;
-    margin: 10px;
-    margin-top: 10%;
-}
-
-.mobile-nav-bar-portrait{
-    position: fixed;
-    bottom: 0;
-}
-
-/* 자막 컨테이너 중앙 정렬, 텍스트 왼쪽 정렬 */
-.mobile-subtitle-container-portrait{
-    position: fixed;
-    width: max-content;
-    text-align: left;
-    padding: 2px 10px;
-    color: white;
-    top: 33%;
-}
-
-/* 네비게이션 바 */
-.mobile-nav-bar-portrait{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
     align-items: center;
-    width: 100vw;
-    height: 30vh;
-    bottom: 20vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 0;
+    height: auto;
 }
 
-.mobile-font-size-controller{
-    margin: 10px;
-    font-size: 0.8em;
-    color: whitesmoke;
+.mobile-video-container .youtube-player {
+    position: relative;
+    height: auto;
+    display: block;
+}
+
+/* 모달 */
+.modal-screen-mobile {
+    width: 100vh;
+    height: 100vw;
+    backdrop-filter: blur(15px);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/public/img/bg.png');
+    z-index: 10;
+}
+
+.modal-container-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: min-content;
+    height: fit-content;
+    border-radius: 2em;
+    color: snow;
+}
+
+.modal-container-mobile h1 {
+    margin: 0.6em;
+    width: max-content;
+}
+
+.type-container-mobile {
+    background-color: rgb(97, 97, 97, 0.5);
+    /* background-color: #0088d6; */
+    /* background-color: dimgray; */
+    padding: 1.5em 0 1.5em 1em;
+    list-style-type: none;
+    justify-content: center;
+    border-radius: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 650px;
+    max-width: 750px;
+}
+
+.type-container-mobile .chat-bubble-container {
+    font-size: 1em !important;
+}
+
+.type-container-mobile li:nth-child(4),
+.type-container-mobile li:nth-child(7) {
+    margin-left: 1.9em;
+}
+
+.type-container-mobile li:nth-child(3) {
+    margin-left: -0.8em;
+}
+
+.type-container-mobile li:last-child{
+    margin: 0.6em 0.6em 0 0.6em;
+    position: relative;
+}
+
+.type-container-mobile img {
+    user-drag: none;
+    /* Standard syntax */
+    -webkit-user-drag: none;
+    /* Safari and older versions of Chrome */
+}
+
+.type-container-mobile .chat-bubble-container {
+    border-radius: 1.1em;
+    font-size: 1.5em;
+    /* margin: 0.2em 0.5em; */
+    margin: 0.3em 0.3em;
 }

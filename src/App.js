@@ -1,22 +1,19 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
-import { BrowserView } from "react-device-detect";
-import { useMediaQuery } from "react-responsive";
+import { BrowserView, MobileView, TabletView } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/desktop.css";
-import "./css/mobile-landscape.css";
 import "./css/mobile.css";
-import { images } from "./locale";
+import "./css/tablet.css";
 import AboutPage from "./pages/AboutPage";
 import DesktopHomePage from "./pages/desktop/DesktopHomePage";
 import YouTubePlayer from "./pages/desktop/DesktopVideoPage";
-// import MobileHomePage from "./pages/mobile/MobileHomePage";
-// import MobileYoutubePlayer from "./pages/mobile/MobileVideoPage";
+import MobileHomePage from "./pages/mobile/MobileHomePage";
 import "./style.css";
+import preloadImages from "./utils/preloadImages";
 
 function App() {
-  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   useEffect(() => {
     preloadImages();
   }, []);
@@ -32,13 +29,20 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </BrowserView>
-        {/* <MobileView>
+        <TabletView>
           <Routes>
-            <Route path="/" element={<MobileHomePage />} />
-            <Route path="/watch" element={<MobileYoutubePlayer />} />
+            <Route path="/" element={<DesktopHomePage />} />
+            <Route path="/watch" element={<YouTubePlayer />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
-        </MobileView> */}
+        </TabletView>
+        <MobileView>
+          <Routes>
+            <Route path="/" element={<MobileHomePage />} />
+            <Route path="/watch" element={<YouTubePlayer />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </MobileView>
       </div>
     </ThemeProvider>
   );
@@ -59,24 +63,3 @@ const theme = createTheme({
     fontFamily: "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif",
   },
 });
-
-const preloadImages = () => {
-  const cache = {};
-  images.forEach((image) => {
-    const img = new Image();
-    img.src = process.env.PUBLIC_URL + "/img/profile/" + image;
-    cache[image] = img;
-  });
-  images.forEach((image) => {
-    const img = new Image();
-    img.src = process.env.PUBLIC_URL + "/img/symbol/" + image;
-    cache[image] = img;
-  });
-
-  images.forEach((image) => {
-    const img = new Image();
-    img.src =
-      process.env.PUBLIC_URL + "/img/tail/" + image.split(".")[0] + "_tail.png";
-    cache[image] = img;
-  });
-};

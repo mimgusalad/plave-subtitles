@@ -45,7 +45,7 @@ body.background-transition::after {
 }
 
 /* 언어 선택 컨테이너 */
-.desktop-language-setting {
+.language-setting {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +66,6 @@ body.background-transition::after {
     margin-bottom: 20px;
     padding-bottom: 10px;
 }
-
 
 /* 동영상 카드 컨테이너 */
 .desktop-card-container {
@@ -120,13 +119,14 @@ body.background-transition::after {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     align-self: baseline;
-    height: 25%;
+    height: 10%;
     max-height: max-content;
     width: max-content;
     color: white;
     z-index: 3;
+    /* background-color: tomato; */
 }
 
 .chat-bubble-container,
@@ -218,7 +218,6 @@ body.background-transition::after {
 .type-container .chat-bubble-container {
     border-radius: 1.1em;
     font-size: 1.5em;
-    /* margin: 0.2em 0.5em; */
     margin: 0.3em 0.3em;
 }
 
@@ -240,11 +239,6 @@ body.background-transition::after {
     box-shadow: 0 0 1em 0.4em rgba(255, 255, 255, 0.2);
     transition: box-shadow 0.2s, background-color 0.2s;
     cursor: pointer;
-}
-
-
-.type-container .chat-bubble-container i {
-    /* margin-left: -0.2em; */
 }
 
 .type-container li:nth-child(4),

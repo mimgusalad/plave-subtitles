@@ -28,9 +28,9 @@ const text = {
 };
 
 const informationText = {
-  en: "Sub Setting",
-  ko: "자막 설정",
-  ja: "字幕設定",
+  en: "Subtitle Option",
+  ko: "자막 옵션",
+  ja: "字幕オプション",
 };
 
 const subtitlePositionText = {

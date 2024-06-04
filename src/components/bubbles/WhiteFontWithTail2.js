@@ -94,8 +94,7 @@ const DefaultChatBubble = (colors, isMobile) => ({
   borderRadius: "1.1em",
   padding: "0 1em",
   alignItems: "center",
-  maxWidth: !isMobile ? "80vw" : "80vw",
-  minWidth: "100%", // 별 의미 없는듯
+  maxWidth: "100vw",
   wordBreak: "break-all",
   border: `0.1em solid rgb(0,0,0,0.8)`,
   position: "relative",
@@ -109,27 +108,14 @@ const ChatBubble = (colors, speaker, isMobile) => ({
   padding: "0 0.8em",
   display: "flex",
   alignItems: "center",
-  maxWidth: !isMobile ? "80vw" : "70vw",
+  maxWidth: "100vw",
   wordWrap: "break-word",
-  // border: `0.1em solid ${colors[speaker][0]}`,
-  // boxShadow: `0 0 0 0.15em ${colors[speaker][0]}`,
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",
   zIndex: "2",
 });
 
-// const SpeakerLabel = {
-//   color: "black",
-//   marginLeft: "1em",
-//   paddingLeft: "0",
-// };
-
-const Separator = (color) => ({
-  color: color,
-  position: "relative",
-  fontSize: "1em",
-});
 const Speech = {
   color: "black",
   flex: "1",

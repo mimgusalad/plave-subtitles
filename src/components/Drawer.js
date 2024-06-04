@@ -7,6 +7,7 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import React, { useEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import {
   currentFontText,
   fontText,
@@ -59,6 +60,7 @@ function SubtitleSettingDrawer({
 
   const list = () => (
     <Box
+      className="drawer-content"
       sx={{ width: "max-content" }}
       role="presentation"
       onClick={(e) => e.stopPropagation()}
@@ -122,16 +124,18 @@ function SubtitleSettingDrawer({
           onClick={toggleDrawer(true)}
         >
           {`🛸 ${informationText[lang]} 🛸`}
+          {/* {`👻 ${informationText[lang]} 👻`} */}
+          {/* {`🌷 ${informationText[lang]} 🌷`} */}
         </Button>
       )}
       <Drawer
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "rgb(97, 97, 97, 0.7)", // Change this to your desired color
-            color: "white", // Change this to your desired text color
+            backgroundColor: "rgb(97, 97, 97, 0.7)",
+            color: "white",
           },
         }}
-        anchor="right"
+        anchor={isMobile ? "right" : "right"}
         open={isDrawerOpen}
         ref={drawerRef}
         onClose={toggleDrawer(false)}

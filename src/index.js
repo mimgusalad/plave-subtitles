@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./css/desktop.css";
-import "./css/mobile-landscape.css";
 import "./css/mobile.css";
+import "./css/tablet.css";
 import reportWebVitals from "./reportWebVitals";
 import "./style.css";
 

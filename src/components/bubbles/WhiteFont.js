@@ -69,34 +69,31 @@ const IconStyle = {
   zIndex: "1",
 };
 
-const DefaultChatBubble = (colors) => ({
-  backgroundColor: "rgb(0,0,0,0.8)",
-  borderRadius: "1.1em",
-  padding: "0 1em",
-  display: "flex",
-  alignItems: "center",
-  maxWidth: "80vw",
-  minWidth: "100%",
-  wordBreak: "break-all",
-  border: `0.11em solid rgb(0,0,0,0.8)`,
-  position: "relative",
-  fontSize: "1em",
-  textAlign: "center",
-});
-
 const ChatBubble = (colors, speaker) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: speaker === "bamby" ? "1.1em 1.1em 1.1em 0" : "1.1em",
   padding: "0 0.8em 0 0",
   display: "flex",
   alignItems: "center",
-  maxWidth: "100%",
+  maxWidth: "100vw",
   wordWrap: "break-word",
-  // border: `0.08em solid ${colors[speaker][0]}`,
-  // boxShadow: `0 0 0 0.15em ${colors[speaker][0]}`,
   position: "relative",
   margin: "0.2em 0",
   fontSize: "1em",
+});
+
+const DefaultChatBubble = (colors) => ({
+  backgroundColor: "rgb(0,0,0,0.8)",
+  borderRadius: "1.1em",
+  padding: "0 1em",
+  display: "flex",
+  alignItems: "center",
+  maxWidth: "100vw",
+  wordBreak: "break-all",
+  border: `0.11em solid rgb(0,0,0,0.8)`,
+  position: "relative",
+  fontSize: "1em",
+  textAlign: "center",
 });
 
 const SpeakerLabel = {

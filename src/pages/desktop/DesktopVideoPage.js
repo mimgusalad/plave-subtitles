@@ -6,33 +6,32 @@ import SubtitleSettingDrawer from "../../components/Drawer";
 import Modal from "../../components/Modal";
 import Subtitles from "../../components/Subtitles";
 // import { getBottom } from "../../utils/getBottom";
+import { isMobile } from "react-device-detect";
 import Home from "../../components/HomeButton";
 import { getSubtitles } from "../../utils/getSubtitles";
 
 function YouTubePlayer() {
+  usePageRotation("/watch");
+
   const [currentTime, setCurrentTime] = useState(0);
   const [player, setPlayer] = useState(null);
   const [subtitles, setSubtitles] = useState([]);
   const [subtitleHashTable, setSubtitleHashTable] = useState({});
   const [type, setType] = useState(localStorage.getItem("type") || "b");
   const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize")) || 22
+    Number(localStorage.getItem("fontSize")) || isMobile ? 14 : 22
   );
 
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "ko"
   );
   const [currentOffset, setOffset] = useState(
-    Number(localStorage.getItem("offset")) || -100
+    Number(localStorage.getItem("offset")) || isMobile ? -10 : -100
   );
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const videoId = searchParams.get("videoId");
-
-  // const isTablet = useMediaQuery({
-  //   query: "(min-width: 768px) and (max-width: 1024px)",
-  // });
 
   /*동영상 크기 변수 */
   const [videoWidth, setVideoWidth] = useState(window.innerWidth * 0.8);
@@ -169,19 +168,28 @@ function YouTubePlayer() {
       showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
     },
   };
+  const optsMobile = {
+    width: (window.innerWidth * 16) / 9,
+    height: window.innerWidth,
+    playerVars: {
+      fs: 0, // 전체화면 버튼 제거
+      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
+      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
+    },
+  };
 
   return (
-    <div>
+    <div className={`${isMobile ? "mobile" : "desktop"}-video-page`}>
       {isModalOpen && (
         <Modal handleConfirm={handleConfirm} lang={selectedLanguage} />
       )}
 
-      <div className="desktop-video-container">
+      <div className={`${isMobile ? "mobile" : "desktop"}-video-container`}>
         <Home />
         <YouTube
           className="youtube-player"
           videoId={videoId}
-          opts={opts}
+          opts={isMobile ? optsMobile : opts}
           onReady={onReady}
           onEnd={() => player.stopVideo()} // not really needed
         />
@@ -203,3 +211,33 @@ function YouTubePlayer() {
 }
 
 export default YouTubePlayer;
+
+function usePageRotation(pathToRotate) {
+  const location = useLocation();
+
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+
+    if (location.pathname === pathToRotate && isMobile) {
+      // Apply rotation
+      htmlElement.style.transform = "rotate(-90deg)";
+      htmlElement.style.transformOrigin = "left top";
+      htmlElement.style.width = "100vh";
+      htmlElement.style.height = "100vw";
+      htmlElement.style.overflowX = "hidden";
+      htmlElement.style.position = "absolute";
+      htmlElement.style.top = "100%";
+      htmlElement.style.left = "0";
+    } else {
+      // Revert rotation
+      htmlElement.style.transform = "";
+      htmlElement.style.transformOrigin = "";
+      htmlElement.style.width = "";
+      htmlElement.style.height = "";
+      htmlElement.style.overflowX = "";
+      htmlElement.style.position = "";
+      htmlElement.style.top = "";
+      htmlElement.style.left = "";
+    }
+  }, [location, pathToRotate]);
+}

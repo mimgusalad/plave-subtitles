@@ -1,5 +1,6 @@
 import { Chip } from "@mui/material";
 import { useState } from "react";
+import { isMobile } from "react-device-detect";
 import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
 import {
   BlackFont,
@@ -63,11 +64,15 @@ function Modal({ handleConfirm, lang }) {
   };
 
   return (
-    <div className={`modal-screen ${isMounted ? "mounted" : "unmounted"}`}>
+    <div
+      className={`modal-screen${isMobile ? "-mobile" : ""} ${
+        isMounted ? "mounted" : "unmounted"
+      }`}
+    >
       <Home />
-      <div className="modal-container">
+      <div className={`modal-container${isMobile ? "-mobile" : ""}`}>
         <h1>{title[lang].toUpperCase()}</h1>
-        <ul className="type-container">
+        <ul className={`type-container${isMobile ? "-mobile" : ""}`}>
           {items.map((item, index) => (
             <li
               className={`type-button ${selected === item ? "selected" : ""}`}
@@ -92,7 +97,7 @@ function Modal({ handleConfirm, lang }) {
             backgroundColor: "snow",
             color: "black",
             fontWeight: "500",
-            fontSize: "1.5em",
+            fontSize: isMobile ? "1em" : "1.5em",
             marginTop: "1em",
             padding: "0.8em 0.5em",
           }}

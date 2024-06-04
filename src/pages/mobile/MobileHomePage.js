@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
-import CardContainer from "../../components/cards/CardContainer";
+import CardContainer from "../../components/CardContainer";
 import LanguageSettingController from "../../components/controllers/LanguageSettingController";
-import MobileChipsContainer from "../../mobile_only_components/MobileChipsContainer";
+import ChipsContainer from "../../components/profile_chips/ChipsContainer";
 
 function MobileHomePage() {
   const [videoData, setVideoData] = useState([]);
@@ -12,9 +11,6 @@ function MobileHomePage() {
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang") || "en"
   );
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
-
   localStorage.setItem("lang", selectedLanguage);
 
   const handleFilterChange = (videos) => {
@@ -31,6 +27,15 @@ function MobileHomePage() {
   };
 
   useEffect(() => {
+    const htmlElement = document.documentElement;
+    htmlElement.style.transform = "";
+    htmlElement.style.transformOrigin = "";
+    htmlElement.style.width = "";
+    htmlElement.style.height = "";
+    htmlElement.style.overflowX = "";
+    htmlElement.style.position = "";
+    htmlElement.style.top = "";
+    htmlElement.style.left = "";
     const fetchData = () => {
       axios
         .get("https://mimgusalad.github.io/plave/img/data.json")
@@ -47,51 +52,29 @@ function MobileHomePage() {
     fetchData();
   }, []);
 
-  const getClassName = (isMobile, isPortrait) => {
-    if (isMobile) {
-      return isPortrait
-        ? "mobile-language-setting-portrait"
-        : "mobile-language-setting-landscape";
-    } else {
-      return "language-setting";
-    }
-  };
-
   return (
-    <>
+    <div className="mobile-nav">
       <div className="mobile-header">
-        <Link
-          to="/about"
-          className={`mobile-tab-${isPortrait ? "portrait" : "landscape"}`}
-        >
+        <Link to="/about" className="mobile-tab">
           About
         </Link>
-        <h1
-          className={`mobile-title${isPortrait ? "-portrait" : "-landscape"}`}
-        >
-          Plave Subtitles
-        </h1>
+        <h1 className="mobile-title">Plave Subtitles</h1>
       </div>
-      <div className={getClassName(isMobile, isPortrait)}>
+      <div className="language-setting">
         <LanguageSettingController
           handleLanguageChange={handleLanguageChange}
         />
-        {getClassName}
       </div>
-      <MobileChipsContainer
+      <ChipsContainer
         selectedLanguage={selectedLanguage}
         onFilterChange={handleFilterChange}
         videoData={filteredVideos}
         originalData={videoData}
       />
-      <div
-        className={`mobile-card-container-${
-          isPortrait ? "portrait" : "landscape"
-        }`}
-      >
+      <div className="mobile-card-container">
         <CardContainer videoData={filteredVideos} />
       </div>
-    </>
+    </div>
   );
 }
 
