@@ -56,9 +56,6 @@ function App() {
 export default App;
 
 const GlobalStyle = createGlobalStyle`
-:root{
-  --vh: 100%;
-}
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
   body {
