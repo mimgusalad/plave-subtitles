@@ -228,16 +228,6 @@ function usePageRotation(pathToRotate) {
       htmlElement.style.position = "absolute";
       htmlElement.style.top = "100%";
       htmlElement.style.left = "0";
-    } else {
-      // Revert rotation
-      htmlElement.style.transform = "";
-      htmlElement.style.transformOrigin = "";
-      htmlElement.style.width = "";
-      htmlElement.style.height = "";
-      htmlElement.style.overflowX = "";
-      htmlElement.style.position = "";
-      htmlElement.style.top = "";
-      htmlElement.style.left = "";
     }
   }, [location, pathToRotate]);
 }

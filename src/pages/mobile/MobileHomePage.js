@@ -30,8 +30,8 @@ function MobileHomePage() {
     const htmlElement = document.documentElement;
     htmlElement.style.transform = "";
     htmlElement.style.transformOrigin = "";
-    htmlElement.style.width = "";
-    htmlElement.style.height = "";
+    htmlElement.style.width = "100dvw";
+    htmlElement.style.height = "100dvh";
     htmlElement.style.overflowX = "";
     htmlElement.style.position = "";
     htmlElement.style.top = "";
