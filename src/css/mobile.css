@@ -35,7 +35,7 @@
     justify-content: first baseline;
     align-items: center;
     margin: 10px;
-    height: 65dvh;
+    height: 60vh;
     overflow-y: scroll;
 }
 
@@ -50,21 +50,28 @@
 }
 
 .mobile-video-page{
-    height: 100dvw;
-    width: 100dvh;
-    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
 }
 
 .mobile-video-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 100dvh;
-    height: 100dvw;
+    width: 100%;
     z-index: 0;
     height: auto;
-    background-color: black;
 }
 
 .mobile-video-container .youtube-player {
@@ -75,12 +82,12 @@
 
 /* 모달 */
 .modal-screen-mobile {
-    width: 100dvh; 
-    height: 100dvw;
+    width: 100vh;
+    height: auto;
     backdrop-filter: blur(15px);
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -95,7 +102,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     width: min-content;
     height: fit-content;
     border-radius: 2em;
@@ -109,8 +116,6 @@
 
 .type-container-mobile {
     background-color: rgb(97, 97, 97, 0.5);
-    /* background-color: #0088d6; */
-    /* background-color: dimgray; */
     padding: 1.5em 0 1.5em 1em;
     list-style-type: none;
     justify-content: center;

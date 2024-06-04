@@ -30,12 +30,14 @@ function MobileHomePage() {
     const htmlElement = document.documentElement;
     htmlElement.style.transform = "";
     htmlElement.style.transformOrigin = "";
-    htmlElement.style.width = "100dvw";
-    htmlElement.style.height = "100dvh";
+    htmlElement.style.width = "";
+    htmlElement.style.height = "";
     htmlElement.style.overflowX = "";
     htmlElement.style.position = "";
     htmlElement.style.top = "";
     htmlElement.style.left = "";
+    document.body.style.width = "100vw";
+    document.body.style.height = "100vh";
     const fetchData = () => {
       axios
         .get("https://mimgusalad.github.io/plave/img/data.json")
