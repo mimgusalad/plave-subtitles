@@ -6,7 +6,7 @@ import SubtitleSettingDrawer from "../../components/Drawer";
 import Modal from "../../components/Modal";
 import Subtitles from "../../components/Subtitles";
 // import { getBottom } from "../../utils/getBottom";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import Home from "../../components/HomeButton";
 import { getSubtitles } from "../../utils/getSubtitles";
 
@@ -177,19 +177,34 @@ function YouTubePlayer() {
       showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
     },
   };
+  const optsTablet = {
+    width: window.innerWidth,
+    height: (window.innerWidth * 9) / 16,
+    playerVars: {
+      fs: 0, // 전체화면 버튼 제거
+      rel: 0, // 동영상이 재생된 계정의 다른 동영상을 추천하는 기능
+      showInfo: 0, // 동영상 멈췄을때 관련 영상 안보이게 하는 parameter
+    },
+  };
 
   return (
-    <div className={`${isMobile ? "mobile" : "desktop"}-video-page`}>
+    <div
+      className={`${isMobile && !isTablet ? "mobile" : "desktop"}-video-page`}
+    >
       {isModalOpen && (
         <Modal handleConfirm={handleConfirm} lang={selectedLanguage} />
       )}
 
-      <div className={`${isMobile ? "mobile" : "desktop"}-video-container`}>
+      <div
+        className={`${
+          isMobile && !isTablet ? "mobile" : "desktop"
+        }-video-container`}
+      >
         <Home />
         <YouTube
           className="youtube-player"
           videoId={videoId}
-          opts={isMobile ? optsMobile : opts}
+          opts={isMobile ? (isTablet ? optsTablet : optsMobile) : opts}
           onReady={onReady}
           onEnd={() => player.stopVideo()} // not really needed
         />
@@ -218,7 +233,7 @@ function usePageRotation(pathToRotate) {
   useEffect(() => {
     const htmlElement = document.documentElement;
 
-    if (location.pathname === pathToRotate && isMobile) {
+    if (location.pathname === pathToRotate && isMobile && !isTablet) {
       // Apply rotation
       htmlElement.style.transform = "rotate(-90deg)";
       htmlElement.style.transformOrigin = "left top";

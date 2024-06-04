@@ -1,6 +1,12 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useEffect } from "react";
-import { BrowserView, MobileView, TabletView } from "react-device-detect";
+import {
+  BrowserView,
+  MobileView,
+  TabletView,
+  isMobile,
+  isTablet,
+} from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/desktop.css";
@@ -34,6 +40,17 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </BrowserView>
+        <MobileView>
+          <Routes>
+            <Route path="/" element={<MobileHomePage />} />
+            {isMobile && !isTablet && (
+              <Route path="/watch" element={<YouTubePlayer />} />
+            )}
+            {isMobile && !isTablet && (
+              <Route path="/about" element={<AboutPage />} />
+            )}
+          </Routes>
+        </MobileView>
         <TabletView>
           <Routes>
             <Route path="/" element={<DesktopHomePage />} />
@@ -41,13 +58,6 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </TabletView>
-        <MobileView>
-          <Routes>
-            <Route path="/" element={<MobileHomePage />} />
-            <Route path="/watch" element={<YouTubePlayer />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-        </MobileView>
       </div>
     </ThemeProvider>
   );

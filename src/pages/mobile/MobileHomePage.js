@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
 import CardContainer from "../../components/CardContainer";
 import LanguageSettingController from "../../components/controllers/LanguageSettingController";
@@ -55,28 +56,32 @@ function MobileHomePage() {
   }, []);
 
   return (
-    <div className="mobile-nav">
-      <div className="mobile-header">
-        <Link to="/about" className="mobile-tab">
-          About
-        </Link>
-        <h1 className="mobile-title">Plave Subtitles</h1>
-      </div>
-      <div className="language-setting">
-        <LanguageSettingController
-          handleLanguageChange={handleLanguageChange}
-        />
-      </div>
-      <ChipsContainer
-        selectedLanguage={selectedLanguage}
-        onFilterChange={handleFilterChange}
-        videoData={filteredVideos}
-        originalData={videoData}
-      />
-      <div className="mobile-card-container">
-        <CardContainer videoData={filteredVideos} />
-      </div>
-    </div>
+    <>
+      {!isTablet && (
+        <div className="mobile-nav">
+          <div className="mobile-header">
+            <Link to="/about" className="mobile-tab">
+              About
+            </Link>
+            <h1 className="mobile-title">Plave Subtitles</h1>
+          </div>
+          <div className="language-setting">
+            <LanguageSettingController
+              handleLanguageChange={handleLanguageChange}
+            />
+          </div>
+          <ChipsContainer
+            selectedLanguage={selectedLanguage}
+            onFilterChange={handleFilterChange}
+            videoData={filteredVideos}
+            originalData={videoData}
+          />
+          <div className="mobile-card-container">
+            <CardContainer videoData={filteredVideos} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

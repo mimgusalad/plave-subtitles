@@ -10,13 +10,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 200px;
+    max-width: 1200px;
     margin: auto;
 }
 
 /* 동영상 카드 한 줄에 3개씩 보이게 하기 */
 .tablet-card {
-    flex: 1 1 calc(33.333% - 20px);
+    flex: 1 1 calc(25% - 20px);
     margin: 10px;
     padding: 20px;
     text-align: center;
