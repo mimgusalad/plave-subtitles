@@ -15,6 +15,11 @@ import preloadImages from "./utils/preloadImages";
 
 function App() {
   useEffect(() => {
+    const setScreenSize = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+    setScreenSize();
     preloadImages();
   }, []);
 
@@ -51,6 +56,9 @@ function App() {
 export default App;
 
 const GlobalStyle = createGlobalStyle`
+:root{
+  --vh: 100%;
+}
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
   body {
