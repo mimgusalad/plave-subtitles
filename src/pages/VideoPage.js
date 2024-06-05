@@ -20,15 +20,15 @@ function YouTubePlayer() {
   const [subtitles, setSubtitles] = useState([]);
 
   /** 자막 조작하는 변수 */
-  const [type, setType] = useState(localStorage.getItem("type") || "b"); // 자막바 타입 변수
+  const [type, setType] = useState(sessionStorage.getItem("type")); // 자막바 타입 변수
   const [fontSize, setFontSize] = useState(
-    Number(localStorage.getItem("fontSize")) || isMobile ? 14 : 22
+    Number(sessionStorage.getItem("fontSize"))
   ); // 폰트 사이즈 변수
   const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "ko"
+    localStorage.getItem("lang")
   ); // 선택된 언어 변수
   const [currentOffset, setOffset] = useState(
-    Number(localStorage.getItem("offset")) || isMobile ? -10 : -100
+    Number(sessionStorage.getItem("offset"))
   ); // 자막 위치 변수
 
   /** 동영상 관련 변수 */
@@ -42,7 +42,7 @@ function YouTubePlayer() {
 
   // 자막바 디자인 선택하는 모달 창 변수
   const [isModalOpen, setIsModalOpen] = useState(
-    localStorage.getItem("modal") === "false" ? false : true
+    sessionStorage.getItem("modal") === "false" ? false : true
   );
 
   // Resize video player based on window size
@@ -57,18 +57,18 @@ function YouTubePlayer() {
 
   const handleConfirm = (selected) => {
     setIsModalOpen(false);
-    localStorage.setItem("modal", "false");
-    localStorage.setItem("type", selected);
+    sessionStorage.setItem("modal", "false");
+    sessionStorage.setItem("type", selected);
   };
 
   const handleTypeChange = (selected) => {
     setType(selected);
-    localStorage.setItem("type", selected);
+    sessionStorage.setItem("type", selected);
   };
 
   const handleOffsetChange = (offset) => {
     setOffset(offset);
-    localStorage.setItem("offset", offset);
+    sessionStorage.setItem("offset", offset);
   };
 
   const handleLanguageChange = async (language) => {
@@ -79,7 +79,7 @@ function YouTubePlayer() {
 
   const handleFontSizeChange = (fontSize) => {
     setFontSize(fontSize);
-    localStorage.setItem("fontSize", fontSize);
+    sessionStorage.setItem("fontSize", fontSize);
   };
 
   // Set subtitle position based on current offset

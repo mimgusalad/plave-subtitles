@@ -1,6 +1,6 @@
 import { Chip } from "@mui/material";
 import { useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isTablet } from "react-device-detect";
 import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
 import {
   BlackFont,
@@ -15,7 +15,9 @@ import {
 import Home from "./HomeButton";
 
 function Modal({ handleConfirm, lang }) {
-  const [selected, setSelected] = useState(localStorage.getItem("type") || "b");
+  const [selected, setSelected] = useState(
+    sessionStorage.getItem("type") || "b"
+  );
   const [isMounted, setIsMounted] = useState(true);
   const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
@@ -65,14 +67,18 @@ function Modal({ handleConfirm, lang }) {
 
   return (
     <div
-      className={`modal-screen${isMobile ? "-mobile" : ""} ${
+      className={`modal-screen${isMobile && !isTablet ? "-mobile" : ""} ${
         isMounted ? "mounted" : "unmounted"
       }`}
     >
       <Home />
-      <div className={`modal-container${isMobile ? "-mobile" : ""}`}>
+      <div
+        className={`modal-container${isMobile && !isTablet ? "-mobile" : ""}`}
+      >
         <h1>{title[lang].toUpperCase()}</h1>
-        <ul className={`type-container${isMobile ? "-mobile" : ""}`}>
+        <ul
+          className={`type-container${isMobile && !isTablet ? "-mobile" : ""}`}
+        >
           {items.map((item, index) => (
             <li
               className={`type-button ${selected === item ? "selected" : ""}`}
@@ -97,7 +103,7 @@ function Modal({ handleConfirm, lang }) {
             backgroundColor: "snow",
             color: "black",
             fontWeight: "500",
-            fontSize: isMobile ? "1em" : "1.5em",
+            fontSize: isMobile && !isTablet ? "1em" : "1.5em",
             marginTop: "1em",
             padding: "0.8em 0.5em",
           }}

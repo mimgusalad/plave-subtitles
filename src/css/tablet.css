@@ -7,18 +7,20 @@
 }
 
 .tablet-card-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: auto;
     justify-content: center;
-    max-width: 1200px;
-    margin: auto;
+    align-items: flex-start;
+    height: calc(var(--vh, 1vh) * 60);
+    overflow-y: scroll;
+    width: 100vw;
+    background-color: tomato;
 }
 
 /* 동영상 카드 한 줄에 3개씩 보이게 하기 */
 .tablet-card {
-    flex: 1 1 calc(25% - 20px);
-    margin: 10px;
-    padding: 20px;
+    margin: 12px;
     text-align: center;
     cursor: pointer;
 }

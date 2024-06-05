@@ -158,10 +158,16 @@ const nameLang = {
   ja: "名前",
 };
 
+const enterText = {
+  en: "Lassgo🛸",
+  ko: "라쓰고🛸",
+  ja: "ラツゴー🛸",
+};
 export {
   additionalText,
   confirmText,
   currentFontText,
+  enterText,
   fontText,
   hearts,
   images,

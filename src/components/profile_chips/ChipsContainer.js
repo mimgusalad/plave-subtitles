@@ -76,8 +76,7 @@ function ChipsContainer({
         clickable
         label={text[selectedLanguage]}
         onClick={handleShowAllVideos}
-        isMobile={isMobile}
-        isTablet={isTablet}
+        isMobile={isMobile && !isTablet}
       />
     </div>
   );
@@ -85,10 +84,10 @@ function ChipsContainer({
 
 export default ChipsContainer;
 
-const StyledChip = styled(Chip)(({ isMobile, isTablet }) => ({
+const StyledChip = styled(Chip)(({ isMobile }) => ({
   backgroundColor: "white",
   opacity: 0.7,
   fontWeight: "bold",
   height: "2em",
-  fontSize: isMobile && !isTablet ? "12px" : "1em",
+  fontSize: isMobile ? "12px" : "1em",
 }));

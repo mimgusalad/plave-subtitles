@@ -5,13 +5,22 @@ import { Link } from "react-router-dom";
 import CardContainer from "../components/CardContainer";
 import LanguageSettingController from "../components/controllers/LanguageSettingController";
 import ChipsContainer from "../components/profile_chips/ChipsContainer";
+import IntroPage from "./IntroPage";
 
 function MobileHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "en"
+    localStorage.getItem("lang")
   );
+  const [isOpen, setIsOpen] = useState(
+    sessionStorage.getItem("isOpen") === "false" ? false : true
+  );
+
+  const handleClickEnter = () => {
+    setIsOpen(false);
+    sessionStorage.setItem("isOpen", false);
+  };
 
   const handleFilterChange = (videos) => {
     setFilteredVideos(videos);
@@ -41,6 +50,7 @@ function MobileHomePage() {
 
   return (
     <>
+      {isOpen && <IntroPage handleClickEnter={handleClickEnter} />}
       {!isTablet && (
         <div className="mobile-nav">
           <div className="mobile-header">

@@ -4,19 +4,9 @@ import React, { useState } from "react";
 import { isMobile, isTablet } from "react-device-detect";
 import { languages } from "../../locale";
 
-const StyledChip = styled(Chip)(
-  ({ selectedLanguage, lang, isMobile, isTablet }) => ({
-    fontWeight: "bold",
-    height: "2em",
-    fontSize: isMobile && !isTablet ? "12px" : "1em",
-    backgroundColor: selectedLanguage === lang ? "white" : "transparent",
-    opacity: selectedLanguage === lang ? 0.7 : 0.7,
-  })
-);
-
 function LanguageSettingController({ handleLanguageChange }) {
   const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "en"
+    localStorage.getItem("lang")
   );
   const handleLanguageClick = (lang) => {
     setSelectedLanguage(lang);
@@ -32,8 +22,7 @@ function LanguageSettingController({ handleLanguageChange }) {
           onClick={() => handleLanguageClick(lang)}
           lang={lang}
           selectedLanguage={selectedLanguage}
-          isMobile={isMobile}
-          isTablet={isTablet}
+          isMobile={isMobile && !isTablet}
         />
       ))}
     </>
@@ -41,3 +30,11 @@ function LanguageSettingController({ handleLanguageChange }) {
 }
 
 export default LanguageSettingController;
+
+const StyledChip = styled(Chip)(({ selectedLanguage, lang, isMobile }) => ({
+  fontWeight: "bold",
+  height: "2em",
+  fontSize: isMobile ? "12px" : "1em",
+  backgroundColor: selectedLanguage === lang ? "white" : "transparent",
+  opacity: selectedLanguage === lang ? 0.7 : 0.7,
+}));

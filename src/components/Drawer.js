@@ -7,7 +7,6 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import React, { useEffect, useRef, useState } from "react";
-import { isMobile } from "react-device-detect";
 import {
   currentFontText,
   fontText,
@@ -135,7 +134,7 @@ function SubtitleSettingDrawer({
             color: "white",
           },
         }}
-        anchor={isMobile ? "right" : "right"}
+        anchor="right"
         open={isDrawerOpen}
         ref={drawerRef}
         onClose={toggleDrawer(false)}
@@ -165,7 +164,7 @@ function FontSizeController({ lang, handleFontSizeChange, fontSize }) {
 
   useEffect(() => {
     updateFontSize(fontSize);
-    localStorage.setItem("fontSize", fontSize);
+    sessionStorage.setItem("fontSize", fontSize);
   }, [fontSize]);
 
   return (
@@ -215,7 +214,7 @@ function PositionController({ lang, handleOffsetChange, currentOffset }) {
 
   useEffect(() => {
     updatePosition(currentOffset);
-    localStorage.setItem("offset", currentOffset);
+    sessionStorage.setItem("offset", currentOffset);
   }, [currentOffset]);
 
   return (

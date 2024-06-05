@@ -1,9 +1,8 @@
-import { useMediaQuery } from "react-responsive";
+import { isMobile, isTablet } from "react-device-detect";
 import nameConverter from "../../utils/nameConverter";
 import splitAndReformat from "../../utils/splitAndReformat";
 
 function WhiteFontWithTail({ message: line }) {
-  const isMobile = useMediaQuery({ query: "(max-width: 950px)" });
   const colors = {
     yejun: ["#8fb3d4", "#c8e3ff"],
     noah: ["#a169a3", "#f5c9f2"],
@@ -35,7 +34,11 @@ function WhiteFontWithTail({ message: line }) {
           </i>
           <div
             className="chat-bubble"
-            style={ChatBubble(colors, nameConverter(result.speaker), isMobile)}
+            style={ChatBubble(
+              colors,
+              nameConverter(result.speaker),
+              isMobile && !isTablet
+            )}
           >
             <span className="speech" style={Speech}>
               {result.dialog}
@@ -54,7 +57,7 @@ function WhiteFontWithTail({ message: line }) {
         <div className="chat-bubble-container-default" style={BubbleContainer}>
           <div
             className="chat-bubble-default"
-            style={DefaultChatBubble(colors, isMobile)}
+            style={DefaultChatBubble(colors, isMobile & !isTablet)}
           >
             <span className="speech" style={Speech}>
               {splitAndReformat(line)}

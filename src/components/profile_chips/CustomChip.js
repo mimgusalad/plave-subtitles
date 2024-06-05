@@ -76,8 +76,15 @@ function CustomChip({
 
   return (
     <div className="custom-chip" style={labelContainerStyle}>
-      {Chips[isTablet ? "tablet" : isMobile ? "mobile" : "desktop"]}
-      <ResponsiveTypography selected={selected} isMobile={isMobile}>
+      {
+        Chips[
+          isTablet ? "tablet" : isMobile && !isTablet ? "mobile" : "desktop"
+        ]
+      }
+      <ResponsiveTypography
+        selected={selected}
+        isMobile={isMobile && !isTablet}
+      >
         {names[selectedLanguage][index]}
       </ResponsiveTypography>
     </div>

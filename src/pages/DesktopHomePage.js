@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 import CardContainer from "../components/CardContainer";
 import LanguageSettingController from "../components/controllers/LanguageSettingController";
 import ChipsContainer from "../components/profile_chips/ChipsContainer";
+import IntroPage from "./IntroPage";
+
 function DesktopHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
+  const [isOpen, setIsOpen] = useState(
+    sessionStorage.getItem("isOpen") === "false" ? false : true
+  );
   const [selectedLanguage, setSelectedLanguage] = useState(
-    localStorage.getItem("lang") || "ko"
+    localStorage.getItem("lang")
   );
 
   useEffect(() => {
@@ -33,6 +38,11 @@ function DesktopHomePage() {
     fetchData();
   }, []);
 
+  const handleClickEnter = () => {
+    setIsOpen(false);
+    sessionStorage.setItem("isOpen", false);
+  };
+
   const handleFilterChange = (videos) => {
     setFilteredVideos(videos);
   };
@@ -44,11 +54,12 @@ function DesktopHomePage() {
 
   return (
     <>
+      {isOpen && <IntroPage handleClickEnter={handleClickEnter} />}
       <div className="header">
         <Link to="/about" className="tabStyle">
           About
         </Link>
-        <h1 className="title">Plave Subtitles</h1>
+        <h1 className={`title`}>Plave Subtitles</h1>
       </div>
       <div className="language-setting">
         <LanguageSettingController
