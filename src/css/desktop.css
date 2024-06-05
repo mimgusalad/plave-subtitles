@@ -9,7 +9,7 @@ body {
     font-family: 'Roboto',
         'Yu Gothic UI', 'Pretendard-Regular', sans-serif;
     user-select: none;
-    /* overflow: hidden; */
+    overflow: hidden;
     position: fixed;
 }
 
