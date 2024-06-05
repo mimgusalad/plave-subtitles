@@ -46,6 +46,7 @@ function MobileHomePage() {
     document.body.classList.remove("background-transition");
     fetchData();
     resetHtml();
+    setMobileHtml();
   }, []);
 
   return (
@@ -93,4 +94,22 @@ const resetHtml = () => {
   htmlElement.style.left = "";
   document.body.style.width = "100vw";
   document.body.style.height = "calc(var(--vh, 1vh) * 100)";
+};
+
+const setMobileHtml = () => {
+  // Create a new style element
+  const style = document.createElement("style");
+
+  // Define the CSS content
+  const css = `
+html,
+body {
+    height: 100vh;
+    height: var(--vh);
+}
+`;
+
+  // Add the CSS content to the style element
+  style.innerHTML = css;
+  document.head.appendChild(style);
 };
