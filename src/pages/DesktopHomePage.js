@@ -34,7 +34,6 @@ function DesktopHomePage() {
         });
     };
 
-    document.body.classList.remove("background-transition");
     fetchData();
   }, []);
 
@@ -53,13 +52,12 @@ function DesktopHomePage() {
   };
 
   return (
-    <>
+    <div className="home-content-container">
       {isOpen && <IntroPage handleClickEnter={handleClickEnter} />}
       <div className="header">
         <Link to="/about" className="tabStyle">
           About
         </Link>
-        <h1 className={`title`}>Plave Subtitles</h1>
       </div>
       <div className="language-setting">
         <LanguageSettingController
@@ -72,10 +70,12 @@ function DesktopHomePage() {
         videoData={filteredVideos}
         originalData={videoData}
       />
-      <div className={`${isTablet ? "tablet" : "desktop"}-card-container`}>
-        <CardContainer videoData={filteredVideos} />
+      <div className="card-container-container">
+        <div className={`${isTablet ? "tablet" : "desktop"}-card-container`}>
+          <CardContainer videoData={filteredVideos} />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

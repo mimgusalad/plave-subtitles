@@ -22,7 +22,9 @@ function Card(props) {
   return (
     <div className={getClassName()} onClick={handleNavigation}>
       <img
-        src={`https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg`}
+        alt="thumbnail"
+        width="250"
+        src={`https://img.youtube.com/vi/${props.videoId}/mqdefault.jpg`}
       ></img>
     </div>
   );

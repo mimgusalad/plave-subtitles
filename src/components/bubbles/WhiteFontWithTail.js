@@ -13,7 +13,8 @@ function WhiteFontWithTail({ message: line }) {
 
   const result = splitAndReformat(line);
   const name = nameConverter(result.speaker);
-  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
+  const speakerImage =
+    name === result.speaker ? "default.avif" : `${name}.avif`;
 
   return (
     <>
@@ -21,6 +22,7 @@ function WhiteFontWithTail({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
+              alt="symbol"
               draggable="false"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
@@ -41,7 +43,8 @@ function WhiteFontWithTail({ message: line }) {
             </span>
             <span class="tail" style={TailStyle}>
               <img
-                src={`/img/tail/${nameConverter(result.speaker)}_tail.png`}
+                alt="tail"
+                src={`/img/tail/${nameConverter(result.speaker)}_tail.avif`}
                 style={{
                   width: "1em",
                 }}

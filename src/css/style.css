@@ -1,11 +1,12 @@
-:root{
+:root {
   --vh: 100%;
 }
 
+/* 이거 지우면 모바일 난리남 */
 html,
 body {
-    height: 100vh;
-    height: var(--vh);
+  height: 100vh;
+  height: var(--vh); /* For mobile browsers 이거때문에 데스크랍 태블릿 뷰에서 위에 자꾸 빈공간 생김*/
 }
 
 @font-face {
@@ -80,7 +81,7 @@ ul.language-selector li {
   margin: 0.8em 0;
 }
 
-.intro{
+.intro {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,16 +90,17 @@ ul.language-selector li {
   flex-direction: column;
 }
 
-.intro h1{
+.intro h1 {
   font-weight: bold;
-  font-size: 10vw;
+  font-size: 2em;
+  margin: 0.5em;
 }
 
-.intro span{
+.intro span {
   font-size: 1rem;
 }
 
-.enter-text{
+.enter-text {
   justify-content: center;
   align-items: center;
   display: flex;

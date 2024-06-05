@@ -89,5 +89,5 @@ const StyledChip = styled(Chip)(({ isMobile }) => ({
   opacity: 0.7,
   fontWeight: "bold",
   height: "2em",
-  fontSize: isMobile ? "12px" : "1em",
+  fontSize: isMobile ? "12px" : "14px",
 }));

@@ -34,7 +34,7 @@ export default LanguageSettingController;
 const StyledChip = styled(Chip)(({ selectedLanguage, lang, isMobile }) => ({
   fontWeight: "bold",
   height: "2em",
-  fontSize: isMobile ? "12px" : "1em",
+  fontSize: isMobile ? "12px" : "14px",
   backgroundColor: selectedLanguage === lang ? "white" : "transparent",
   opacity: selectedLanguage === lang ? 0.7 : 0.7,
 }));

@@ -12,7 +12,8 @@ function WhiteFont({ message: line }) {
 
   const result = splitAndReformat(line);
   const name = nameConverter(result.speaker);
-  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
+  const speakerImage =
+    name === result.speaker ? "default.avif" : `${name}.avif`;
 
   return (
     <>

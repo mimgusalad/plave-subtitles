@@ -27,9 +27,7 @@ function Modal({ handleConfirm, lang }) {
 
   const handleConfirmButton = (selected) => {
     setIsMounted(false);
-    setTimeout(() => {
-      handleConfirm(selected);
-    }, 1000);
+    handleConfirm(selected);
   };
 
   const getMessageComponent = (index) => {

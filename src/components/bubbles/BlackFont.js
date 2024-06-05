@@ -13,7 +13,8 @@ function BlackFont({ message: line }) {
 
   const result = splitAndReformat(line);
   const name = nameConverter(result.speaker);
-  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
+  const speakerImage =
+    name === result.speaker ? "default.avif" : `${name}.avif`;
 
   return (
     <>
@@ -21,6 +22,7 @@ function BlackFont({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
+              alt="symbol"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${

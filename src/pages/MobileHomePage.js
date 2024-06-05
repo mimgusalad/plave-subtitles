@@ -43,7 +43,7 @@ function MobileHomePage() {
           console.log(err);
         });
     };
-    document.body.classList.remove("background-transition");
+
     fetchData();
     resetHtml();
     setMobileHtml();

@@ -117,7 +117,13 @@ const sampleSubtitle = {
     "デフォルト字幕",
   ],
 };
-const images = ["yejun.png", "noah.png", "bamby.png", "eunho.png", "hamin.png"];
+const images = [
+  "yejun.avif",
+  "noah.avif",
+  "bamby.avif",
+  "eunho.avif",
+  "hamin.avif",
+];
 
 const sampleText = {
   en: [

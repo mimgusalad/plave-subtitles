@@ -100,7 +100,7 @@ function YouTubePlayer() {
   useEffect(() => {
     const element = document.getElementsByClassName("subtitle-container")[0];
     element.style.bottom = window.innerHeight * 0.05 - currentOffset + "px";
-    document.body.classList.add("background-transition");
+
     // Fetch initial subtitles
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
 
@@ -179,6 +179,7 @@ function YouTubePlayer() {
         <YouTube
           className="youtube-player"
           videoId={videoId}
+          loading="lazy"
           opts={
             isMobile
               ? isTablet

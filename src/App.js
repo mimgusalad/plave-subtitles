@@ -1,5 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import {
   BrowserView,
   MobileView,
@@ -9,59 +9,65 @@ import {
 } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import "./css/desktop.css";
-import "./css/mobile.css";
-import "./css/style.css";
-import "./css/tablet.css";
-import AboutPage from "./pages/AboutPage";
-import DesktopHomePage from "./pages/DesktopHomePage";
-import MobileHomePage from "./pages/MobileHomePage";
-import YouTubePlayer from "./pages/VideoPage";
-import preloadImages from "./utils/preloadImages";
+lazy(() => import("./css/desktop.css"));
+lazy(() => import("./css/style.css"));
+lazy(() => import("./css/tablet.css"));
+lazy(() => import("./css/mobile.css"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const DesktopHomePage = lazy(() => import("./pages/DesktopHomePage"));
+const MobileHomePage = lazy(() => import("./pages/MobileHomePage"));
+const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
+// lazy(() => import("./utils/preloadImages"));
 
 function App() {
-  useEffect(() => {
-    const setScreenSize = () => {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    };
-    setScreenSize();
-    preloadImages();
-  }, []);
   localStorage.setItem("lang", "ko");
   sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 26);
   sessionStorage.setItem("offset", isMobile && isTablet ? -10 : -100);
   sessionStorage.setItem("modal", "true");
   sessionStorage.setItem("type", "b");
 
+  useEffect(() => {
+    const setScreenSize = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    };
+    setScreenSize();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <GlobalStyle />
         <BrowserView>
-          <Routes>
-            <Route path="/" element={<DesktopHomePage />} />
-            <Route path="/watch" element={<YouTubePlayer />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+          <Suspense>
+            <Routes>
+              <Route path="/" element={<DesktopHomePage />} />
+              <Route path="/watch" element={<YouTubePlayer />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </Suspense>
         </BrowserView>
         <MobileView>
-          <Routes>
-            <Route path="/" element={<MobileHomePage />} />
-            {isMobile && !isTablet && (
-              <Route path="/watch" element={<YouTubePlayer />} />
-            )}
-            {isMobile && !isTablet && (
-              <Route path="/about" element={<AboutPage />} />
-            )}
-          </Routes>
+          <Suspense>
+            <Routes>
+              <Route path="/" element={<MobileHomePage />} />
+              {isMobile && !isTablet && (
+                <Route path="/watch" element={<YouTubePlayer />} />
+              )}
+              {isMobile && !isTablet && (
+                <Route path="/about" element={<AboutPage />} />
+              )}
+            </Routes>
+          </Suspense>
         </MobileView>
         <TabletView>
-          <Routes>
-            <Route path="/" element={<DesktopHomePage />} />
-            <Route path="/watch" element={<YouTubePlayer />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+          <Suspense>
+            <Routes>
+              <Route path="/" element={<DesktopHomePage />} />
+              <Route path="/watch" element={<YouTubePlayer />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </Suspense>
         </TabletView>
       </div>
     </ThemeProvider>

@@ -37,7 +37,8 @@ function Bubble({ message: line, showTail, isBordered, showNameTag }) {
 
   const result = splitAndReformat(line);
   const name = nameConverter(result.speaker);
-  const speakerImage = name === result.speaker ? "default.png" : `${name}.png`;
+  const speakerImage =
+    name === result.speaker ? "default.avif" : `${name}.avif`;
   return (
     <>
       {result.speaker ? (
@@ -99,6 +100,7 @@ const Icon = (image, name, type) => {
   return (
     <i className="icon" style={style[type]}>
       <img
+        alt="symbol"
         src={process.env.PUBLIC_URL + "/img/symbol/" + image}
         style={{
           height: `${nameConverter(name) === "eunho" ? "2.68em" : "2.65em"}`,
@@ -126,7 +128,8 @@ const Dialog = (name, dialog, tail) => {
           }}
         >
           <img
-            src={`/img/tail/${nameConverter(name)}_tail.png`}
+            alt="tail"
+            src={`/img/tail/${nameConverter(name)}_tail.avif`}
             style={{
               width: "1em",
             }}

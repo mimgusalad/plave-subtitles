@@ -19,7 +19,8 @@ function BlackFont2({ message: line }) {
         <div class="chat-bubble-container" style={BubbleContainer}>
           <i class="icon" style={IconStyle}>
             <img
-              src={`/img/symbol/${nameConverter(result.speaker)}.png`}
+              alt="symbol"
+              src={`/img/symbol/${nameConverter(result.speaker)}.avif`}
               style={{
                 height: `${
                   nameConverter(result.speaker) === "eunho"

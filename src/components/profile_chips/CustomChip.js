@@ -13,7 +13,7 @@ function CustomChip({
 }) {
   const profileImage = `${process.env.PUBLIC_URL}/img/profile/${nameConverter(
     names[selectedLanguage][index]
-  )}.png`;
+  )}.avif`;
 
   const handleChipClick = () => {
     handleSelectedOptions(names.en[index].toLowerCase());
@@ -100,7 +100,7 @@ const ResponsiveAvatar = styled(Avatar)(({ size }) => ({
 }));
 
 const ResponsiveTypography = styled(Typography)(({ selected, isMobile }) => ({
-  fontSize: !isMobile ? "1em" : "12px",
+  fontSize: isMobile ? "12px" : "1em",
   fontWeight: "bold",
   marginTop: "5px",
   color: "snow",
