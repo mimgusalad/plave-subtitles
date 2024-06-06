@@ -132,7 +132,7 @@ function YouTubePlayer() {
   }, [fontSize]);
 
   useEffect(() => {
-    if (isMobile && !isTablet) setRotate();
+    if (isMobile && !isTablet) setRotateDirection();
   }, []);
 
   // Fetch initial subtitles and set up event listeners
