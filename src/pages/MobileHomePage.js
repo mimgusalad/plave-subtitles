@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import CardContainer from "../components/CardContainer";
 import LanguageSettingController from "../components/controllers/LanguageSettingController";
 import ChipsContainer from "../components/profile_chips/ChipsContainer";
+import { resetHtml } from "../utils/changeRotation";
 import IntroPage from "./IntroPage";
-
 function MobileHomePage() {
   const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
@@ -81,20 +81,6 @@ function MobileHomePage() {
 
 export default MobileHomePage;
 
-const resetHtml = () => {
-  const htmlElement = document.documentElement;
-  htmlElement.style.transform = "";
-  htmlElement.style.transformOrigin = "";
-  htmlElement.style.width = "";
-  htmlElement.style.height = "";
-  htmlElement.style.overflowX = "";
-  htmlElement.style.position = "";
-  htmlElement.style.top = "";
-  htmlElement.style.left = "";
-  document.body.style.width = "100vw";
-  document.body.style.height = "calc(var(--vh, 1vh) * 100)";
-};
-
 const setMobileHtml = () => {
   // Create a new style element
   const style = document.createElement("style");
@@ -103,7 +89,7 @@ const setMobileHtml = () => {
   const css = `
 html,
 body {
-    height: 100vh;
+    height: 100dvh;
     height: var(--vh);
 }
 `;
