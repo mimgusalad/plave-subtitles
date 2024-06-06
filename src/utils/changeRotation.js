@@ -38,7 +38,7 @@ const resetHtml = () => {
   htmlElement.style.top = "";
   htmlElement.style.left = "";
   document.body.style.width = "100vw";
-  document.body.style.height = "calc(var(--vh, 1vh) * 100)";
+  document.body.style.height = "calc(var(--vh, 1vh) * 110)";
 };
 
 export { leftHandRotation, resetHtml, rightHandRotation };

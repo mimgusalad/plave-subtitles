@@ -115,6 +115,7 @@ body {
     width: max-content;
     color: white;
     z-index: 3;
+    text-align: left;
 }
 
 .chat-bubble-container,
