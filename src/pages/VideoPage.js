@@ -142,6 +142,7 @@ function YouTubePlayer() {
 
     // Fetch initial subtitles
     fetchSubtitles(selectedLanguage).then(setSubtitleHashTable);
+    setRotateDirection();
 
     window.addEventListener("resize", handleResize);
     handleResize(); // Call once to set initial value
