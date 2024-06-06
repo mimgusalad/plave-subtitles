@@ -169,6 +169,19 @@ const enterText = {
   ko: "라쓰고🛸",
   ja: "ラツゴー🛸",
 };
+
+const tooltipText1 = {
+  en: "If there's an error, please click this button to report it.",
+  ko: "오류가 있으면 이 버튼을 눌러 제보해주세요.",
+  ja: "エラーがあれば、このボタンをクリックして報告してください。",
+};
+
+const tooltipText2 = {
+  en: "To change the subtitle settings, please click this button.",
+  ko: "자막 설정을 변경하려면 이 버튼을 눌러주세요.",
+  ja: "字幕設定を変更するには、このボタンをクリックしてください。",
+};
+
 export {
   additionalText,
   confirmText,
@@ -190,4 +203,6 @@ export {
   text,
   theaterModeText,
   title,
+  tooltipText1,
+  tooltipText2,
 };

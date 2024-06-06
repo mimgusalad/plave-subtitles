@@ -212,7 +212,7 @@ body {
     position: relative;
 }
 
-.drawer .drawer-button {
+.drawer{
     position: fixed;
     top: 0;
     right: 0;

@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import YouTube from "react-youtube";
 import DisplaySubtitles from "../components/DisplaySubtitles";
 import SubtitleSettingDrawer from "../components/Drawer";
+import Form from "../components/Form";
+import GuideTooltip from "../components/GuideTooltip";
 import Home from "../components/HomeButton";
 import Modal from "../components/Modal";
 import { getSubtitles } from "../utils/getSubtitles";
@@ -45,6 +47,10 @@ function YouTubePlayer() {
     sessionStorage.getItem("modal") === "false" ? false : true
   );
 
+  const [isGuideOpen, setIsGuideOpen] = useState(
+    localStorage.getItem("guide") === "false" ? false : true
+  );
+
   // Resize video player based on window size
   const handleResize = () => {
     setVideoWidth((window.innerHeight * 16) / 9);
@@ -55,9 +61,14 @@ function YouTubePlayer() {
     }
   };
 
-  const handleConfirm = (selected) => {
+  const handleGuideClose = () => {
+    setIsGuideOpen(false);
+    localStorage.setItem("guide", false);
+  };
+
+  const handleModalConfirm = (selected) => {
     setIsModalOpen(false);
-    sessionStorage.setItem("modal", "false");
+    localStorage.setItem("modal", false);
     sessionStorage.setItem("type", selected);
   };
 
@@ -167,7 +178,7 @@ function YouTubePlayer() {
       className={`${isMobile && !isTablet ? "mobile" : "desktop"}-video-page`}
     >
       {isModalOpen && (
-        <Modal handleConfirm={handleConfirm} lang={selectedLanguage} />
+        <Modal handleConfirm={handleModalConfirm} lang={selectedLanguage} />
       )}
 
       <div
@@ -193,6 +204,11 @@ function YouTubePlayer() {
         <div className="subtitle-container">
           <DisplaySubtitles subtitles={subtitles} type={type} />
         </div>
+        <Form
+          lang={selectedLanguage}
+          videoId={videoId}
+          playhead={currentTime}
+        />
         <SubtitleSettingDrawer
           lang={selectedLanguage}
           handleTypeChange={handleTypeChange}
@@ -202,6 +218,12 @@ function YouTubePlayer() {
           handleFontSizeChange={handleFontSizeChange}
           fontSize={fontSize}
         />
+        {isGuideOpen && (
+          <GuideTooltip
+            lang={selectedLanguage}
+            handleGuideClose={handleGuideClose}
+          />
+        )}
       </div>
     </div>
   );

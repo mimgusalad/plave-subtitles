@@ -52,7 +52,7 @@ function Modal({ handleConfirm, lang }) {
         style={{
           backgroundColor: type === "b" ? "rgb(0,0,0,0.7)" : "",
           color: "white",
-          padding: "0.1em",
+          padding: "5px 0.5em",
           minWidth: "max-content",
           fontSize: "1.3em",
           cursor: "pointer",

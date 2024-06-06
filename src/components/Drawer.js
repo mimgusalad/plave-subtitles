@@ -10,7 +10,6 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   currentFontText,
   fontText,
-  informationText,
   language,
   subtitleDesignText,
   subtitlePositionText,
@@ -118,11 +117,12 @@ function SubtitleSettingDrawer({
     <div className="drawer">
       {!isDrawerOpen && (
         <Button
-          className="drawer-button"
-          sx={{ fontSize: "1.3em", fontWeight: "bold", color: "snow" }}
+          id="drawer-button"
+          sx={{ fontSize: "1.3em" }}
           onClick={toggleDrawer(true)}
         >
-          {`🛸 ${informationText[lang]} 🛸`}
+          🛸
+          {/* {`🛸 ${informationText[lang]} 🛸`} */}
           {/* {`👻 ${informationText[lang]} 👻`} */}
           {/* {`🌷 ${informationText[lang]} 🌷`} */}
         </Button>

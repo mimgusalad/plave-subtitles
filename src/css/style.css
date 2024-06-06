@@ -3,11 +3,11 @@
 }
 
 /* 이거 지우면 모바일 난리남 */
-html,
+/* html,
 body {
   height: 100vh;
-  height: var(--vh); /* For mobile browsers 이거때문에 데스크랍 태블릿 뷰에서 위에 자꾸 빈공간 생김*/
-}
+  height: var(--vh); 
+} */
 
 @font-face {
   font-family: 'Pretendard-Regular';
@@ -113,3 +113,124 @@ ul.language-selector li {
   border-radius: 20px;
   padding: 0.1em 1em;
 }
+
+#form-button {
+  position: fixed;
+  top: 0;
+  right: 30px;
+  padding: 6px 8px;
+  margin-right: 20px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  width: max-content;
+  flex-direction: column;
+  position: absolute;
+  padding: 20px;
+  z-index: 2;
+}
+
+#toast {
+  visibility: hidden;
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  width: max-content;
+  padding: 5px 1em;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+  background-color: snow;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.2s
+}
+
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.2s, fadeout 0.2s 2s;
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+
+  to {
+    top: 10px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 10px;
+    opacity: 1;
+  }
+
+  to {
+    top: 10px;
+    opacity: 0;
+  }
+}
+
+.guide-tooltip{
+  position: fixed;
+  top: 40px;
+  right: 0;
+  z-index: 100;
+  display: flex;;
+}
+
+#tooltip1{
+  position: relative;
+  right: 40px;
+}
+
+#tooltip2{
+  position: relative;
+  right: 0;
+}
+
+.guide-tooltip img{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.guide-tooltip span{
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 20px;
+  z-index: 1;
+  display: inline-block;
+}
+
+.guide-tooltip .tooltip-button{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: tomato;
+  color: white;
+  padding: 2px 10px;
+  margin: 10px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  height: auto;
+  width: fit-content;
+  font-size: 14px;
+  font-weight: bold;
+}
+ 

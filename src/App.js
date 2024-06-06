@@ -23,7 +23,7 @@ function App() {
   localStorage.setItem("lang", "ko");
   sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 26);
   sessionStorage.setItem("offset", isMobile && isTablet ? -10 : -100);
-  sessionStorage.setItem("modal", "true");
+  localStorage.setItem("modal", "true");
   sessionStorage.setItem("type", "b");
 
   useEffect(() => {
