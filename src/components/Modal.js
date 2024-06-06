@@ -78,10 +78,6 @@ function Modal({ handleConfirm, lang }) {
     );
   };
 
-  // useEffect(() => {
-  //   handleRotate();
-  // }, [rotate]);
-
   return (
     <div
       className={`modal-screen${isMobile && !isTablet ? "-mobile" : ""} ${

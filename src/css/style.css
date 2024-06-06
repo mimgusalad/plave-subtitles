@@ -87,11 +87,23 @@ ul.language-selector li {
 }
 
 #form-button {
-  position: fixed;
-  top: 0;
-  right: 30px;
+  position: absolute;
+  top: 40px;
+  right: 0;
   padding: 6px 8px;
-  margin-right: 20px;
+  margin-right: 10px;
+}
+
+#drawer-button{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px 8px;
+  margin-right: 10px;
+  z-index: 2;
+  font-size: 1.3em;
+  background-color: transparent;
+  border: none;
 }
 
 .form-container {
@@ -163,7 +175,8 @@ ul.language-selector li {
 
 #tooltip1{
   position: relative;
-  right: 40px;
+  top: 40px;
+  right: 0;
 }
 
 #tooltip2{
@@ -206,15 +219,3 @@ ul.language-selector li {
   font-weight: bold;
 }
 
-#drawer-button{
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 6px 8px;
-  margin-left: 20px;
-  margin-right: 10px;
-  z-index: 2;
-  font-size: 1.3em;
-  background-color: transparent;
-  border: none;
-}

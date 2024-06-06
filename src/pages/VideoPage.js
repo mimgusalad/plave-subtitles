@@ -1,3 +1,4 @@
+import ScreenRotationIcon from "@mui/icons-material/ScreenRotation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { isMobile, isTablet } from "react-device-detect";
@@ -96,11 +97,23 @@ function YouTubePlayer() {
   };
 
   // 모바일 가로화면 방향
-  const handleRotate = () => {
+  const setRotateDirection = () => {
     if (rotate === "1") {
       leftHandRotation();
     } else {
       rightHandRotation();
+    }
+  };
+
+  const handleRotate = () => {
+    if (rotate === "0") {
+      setRotate("1");
+      leftHandRotation();
+      sessionStorage.setItem("rotate", "1");
+    } else {
+      setRotate("0");
+      rightHandRotation();
+      sessionStorage.setItem("rotate", "0");
     }
   };
 
@@ -119,7 +132,7 @@ function YouTubePlayer() {
   }, [fontSize]);
 
   useEffect(() => {
-    handleRotate();
+    if (isMobile && !isTablet) setRotate();
   }, []);
 
   // Fetch initial subtitles and set up event listeners
@@ -233,6 +246,13 @@ function YouTubePlayer() {
           handleFontSizeChange={handleFontSizeChange}
           fontSize={fontSize}
         />
+        {isMobile && !isTablet && (
+          <span id="rotate-button-video" onClick={handleRotate}>
+            <ScreenRotationIcon
+              style={{ color: "snow", fontSize: "1.5em", cursor: "pointer" }}
+            />
+          </span>
+        )}
         {isGuideOpen && (
           <GuideTooltip
             lang={selectedLanguage}

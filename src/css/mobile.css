@@ -51,24 +51,10 @@
 
 .mobile-video-page {
     position: relative;
-    background-color: tomato;
 }
 
 .mobile-video-container {
-    /* position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    z-index: 0;
-    height: auto;
-    background-color: black; */
     position: relative;
-    justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -163,4 +149,11 @@
     border-radius: 1.1em;
     font-size: 1.5em;
     margin: 0.3em 0.3em;
+}
+
+#rotate-button-video{
+    position: absolute;
+    padding: 10px;
+    bottom: 20px;
+    right: 10px;
 }
