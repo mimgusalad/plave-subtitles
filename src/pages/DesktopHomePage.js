@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
@@ -7,8 +6,8 @@ import LanguageSettingController from "../components/controllers/LanguageSetting
 import ChipsContainer from "../components/profile_chips/ChipsContainer";
 import IntroPage from "./IntroPage";
 
-function DesktopHomePage() {
-  const [videoData, setVideoData] = useState([]);
+function DesktopHomePage({ videoData }) {
+  // const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [isOpen, setIsOpen] = useState(
     sessionStorage.getItem("isOpen") === "false" ? false : true
@@ -22,20 +21,24 @@ function DesktopHomePage() {
   }, [selectedLanguage]);
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get("https://mimgusalad.github.io/plave/img/data.json")
-        .then((res) => {
-          setFilteredVideos(res.data.info);
-          setVideoData(res.data.info);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
+    setFilteredVideos(videoData);
+  }, [videoData]);
 
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     axios
+  //       .get("https://mimgusalad.github.io/plave/img/data.json")
+  //       .then((res) => {
+  //         setFilteredVideos(res.data.info);
+  //         setVideoData(res.data.info);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const handleClickEnter = () => {
     setIsOpen(false);

@@ -24,7 +24,8 @@ function Card(props) {
       <img
         alt="thumbnail"
         width="250"
-        src={`https://img.youtube.com/vi/${props.videoId}/mqdefault.jpg`}
+        // src={`https://img.youtube.com/vi/${props.videoId}/mqdefault.jpg`}
+        src={`https://mimgusalad.github.io/plave/thumbnail/${props.videoId}.avif`}
       ></img>
     </div>
   );

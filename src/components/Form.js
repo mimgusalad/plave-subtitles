@@ -3,22 +3,49 @@ import { Box, TextField, styled } from "@mui/material";
 import { useState } from "react";
 import secondsToHms from "../utils/secondsToHms";
 
-function Form({ videoId, playhead, lang }) {
+function Form({ videoId, timecode, lang }) {
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [formData, setFormData] = useState({
-    videoId: videoId,
-    message: "",
+    Timestamp: "",
+    VideoId: "",
+    Timecode: "",
+    Message: "",
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, message: e.target.value });
+    setFormData({
+      Timestamp: new Date().toLocaleString(),
+      VideoId: videoId,
+      Timecode: secondsToHms(timecode),
+      Message: e.target.value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    const form = e.target;
+
+    console.log(formData);
+    console.log(JSON.stringify(formData));
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzvwiuDkdY_co4Wbmec0Mh-JSHxx2HFsDcj5VloDhaYN1i0y_rgygpkLawGw3iSKELAng/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        mode: "no-cors",
+      }
+    );
+
+    const form = document.getElementById("form");
     form.reset();
+
+    setFormData({
+      Timestamp: new Date().toLocaleString(),
+      VideoId: videoId,
+      Timecode: secondsToHms(timecode),
+      Message: "",
+    });
 
     const toast = document.getElementById("toast");
     toast.classList.add("show");
@@ -44,10 +71,18 @@ function Form({ videoId, playhead, lang }) {
       <div className="form-container">
         {!isSubmitted && (
           <StyledBox>
-            <form style={FormStyle} onSubmit={handleSubmit}>
+            <form id="form" style={FormStyle} onSubmit={handleSubmit}>
+              <input type="hidden" name="VideoId" value={formData.VideoId} />
+              <input type="hidden" name="Timecode" value={formData.Timecode} />
+              <input
+                type="hidden"
+                name="Timestamp"
+                value={formData.Timestamp}
+              />
+              <input type="hidden" name="Message" value={formData.Message} />
               <span style={TitleStyle}>🔔 {titleText[lang]} 🔔</span>{" "}
               <span style={{ fontSize: "14px" }}>
-                {currentText[lang]} : {secondsToHms(playhead)}
+                {currentText[lang]} : {secondsToHms(timecode)}
               </span>
               <button
                 type="reset"
@@ -66,12 +101,13 @@ function Form({ videoId, playhead, lang }) {
               </button>
               <TextField
                 multiline
-                placeholder={informationText[lang]}
                 fullWidth
                 required
                 rows={4}
                 style={{ margin: "1em" }}
+                placeholder={informationText[lang]}
                 onChange={handleChange}
+                // value={formData.Message}
               />
               <button type="submit" style={ButtonStyle}>
                 {submitText[lang]}

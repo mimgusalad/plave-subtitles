@@ -1,3 +1,4 @@
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Link } from "react-router-dom";
 
 function Home() {
@@ -19,7 +20,8 @@ function Home() {
           cursor: "pointer",
         }}
       >
-        {"HOME"}
+        {/* {"HOME"} */}
+        <ArrowBackIosNewIcon />
       </Link>
     </div>
   );

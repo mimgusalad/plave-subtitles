@@ -207,7 +207,7 @@ function YouTubePlayer() {
         <Form
           lang={selectedLanguage}
           videoId={videoId}
-          playhead={currentTime}
+          timecode={currentTime}
         />
         <SubtitleSettingDrawer
           lang={selectedLanguage}

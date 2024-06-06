@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Suspense, lazy, useEffect } from "react";
+import axios from "axios";
+import { Suspense, lazy, useEffect, useState } from "react";
 import {
   BrowserView,
   MobileView,
@@ -9,6 +10,7 @@ import {
 } from "react-device-detect";
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import "./css/font.css";
 lazy(() => import("./css/desktop.css"));
 lazy(() => import("./css/style.css"));
 lazy(() => import("./css/tablet.css"));
@@ -17,9 +19,9 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const DesktopHomePage = lazy(() => import("./pages/DesktopHomePage"));
 const MobileHomePage = lazy(() => import("./pages/MobileHomePage"));
 const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
-// lazy(() => import("./utils/preloadImages"));
 
 function App() {
+  const [videoData, setVideoData] = useState([]);
   localStorage.setItem("lang", "ko");
   sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 26);
   sessionStorage.setItem("offset", isMobile && isTablet ? -10 : -100);
@@ -27,21 +29,33 @@ function App() {
   sessionStorage.setItem("type", "b");
 
   useEffect(() => {
-    const setScreenSize = () => {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    const fetchData = () => {
+      axios
+        .get("https://mimgusalad.github.io/plave/img/data.json")
+        .then((res) => {
+          setVideoData(res.data.info);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
+
     setScreenSize();
+    fetchData();
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <preloadImages videoData={videoData} />
         <GlobalStyle />
         <BrowserView>
           <Suspense>
             <Routes>
-              <Route path="/" element={<DesktopHomePage />} />
+              <Route
+                path="/"
+                element={<DesktopHomePage videoData={videoData} />}
+              />
               <Route path="/watch" element={<YouTubePlayer />} />
               <Route path="/about" element={<AboutPage />} />
             </Routes>
@@ -89,3 +103,8 @@ const theme = createTheme({
     fontFamily: "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif",
   },
 });
+
+const setScreenSize = () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
