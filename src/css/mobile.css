@@ -34,8 +34,8 @@
     flex-direction: column;
     justify-content: first baseline;
     align-items: center;
-    margin: 10px;
-    height: calc(var(--vh, 1vh) * 60);
+    margin: 0 10px;
+    height: calc(var(--vh, 1vh) * 74);
     overflow-y: scroll;
 }
 
@@ -50,21 +50,24 @@
 }
 
 .mobile-video-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    height: auto;
+    position: relative;
+    background-color: tomato;
 }
 
 .mobile-video-container {
-    position: absolute;
+    /* position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 0;
+    height: auto;
+    background-color: black; */
+    position: relative;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -84,14 +87,13 @@
 /* 모달 */
 .modal-screen-mobile {
     width: calc(var(--vh, 1vh) * 100);
-    height: 100VW;
+    height: 100vw;
     backdrop-filter: blur(15px);
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left:0;
+    top:0;
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/public/img/bg.avif');
@@ -113,11 +115,18 @@
 .modal-container-mobile h1 {
     margin: 0.6em;
     width: max-content;
+    font-size: 1.5em;
+}
+
+#rotate-button{
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
 
 .type-container-mobile {
     background-color: rgb(97, 97, 97, 0.5);
-    padding: 1.5em 0 1.5em 1em;
+    padding: 1em;
     list-style-type: none;
     justify-content: center;
     border-radius: 2em;

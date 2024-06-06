@@ -58,7 +58,6 @@ function MobileHomePage() {
             <Link to="/about" className="mobile-tab">
               About
             </Link>
-            <h1 className="mobile-title">Plave Subtitles</h1>
           </div>
           <div className="language-setting">
             <LanguageSettingController

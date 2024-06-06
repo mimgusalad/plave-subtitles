@@ -1,7 +1,9 @@
+import ScreenRotationIcon from "@mui/icons-material/ScreenRotation";
 import { Chip } from "@mui/material";
 import { useState } from "react";
 import { isMobile, isTablet } from "react-device-detect";
 import { additionalText, confirmText, sampleSubtitle, title } from "../locale";
+import { leftHandRotation, rightHandRotation } from "../utils/changeRotation";
 import {
   BlackFont,
   BlackFont2,
@@ -19,7 +21,20 @@ function Modal({ handleConfirm, lang }) {
     sessionStorage.getItem("type") || "b"
   );
   const [isMounted, setIsMounted] = useState(true);
+  const [rotate, setRotate] = useState(sessionStorage.getItem("rotate") || "0"); // righthand: 0, lefthand: 1
   const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
+  const handleRotate = () => {
+    if (rotate === "0") {
+      setRotate("1");
+      leftHandRotation();
+      sessionStorage.setItem("rotate", "1");
+    } else {
+      setRotate("0");
+      rightHandRotation();
+      sessionStorage.setItem("rotate", "0");
+    }
+  };
 
   const handleClick = (item) => {
     setSelected(item);
@@ -54,7 +69,7 @@ function Modal({ handleConfirm, lang }) {
           color: "white",
           padding: "5px 0.5em",
           minWidth: "max-content",
-          fontSize: "1.3em",
+          fontSize: isMobile ? "16px" : "1.3em",
           cursor: "pointer",
         }}
       >
@@ -63,6 +78,10 @@ function Modal({ handleConfirm, lang }) {
     );
   };
 
+  // useEffect(() => {
+  //   handleRotate();
+  // }, [rotate]);
+
   return (
     <div
       className={`modal-screen${isMobile && !isTablet ? "-mobile" : ""} ${
@@ -70,6 +89,13 @@ function Modal({ handleConfirm, lang }) {
       }`}
     >
       <Home />
+      {isMobile && !isTablet && (
+        <span id="rotate-button" onClick={handleRotate}>
+          <ScreenRotationIcon
+            style={{ color: "snow", fontSize: "1.5em", cursor: "pointer" }}
+          />
+        </span>
+      )}
       <div
         className={`modal-container${isMobile && !isTablet ? "-mobile" : ""}`}
       >
@@ -103,7 +129,7 @@ function Modal({ handleConfirm, lang }) {
             fontWeight: "500",
             fontSize: isMobile && !isTablet ? "1em" : "1.5em",
             marginTop: "1em",
-            padding: "0.8em 0.5em",
+            padding: "5px 0.5em",
           }}
         />
       </div>

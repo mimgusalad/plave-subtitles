@@ -9,10 +9,10 @@ import Form from "../components/Form";
 import GuideTooltip from "../components/GuideTooltip";
 import Home from "../components/HomeButton";
 import Modal from "../components/Modal";
+import { leftHandRotation, rightHandRotation } from "../utils/changeRotation";
 import { getSubtitles } from "../utils/getSubtitles";
 
 function YouTubePlayer() {
-  usePageRotation("/watch"); // 모바일 화면 회전
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const videoId = searchParams.get("videoId");
@@ -51,6 +51,8 @@ function YouTubePlayer() {
     localStorage.getItem("guide") === "false" ? false : true
   );
 
+  const [rotate, setRotate] = useState(sessionStorage.getItem("rotate") || "0"); // righthand: 0, lefthand: 1
+
   // Resize video player based on window size
   const handleResize = () => {
     setVideoWidth((window.innerHeight * 16) / 9);
@@ -68,7 +70,7 @@ function YouTubePlayer() {
 
   const handleModalConfirm = (selected) => {
     setIsModalOpen(false);
-    localStorage.setItem("modal", false);
+    sessionStorage.setItem("modal", false);
     sessionStorage.setItem("type", selected);
   };
 
@@ -93,6 +95,15 @@ function YouTubePlayer() {
     sessionStorage.setItem("fontSize", fontSize);
   };
 
+  // 모바일 가로화면 방향
+  const handleRotate = () => {
+    if (rotate === "1") {
+      leftHandRotation();
+    } else {
+      rightHandRotation();
+    }
+  };
+
   // Set subtitle position based on current offset
   useEffect(() => {
     const element = document.getElementsByClassName("subtitle-container")[0];
@@ -106,6 +117,10 @@ function YouTubePlayer() {
       elements[i].style.fontSize = `${fontSize}px`;
     }
   }, [fontSize]);
+
+  useEffect(() => {
+    handleRotate();
+  }, []);
 
   // Fetch initial subtitles and set up event listeners
   useEffect(() => {
@@ -230,28 +245,6 @@ function YouTubePlayer() {
 }
 
 export default YouTubePlayer;
-
-function usePageRotation(pathToRotate) {
-  const location = useLocation();
-
-  useEffect(() => {
-    const htmlElement = document.documentElement;
-
-    if (location.pathname === pathToRotate && isMobile && !isTablet) {
-      // Apply rotation
-      htmlElement.style.transform = "rotate(-90deg)";
-      htmlElement.style.transformOrigin = "left top";
-      htmlElement.style.width = "100dvh";
-      htmlElement.style.height = "100dvw";
-      htmlElement.style.overflowX = "hidden";
-      htmlElement.style.position = "absolute";
-      htmlElement.style.top = "100%";
-      htmlElement.style.left = "0";
-      document.body.style.width = "calc(var(--vh, 1vh) * 100)";
-      document.body.style.height = "100vw";
-    }
-  }, [location, pathToRotate]);
-}
 
 const baseOpts = {
   playerVars: {

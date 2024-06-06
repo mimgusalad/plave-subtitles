@@ -2,7 +2,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Chip, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -116,16 +115,9 @@ function SubtitleSettingDrawer({
   return (
     <div className="drawer">
       {!isDrawerOpen && (
-        <Button
-          id="drawer-button"
-          sx={{ fontSize: "1.3em" }}
-          onClick={toggleDrawer(true)}
-        >
+        <button id="drawer-button" onClick={toggleDrawer(true)}>
           🛸
-          {/* {`🛸 ${informationText[lang]} 🛸`} */}
-          {/* {`👻 ${informationText[lang]} 👻`} */}
-          {/* {`🌷 ${informationText[lang]} 🌷`} */}
-        </Button>
+        </button>
       )}
       <Drawer
         sx={{
