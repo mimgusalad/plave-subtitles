@@ -23,8 +23,8 @@ const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
 function App() {
   const [videoData, setVideoData] = useState([]);
   localStorage.setItem("lang", "ko");
-  sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 26);
-  sessionStorage.setItem("offset", isMobile && isTablet ? -10 : -100);
+  sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 22);
+  sessionStorage.setItem("offset", isMobile ? -10 : -100);
   localStorage.setItem("modal", "true");
   sessionStorage.setItem("type", "b");
 
