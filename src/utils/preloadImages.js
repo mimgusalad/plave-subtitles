@@ -1,5 +1,8 @@
 function PreloadImages({ videoData }) {
   const images = ["yejun", "noah", "bamby", "eunho", "hamin"];
+  const imgUrl = (videoId) => {
+    return "https://img.youtube.com/vi/" + videoId + "/maxresdefault.jpg";
+  };
 
   return (
     <div id="preload">

@@ -79,7 +79,10 @@ function App() {
         <TabletView>
           <Suspense>
             <Routes>
-              <Route path="/" element={<DesktopHomePage />} />
+              <Route
+                path="/"
+                element={<DesktopHomePage videoData={videoData} />}
+              />
               <Route path="/watch" element={<YouTubePlayer />} />
               <Route path="/about" element={<AboutPage />} />
             </Routes>

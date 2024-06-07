@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
 import CardContainer from "../components/CardContainer";
 import LanguageSettingController from "../components/controllers/LanguageSettingController";
@@ -23,22 +22,6 @@ function DesktopHomePage({ videoData }) {
   useEffect(() => {
     setFilteredVideos(videoData);
   }, [videoData]);
-
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     axios
-  //       .get("https://mimgusalad.github.io/plave/img/data.json")
-  //       .then((res) => {
-  //         setFilteredVideos(res.data.info);
-  //         setVideoData(res.data.info);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const handleClickEnter = () => {
     setIsOpen(false);
@@ -74,7 +57,7 @@ function DesktopHomePage({ videoData }) {
         originalData={videoData}
       />
       <div className="card-container-container">
-        <div className={`${isTablet ? "tablet" : "desktop"}-card-container`}>
+        <div className={`desktop-card-container`}>
           <CardContainer videoData={filteredVideos} />
         </div>
       </div>

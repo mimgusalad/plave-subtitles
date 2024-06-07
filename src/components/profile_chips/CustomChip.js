@@ -103,7 +103,7 @@ const ResponsiveTypography = styled(Typography)(({ selected, isMobile }) => ({
   fontSize: isMobile ? "12px" : "1em",
   fontWeight: "bold",
   marginTop: "5px",
-  color: "snow",
+  color: "rgba(0, 0, 0, 0.87)",
   opacity: selected ? 1 : 0.5,
 }));
 
