@@ -1,4 +1,4 @@
-function preloadImages({ videoData }) {
+function PreloadImages({ videoData }) {
   const images = ["yejun", "noah", "bamby", "eunho", "hamin"];
 
   return (
@@ -54,4 +54,4 @@ function preloadImages({ videoData }) {
   );
 }
 
-export default preloadImages;
+export default PreloadImages;

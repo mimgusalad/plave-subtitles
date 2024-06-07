@@ -16,8 +16,8 @@ function BlackFont2({ message: line }) {
   return (
     <>
       {result.speaker ? (
-        <div class="chat-bubble-container" style={BubbleContainer}>
-          <i class="icon" style={IconStyle}>
+        <div className="chat-bubble-container" style={BubbleContainer}>
+          <i className="icon" style={IconStyle}>
             <img
               alt="symbol"
               src={`/img/symbol/${nameConverter(result.speaker)}.avif`}
@@ -31,19 +31,22 @@ function BlackFont2({ message: line }) {
             />
           </i>
           <div
-            class="chat-bubble"
+            className="chat-bubble"
             style={ChatBubble(colors, nameConverter(result.speaker))}
           >
-            <span class="speaker-label" style={SpeakerLabel}></span>
-            <span class="speech" style={Speech}>
+            <span className="speaker-label" style={SpeakerLabel}></span>
+            <span className="speech" style={Speech}>
               {result.dialog}
             </span>
           </div>
         </div>
       ) : (
-        <div class="chat-bubble-container-default" style={BubbleContainer}>
-          <div class="chat-bubble-default" style={DefaultChatBubble(colors)}>
-            <span class="speech" style={Speech}>
+        <div className="chat-bubble-container-default" style={BubbleContainer}>
+          <div
+            className="chat-bubble-default"
+            style={DefaultChatBubble(colors)}
+          >
+            <span className="speech" style={Speech}>
               {splitAndReformat(line)}
             </span>
           </div>
@@ -64,7 +67,7 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-0.31em",
+  left: "-0.5em",
   top: "-0.59em", // -0.5em
   zIndex: "1",
 };
@@ -78,16 +81,15 @@ const ChatBubble = (colors, speaker) => ({
   wordWrap: "break-word",
   position: "relative",
   margin: "0.2em 0",
-  fontSize: "1em",
 
-  padding: "0 0.8em 0 0",
+  padding: "0 1em 0 1.2em",
 });
 
 const SpeakerLabel = {
   color: "black",
-  marginLeft: "1.4em",
   paddingLeft: "0",
 };
+
 const Speech = {
   color: "black",
   flex: "1",
@@ -102,6 +104,5 @@ const DefaultChatBubble = (colors) => ({
   maxWidth: "100vw",
   wordBreak: "break-all",
   position: "relative",
-  fontSize: "1em",
   textAlign: "center",
 });

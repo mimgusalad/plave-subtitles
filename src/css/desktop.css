@@ -121,7 +121,7 @@ body {
 .chat-bubble-container,
 .chat-bubble-container-default {
     padding: 2px 10px;
-    color: white;
+    color: snow;
 }
 
 /* 모달 */
@@ -153,6 +153,7 @@ body {
 .modal-container h1 {
     margin: 0.6em;
     width: max-content;
+    font-size: 2em;
 }
 
 .type-container {
@@ -160,7 +161,7 @@ body {
     padding: 1.5em 0 1.5em 1em;
     list-style-type: none;
     justify-content: center;
-    border-radius: 2em;
+    border-radius: 20px;
     display: flex;
     flex-wrap: wrap;
     min-width: 650px;
@@ -175,7 +176,7 @@ body {
 
 .type-container .chat-bubble-container {
     border-radius: 1.1em;
-    font-size: 1.5em;
+    font-size: 1em;
     margin: 0.3em 0.3em;
 }
 

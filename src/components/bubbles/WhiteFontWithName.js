@@ -18,8 +18,8 @@ function WhiteFontWithName({ message: line }) {
   return (
     <>
       {result.speaker ? (
-        <div class="chat-bubble-container" style={BubbleContainer}>
-          <i class="icon" style={IconStyle}>
+        <div className="chat-bubble-container" style={BubbleContainer}>
+          <i className="icon" style={IconStyle}>
             <img
               alt="symbol"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
@@ -33,27 +33,30 @@ function WhiteFontWithName({ message: line }) {
             />
           </i>
           <div
-            class="chat-bubble"
+            className="chat-bubble"
             style={ChatBubble(colors, nameConverter(result.speaker))}
           >
-            <span class="speaker-label" style={SpeakerLabel}>
+            <span className="speaker-label" style={SpeakerLabel}>
               {result.speaker}
               <span
-                class="separator"
+                className="separator"
                 style={Separator(colors[nameConverter(result.speaker)][1])}
               >
                 ㅣ
               </span>
             </span>
-            <span class="speech" style={Speech}>
+            <span className="speech" style={Speech}>
               {result.dialog}
             </span>
           </div>
         </div>
       ) : (
-        <div class="chat-bubble-container-default" style={BubbleContainer}>
-          <div class="chat-bubble-default" style={DefaultChatBubble(colors)}>
-            <span class="speech" style={Speech}>
+        <div className="chat-bubble-container-default" style={BubbleContainer}>
+          <div
+            className="chat-bubble-default"
+            style={DefaultChatBubble(colors)}
+          >
+            <span className="speech" style={Speech}>
               {splitAndReformat(line)}
             </span>
           </div>
@@ -89,7 +92,6 @@ const ChatBubble = (colors, speaker) => ({
   wordWrap: "break-word",
   position: "relative",
   margin: "0.2em 0",
-  fontSize: "1em",
 });
 
 const SpeakerLabel = {
@@ -109,7 +111,6 @@ const DefaultChatBubble = (colors) => ({
   wordBreak: "break-all",
   border: `0.11em solid rgb(0,0,0,0.8)`,
   position: "relative",
-  fontSize: "1em",
   textAlign: "center",
 });
 const Separator = (color) => ({

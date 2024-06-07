@@ -23,7 +23,7 @@ function YouTubePlayer() {
   const [subtitles, setSubtitles] = useState([]);
 
   /** 자막 조작하는 변수 */
-  const [type, setType] = useState(sessionStorage.getItem("type")); // 자막바 타입 변수
+  const [type, setType] = useState(localStorage.getItem("type") || "b"); // 자막바 타입 변수
   const [fontSize, setFontSize] = useState(
     Number(sessionStorage.getItem("fontSize"))
   ); // 폰트 사이즈 변수
@@ -72,12 +72,13 @@ function YouTubePlayer() {
   const handleModalConfirm = (selected) => {
     setIsModalOpen(false);
     sessionStorage.setItem("modal", false);
-    sessionStorage.setItem("type", selected);
+    localStorage.setItem("type", selected);
+    setType(selected);
   };
 
   const handleTypeChange = (selected) => {
     setType(selected);
-    sessionStorage.setItem("type", selected);
+    localStorage.setItem("type", selected);
   };
 
   const handleOffsetChange = (offset) => {

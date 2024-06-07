@@ -157,10 +157,10 @@ const SpeakerLabel = (showNameTag, name, borderColors) => {
     <>
       {showNameTag ? (
         <>
-          <span class="speaker-label" style={speakerLabelStyle1}>
+          <span className="speaker-label" style={speakerLabelStyle1}>
             {name}
             <span
-              class="separator"
+              className="separator"
               style={Separator(borderColors[nameConverter(name)][1])}
             >
               ㅣ
@@ -168,7 +168,7 @@ const SpeakerLabel = (showNameTag, name, borderColors) => {
           </span>
         </>
       ) : (
-        <span class="speaker-label" style={speakerLabelStyle2}></span>
+        <span className="speaker-label" style={speakerLabelStyle2}></span>
       )}
     </>
   );

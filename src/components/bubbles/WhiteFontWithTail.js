@@ -19,8 +19,8 @@ function WhiteFontWithTail({ message: line }) {
   return (
     <>
       {result.speaker ? (
-        <div class="chat-bubble-container" style={BubbleContainer}>
-          <i class="icon" style={IconStyle}>
+        <div className="chat-bubble-container" style={BubbleContainer}>
+          <i className="icon" style={IconStyle}>
             <img
               alt="symbol"
               draggable="false"
@@ -35,13 +35,13 @@ function WhiteFontWithTail({ message: line }) {
             />
           </i>
           <div
-            class="chat-bubble"
+            className="chat-bubble"
             style={ChatBubble(colors, nameConverter(result.speaker))}
           >
-            <span class="speech" style={Speech}>
+            <span className="speech" style={Speech}>
               {result.dialog}
             </span>
-            <span class="tail" style={TailStyle}>
+            <span className="tail" style={TailStyle}>
               <img
                 alt="tail"
                 src={`/img/tail/${nameConverter(result.speaker)}_tail.avif`}
@@ -53,9 +53,12 @@ function WhiteFontWithTail({ message: line }) {
           </div>
         </div>
       ) : (
-        <div class="chat-bubble-container-default" style={BubbleContainer}>
-          <div class="chat-bubble-default" style={DefaultChatBubble(colors)}>
-            <span class="speech" style={Speech}>
+        <div className="chat-bubble-container-default" style={BubbleContainer}>
+          <div
+            className="chat-bubble-default"
+            style={DefaultChatBubble(colors)}
+          >
+            <span className="speech" style={Speech}>
               {splitAndReformat(line)}
             </span>
           </div>
@@ -90,17 +93,16 @@ const IconStyle = {
 const ChatBubble = (colors, speaker) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: "1.1em",
-  padding: "0.05em 0.8em",
+  padding: "3px 1em 3px 1.2em",
   display: "flex",
   alignItems: "center",
   maxWidth: "100vw",
   wordWrap: "break-word",
   outline: `0.09em solid snow`,
-  outlineOffset: "-0.2em",
-  boxShadow: `0 0 0 0.04em ${colors[speaker][0]}`,
+  outlineOffset: "-0.25em",
+  // boxShadow: `0 0 0 0.04em ${colors[speaker][0]}`,
   position: "relative",
-  margin: "0.2em 0",
-  fontSize: "1em",
+  margin: "0.1em 0",
   zIndex: "2",
 });
 
@@ -114,7 +116,6 @@ const DefaultChatBubble = (colors) => ({
   wordBreak: "break-all",
   border: `0.11em solid rgb(0,0,0,0.8)`,
   position: "relative",
-  fontSize: "1em",
   textAlign: "center",
 });
 

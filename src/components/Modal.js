@@ -17,9 +17,7 @@ import {
 import Home from "./HomeButton";
 
 function Modal({ handleConfirm, lang }) {
-  const [selected, setSelected] = useState(
-    sessionStorage.getItem("type") || "b"
-  );
+  const [selected, setSelected] = useState(localStorage.getItem("type"));
   const [isMounted, setIsMounted] = useState(true);
   const [rotate, setRotate] = useState(sessionStorage.getItem("rotate") || "0"); // righthand: 0, lefthand: 1
   const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -67,9 +65,9 @@ function Modal({ handleConfirm, lang }) {
         style={{
           backgroundColor: type === "b" ? "rgb(0,0,0,0.7)" : "",
           color: "white",
-          padding: "5px 0.5em",
+          padding: "0 0.5em",
           minWidth: "max-content",
-          fontSize: isMobile ? "16px" : "1.3em",
+          fontSize: "1em",
           cursor: "pointer",
         }}
       >
@@ -123,9 +121,9 @@ function Modal({ handleConfirm, lang }) {
             backgroundColor: "snow",
             color: "black",
             fontWeight: "500",
-            fontSize: isMobile && !isTablet ? "1em" : "1.5em",
+            fontSize: isMobile && !isTablet ? "1em" : "1em",
             marginTop: "1em",
-            padding: "5px 0.5em",
+            padding: "0 0.5em",
           }}
         />
       </div>

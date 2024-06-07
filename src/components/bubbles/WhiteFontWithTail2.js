@@ -95,19 +95,6 @@ const IconStyle = {
   top: "-0.45em", // -0.5em
 };
 
-const DefaultChatBubble = (colors, isMobile) => ({
-  backgroundColor: "rgb(0,0,0,0.8)",
-  borderRadius: "1.1em",
-  padding: "0 1em",
-  alignItems: "center",
-  maxWidth: "100vw",
-  wordBreak: "break-all",
-  border: `0.1em solid rgb(0,0,0,0.8)`,
-  position: "relative",
-  fontSize: "1em",
-  textAlign: "center",
-});
-
 const ChatBubble = (colors, speaker, isMobile) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: "1.1em",
@@ -118,8 +105,19 @@ const ChatBubble = (colors, speaker, isMobile) => ({
   wordWrap: "break-word",
   position: "relative",
   margin: "0.2em 0",
-  fontSize: "1em",
   zIndex: "2",
+});
+
+const DefaultChatBubble = (colors, isMobile) => ({
+  backgroundColor: "rgb(0,0,0,0.8)",
+  borderRadius: "1.1em",
+  padding: "0 1em",
+  alignItems: "center",
+  maxWidth: "100vw",
+  wordBreak: "break-all",
+  border: `0.1em solid rgb(0,0,0,0.8)`,
+  position: "relative",
+  textAlign: "center",
 });
 
 const Speech = {

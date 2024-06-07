@@ -15,6 +15,7 @@ lazy(() => import("./css/desktop.css"));
 lazy(() => import("./css/style.css"));
 lazy(() => import("./css/tablet.css"));
 lazy(() => import("./css/mobile.css"));
+
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const DesktopHomePage = lazy(() => import("./pages/DesktopHomePage"));
 const MobileHomePage = lazy(() => import("./pages/MobileHomePage"));
@@ -23,10 +24,10 @@ const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
 function App() {
   const [videoData, setVideoData] = useState([]);
   localStorage.setItem("lang", "ko");
-  sessionStorage.setItem("fontSize", isMobile && !isTablet ? 16 : 22);
-  sessionStorage.setItem("offset", isMobile ? -10 : -100);
+  sessionStorage.setItem("fontSize", isMobile && !isTablet ? 14 : 16);
+  sessionStorage.setItem("offset", isMobile ? (!isTablet ? -5 : -30) : -100);
   localStorage.setItem("modal", "true");
-  sessionStorage.setItem("type", "b");
+  localStorage.setItem("type", "b");
 
   useEffect(() => {
     const fetchData = () => {
@@ -92,9 +93,25 @@ export default App;
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+  @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF, U+3200-32FF, U+FF00-FFEF;
+  }
+  
+  @font-face {
+    font-family: 'Yu Gothic UI';
+    src: local('Yu Gothic UI');
+    font-weight: 400;
+    font-style: normal;
+    unicode-range: U+3040-309F, U+30A0-30FF, U+31F0-31FF, U+4E00-9FFF, U+FF00-FFEF;
+  }
+  
 
-  body {
-    font-family: 'Roboto', 'Yu Gothic UI', 'Pretendard-Regular', sans-serif;
+  * {
+    font-family: 'Roboto', 'Yu Gothic UI', 'Pretendard-Regular', sans-serif !important;
   }
 `;
 
