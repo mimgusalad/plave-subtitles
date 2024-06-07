@@ -1,9 +1,10 @@
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Box, TextField, styled } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { isMobile, isTablet } from "react-device-detect";
 import secondsToHms from "../utils/secondsToHms";
 
-function Form({ videoId, timecode, lang }) {
+function Form({ rotation, videoId, timecode, lang }) {
   const [isSubmitted, setIsSubmitted] = useState(true);
   const [formData, setFormData] = useState({
     Timestamp: "",
@@ -63,12 +64,26 @@ function Form({ videoId, timecode, lang }) {
     setIsSubmitted(!isSubmitted);
   };
 
+  useEffect(() => {
+    const formContainer = document.getElementsByClassName(
+      "mobile-form-container"
+    )[0];
+    if (isMobile && !isTablet) {
+      if (rotation === "1") {
+        formContainer.style.transform = "rotate(90deg)";
+      } else {
+        formContainer.style.transform = "rotate(-90deg)";
+      }
+    }
+  }, [rotation]);
   return (
     <>
       <button id="form-button" style={FormButtonStyle} onClick={toggleForm}>
         🔔
       </button>
-      <div className="form-container">
+      <div
+        className={`${isMobile && !isTablet ? "mobile-" : ""}form-container`}
+      >
         {!isSubmitted && (
           <StyledBox>
             <form id="form" style={FormStyle} onSubmit={handleSubmit}>
@@ -80,7 +95,9 @@ function Form({ videoId, timecode, lang }) {
                 value={formData.Timestamp}
               />
               <input type="hidden" name="Message" value={formData.Message} />
-              <span style={TitleStyle}>🔔 {titleText[lang]} 🔔</span>{" "}
+              <span id="form-title" style={TitleStyle}>
+                🔔 {titleText[lang]} 🔔
+              </span>{" "}
               <span style={{ fontSize: "14px" }}>
                 {currentText[lang]} : {secondsToHms(timecode)}
               </span>

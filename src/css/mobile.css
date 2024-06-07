@@ -153,3 +153,21 @@
     bottom: 20px;
     right: 10px;
 }
+
+
+/* 오류보고 폼 화면 세로모드에 맞추기 */
+.mobile-form-container{
+    position:fixed;
+    width: 95vw;
+    height: 100vw;
+}
+
+.mobile-form-container #form-title{
+    font-size: 18px !important;
+}
+
+.mobile-form-container #toast{
+    top: 0;
+    width: 100%;
+    text-align: center;
+}

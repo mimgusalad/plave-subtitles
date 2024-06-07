@@ -236,6 +236,7 @@ function YouTubePlayer() {
           <DisplaySubtitles subtitles={subtitles} type={type} />
         </div>
         <Form
+          rotation={rotate}
           lang={selectedLanguage}
           videoId={videoId}
           timecode={currentTime}
