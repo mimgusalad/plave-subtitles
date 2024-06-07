@@ -15,7 +15,6 @@ function Home() {
           top: 0,
           left: 0,
           marginTop: "10px",
-          marginLeft: "20px",
           padding: "0 10px",
           cursor: "pointer",
         }}

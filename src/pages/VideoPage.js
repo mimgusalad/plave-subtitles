@@ -204,7 +204,9 @@ function YouTubePlayer() {
 
   return (
     <div
-      className={`${isMobile && !isTablet ? "mobile" : "desktop"}-video-page`}
+      className={`${
+        isMobile ? (isTablet ? "tablet" : "mobile") : "desktop"
+      }-video-page`}
     >
       {isModalOpen && (
         <Modal handleConfirm={handleModalConfirm} lang={selectedLanguage} />
