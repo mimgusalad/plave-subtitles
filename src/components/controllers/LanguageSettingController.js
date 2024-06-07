@@ -21,7 +21,7 @@ function LanguageSettingController({ handleLanguageChange }) {
           label={languages[lang]}
           onClick={() => handleLanguageClick(lang)}
           lang={lang}
-          selectedLanguage={selectedLanguage}
+          selectedlanguage={selectedLanguage}
           isMobile={isMobile && !isTablet}
         />
       ))}
@@ -31,10 +31,10 @@ function LanguageSettingController({ handleLanguageChange }) {
 
 export default LanguageSettingController;
 
-const StyledChip = styled(Chip)(({ selectedLanguage, lang, isMobile }) => ({
+const StyledChip = styled(Chip)(({ selectedlanguage, lang, isMobile }) => ({
   fontWeight: "bold",
   height: "2em",
   fontSize: isMobile ? "12px" : "14px",
-  backgroundColor: selectedLanguage === lang ? "white" : "transparent",
-  opacity: selectedLanguage === lang ? 0.7 : 0.7,
+  backgroundColor: selectedlanguage === lang ? "white" : "transparent",
+  opacity: selectedlanguage === lang ? 0.7 : 0.7,
 }));

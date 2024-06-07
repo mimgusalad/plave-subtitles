@@ -11,6 +11,7 @@ import {
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/font.css";
+import PreloadImages from "./utils/preloadImages";
 lazy(() => import("./css/desktop.css"));
 lazy(() => import("./css/style.css"));
 lazy(() => import("./css/tablet.css"));
@@ -48,7 +49,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <preloadImages videoData={videoData} />
+        <PreloadImages videoData={videoData} />
         <GlobalStyle />
         <BrowserView>
           <Suspense>

@@ -87,6 +87,8 @@ ul.language-selector li {
   padding: 0.1em 1em;
 }
 
+
+/* 오류보고창 */
 #form-button {
   position: absolute;
   top:0;
@@ -95,6 +97,7 @@ ul.language-selector li {
   margin-right: 10px;
 }
 
+/* 이건 drawer 버튼 */
 #drawer-button{
   position: absolute;
   top: 40px;
@@ -113,7 +116,7 @@ ul.language-selector li {
   align-items: center;
   height: max-content;
   width: max-content;
-  flex-direction: column;
+  /* flex-direction: column; */
   position: absolute;
   padding: 20px;
   z-index: 2;
