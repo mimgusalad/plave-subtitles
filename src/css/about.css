@@ -13,7 +13,7 @@
 #about-page {
     display: flex;
     justify-content: center;
-    height: calc(100vh - 150px);
+    height: calc(100svh - 150px);
     width: 100vw;
     margin: auto;
 }
