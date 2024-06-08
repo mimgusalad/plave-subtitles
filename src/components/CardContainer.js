@@ -23,13 +23,10 @@ function Card(props) {
   return (
     <div className={getClassName()} onClick={handleNavigation}>
       <img
-        srcset={`https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg 300w,
-            https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg 250w`}
-        sizes="(max-width: 768px) 300px,
-            250px"
-        src={`https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg`}
+        key={props.videoId}
+        src={`https://mimgusalad.github.io/plave/thumbnail/${props.videoId}.avif`}
         alt="thumbnail"
-      ></img>
+      />
     </div>
   );
 }
