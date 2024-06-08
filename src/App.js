@@ -40,16 +40,17 @@ function App() {
         const response = await axios.get(
           "https://opensheet.elk.sh/" + sheetID + "/" + tabName
         );
-        setData(response.data);
+
+        const sortedData = response.data.sort(
+          (a, b) => new Date(b.Date) - new Date(a.Date)
+        );
+        setData(sortedData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
-    console.log(data);
-    data.sort((a, b) => new Date(b.Date) - new Date(a.Date));
-    console.log(data);
 
     setScreenSize();
     fetchData();

@@ -32,17 +32,31 @@ function ChipsContainer({
     setSelectedOptions([]);
   };
 
+  // const filteredVideos = () => {
+  //   if (!videoData) return [];
+  //   return videoData.filter((video) => {
+  //     console.log("video.Memebrs:" + video.Members);
+  //     const actors = video.Members.split(",").map((actor) => actor.trim());
+  //     console.log(actors);
+  //     if (selectedOptions.length === 0) {
+  //       return [];
+  //     } else {
+  //       return selectedOptions.every((selectedOption) =>
+  //         actors.includes(selectedOption)
+  //       );
+  //     }
+  //   });
+  // };
+
   const filteredVideos = () => {
     if (!videoData) return [];
     return videoData.filter((video) => {
-      const actors = video.Members.toLowerCase()
-        .split(", ")
-        .map((actor) => actor.trim());
       if (selectedOptions.length === 0) {
         return [];
       } else {
-        return selectedOptions.every((selectedOption) =>
-          actors.includes(selectedOption.toLowerCase())
+        const actors = video.Members.split(",").map((actor) => actor.trim());
+        return selectedOptions.every((actor) =>
+          actors.includes(actor.toLowerCase())
         );
       }
     });

@@ -83,7 +83,8 @@ body::-webkit-scrollbar-thumb
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    width: 1100px;
+    min-width: 1100px;
+    max-width: 1100px;
     height: 100%;
 }
 
