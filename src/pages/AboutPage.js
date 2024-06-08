@@ -2,20 +2,76 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import content from "../about-content";
+import "../css/about.css";
+
+function AboutPage() {
+  const [selectedLang, setSelectedLang] = useState("ko");
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  const [isSubtitleOpen, setIsSubtitleOpen] = useState(false);
+  const [isTranslationOpen, setIsTranslationOpen] = useState(false);
+  const [isDevelopmentOpen, setIsDevelopmentOpen] = useState(false);
+
+  return (
+    <>
+      <Link to="/" style={tabStyle}>
+        {"HOME"}
+      </Link>
+      <ul id="content-lang">
+        <li onClick={() => setSelectedLang("ko")}>한국어</li>ㅣ
+        <li onClick={() => setSelectedLang("en")}>English</li>ㅣ
+        <li onClick={() => setSelectedLang("ja")}>日本語</li>
+      </ul>
+      <div id="about-page">
+        <div className="about-content">
+          <p>{content[selectedLang]["intro"]}</p>
+          <p>{content[selectedLang]["p1"]}</p>
+          <span onClick={() => setIsViewOpen(!isViewOpen)}>
+            {`📃 `}
+            {content[selectedLang]["view"]["title"]}
+          </span>
+          {isViewOpen && <p>{content[selectedLang]["view"]["content"]}</p>}
+          <p></p>
+          <span onClick={() => setIsSubtitleOpen(!isSubtitleOpen)}>
+            {`📃 `}
+            {content[selectedLang]["subtitle"]["title"]}
+          </span>
+          {isSubtitleOpen && (
+            <p>{content[selectedLang]["subtitle"]["content"]}</p>
+          )}
+          <p></p>
+          <span onClick={() => setIsTranslationOpen(!isTranslationOpen)}>
+            {`📃 `}
+            {content[selectedLang]["translation"]["title"]}
+          </span>
+          {isTranslationOpen && (
+            <p>{content[selectedLang]["translation"]["content"]}</p>
+          )}
+          <p></p>
+          <span onClick={() => setIsDevelopmentOpen(!isDevelopmentOpen)}>
+            {`📃 `}
+            {content[selectedLang]["development"]["title"]}
+          </span>
+          {isDevelopmentOpen && (
+            <p>{content[selectedLang]["development"]["content"]}</p>
+          )}
+          <p>{content[selectedLang]["p2"]}</p>
+          <p>{content[selectedLang]["last"]}</p>
+          <p>{content[selectedLang]["p3"]}</p>
+          <p>{content[selectedLang]["p4"]}</p>
+          <p>{content[selectedLang]["p5"]}</p>
+          <Email />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default AboutPage;
 
 function Email() {
   const [open, setOpen] = useState(false);
   const email = "underbar.sari@gmail.com";
-
-  const backgroundStyle = {
-    width: "fit-content",
-    backgroundColor: "white",
-    color: "black",
-    opacity: "0.7",
-    borderRadius: "5px",
-    padding: "5px",
-    paddingLeft: "15px",
-  };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email).then(() => {
@@ -27,7 +83,7 @@ function Email() {
   };
 
   return (
-    <div style={backgroundStyle}>
+    <div style={EmailStyle}>
       {email}
       <Tooltip
         arrow
@@ -46,35 +102,22 @@ function Email() {
   );
 }
 
-function AboutPage() {
-  const tabStyle = {
-    display: "inline-block",
-    fontSize: "1.3em",
-    fontWeight: "bold",
-    textDecoration: "none",
-    color: "white",
-    marginLeft: "20px",
-    marginTop: "10px",
-    padding: "0 10px",
-  };
-
-  const contentStyle = {
-    height: "50dvh",
-    padding: "20px 30px",
-    margin: "20px 30px",
-    color: "black",
-  };
-  return (
-    <>
-      <Link to="/" style={tabStyle}>
-        {"HOME"}
-      </Link>
-      <div className="about-content" style={contentStyle}>
-        <p>안녕하세요왜 안나오냐고</p>
-        <Email />
-      </div>
-    </>
-  );
-}
-
-export default AboutPage;
+const EmailStyle = {
+  width: "fit-content",
+  backgroundColor: "white",
+  color: "black",
+  opacity: "0.7",
+  borderRadius: "5px",
+  padding: "5px",
+  paddingLeft: "15px",
+};
+const tabStyle = {
+  display: "inline-block",
+  fontSize: "1.3em",
+  fontWeight: "bold",
+  textDecoration: "none",
+  color: "white",
+  marginLeft: "20px",
+  marginTop: "10px",
+  padding: "0 10px",
+};

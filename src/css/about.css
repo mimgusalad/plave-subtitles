@@ -1,0 +1,32 @@
+#content-lang{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+#content-lang li{
+ cursor: pointer;
+}
+
+#about-page{
+    display: flex;
+    justify-content: center;
+}
+
+.about-content{
+    position: relative;
+    width: 70%;
+    max-width: 700px;
+    word-break: keep-all;
+    padding: 10px;
+}
+
+.about-content span{
+    cursor: pointer;
+}
+
+.about-content p{
+    margin-bottom: 2em;
+}
