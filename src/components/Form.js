@@ -26,9 +26,6 @@ function Form({ rotation, videoId, timecode, lang }) {
     e.preventDefault();
     setIsSubmitted(true);
 
-    console.log(formData);
-    console.log(JSON.stringify(formData));
-
     fetch(
       "https://script.google.com/macros/s/AKfycbzvwiuDkdY_co4Wbmec0Mh-JSHxx2HFsDcj5VloDhaYN1i0y_rgygpkLawGw3iSKELAng/exec",
       {

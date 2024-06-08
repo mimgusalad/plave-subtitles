@@ -11,24 +11,21 @@ body {
     position: fixed;
 }
 
-body::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
-body::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: #F5F5F5;
+body::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
 }
 
-body::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
 }
 
 /* 타이틀 */
@@ -109,146 +106,3 @@ body::-webkit-scrollbar-thumb
     border-radius: 10px;
     pointer-events: none;
 }
-
-/* 동영상 페이지 */
-
-/* 동영상 컨테이너 */
-.desktop-video-container {
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    height: 100dvh;
-    z-index: 0;
-    background-color: black;
-}
-
-.youtube-player {
-    position: relative;
-    height: auto;
-    display: block;
-}
-
-/* 자막 컨테이너 */
-.subtitle-container {
-    position: fixed;
-    left: 50%;
-    bottom: 5%;
-    transform: translate(-50%, -5%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-self: baseline;
-    height: 10%;
-    max-height: max-content;
-    width: max-content;
-    color: white;
-    z-index: 3;
-    text-align: left;
-}
-
-.chat-bubble-container,
-.chat-bubble-container-default {
-    padding: 2px 10px;
-    color: snow;
-}
-
-/* 모달 */
-.modal-screen {
-    width: 100vw;
-    height: 100vh;
-    backdrop-filter: blur(15px);
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/public/img/bg.avif');
-    z-index: 10;
-}
-
-.modal-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    width: min-content;
-    height: fit-content;
-    border-radius: 2em;
-    color: snow;
-}
-
-.modal-container h1 {
-    margin: 0.6em;
-    width: max-content;
-    font-size: 2em;
-}
-
-.type-container {
-    background-color: rgb(97, 97, 97, 0.5);
-    padding: 1.5em 0 1.5em 1em;
-    list-style-type: none;
-    justify-content: center;
-    border-radius: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 650px;
-    max-width: 750px;
-}
-
-/* 이미지 드래그 금지 */
-.type-container img {
-    user-drag: none;
-    -webkit-user-drag: none;
-}
-
-.type-container .chat-bubble-container {
-    border-radius: 1.1em;
-    font-size: 1em;
-    margin: 0.3em 0.3em;
-}
-
-.type-button {
-    border-radius: 1.1em;
-    cursor: pointer;
-    margin: 0.1em;
-}
-
-.type-button.selected {
-    filter: drop-shadow(0 0 0.75em rgba(255, 255, 255, 0.6));
-    transition: box-shadow 0.2s, background-color 0.2s;
-    border-radius: 2em;
-    cursor: pointer;
-}
-
-.default-type-button.selected {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 1em 0.4em rgba(255, 255, 255, 0.2);
-    transition: box-shadow 0.2s, background-color 0.2s;
-    cursor: pointer;
-}
-
-.type-container li:nth-child(4),
-.type-container li:nth-child(7) {
-    margin-left: 1.9em;
-}
-
-.type-container li:nth-child(3) {
-    margin-left: -0.8em;
-}
-
-.type-container li:last-child {
-    margin: 0.6em 0.6em 0 0.6em;
-    position: relative;
-}
-
-.drawer{
-    position: fixed;
-    top: 0;
-    right: 0;
-}
-
-

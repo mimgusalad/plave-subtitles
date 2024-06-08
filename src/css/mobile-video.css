@@ -1,0 +1,123 @@
+.mobile-video-page {
+    position: relative;
+}
+
+.mobile-video-container {
+    position: relative;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    z-index: 0;
+    height: auto;
+    background-color: black;
+}
+
+.mobile-video-container .youtube-player {
+    position: relative;
+    height: auto;
+    display: block;
+}
+
+/* 모달 */
+.modal-screen-mobile {
+    /* width: calc(var(--vh, 1vh) * 100); */
+    width: 100dvh;
+    height: 100dvw;
+    backdrop-filter: blur(15px);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/public/img/bg.avif');
+    z-index: 10;
+}
+
+.modal-container-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: min-content;
+    height: fit-content;
+    border-radius: 2em;
+    color: snow;
+}
+
+.modal-container-mobile h1 {
+    margin: 0.6em;
+    width: max-content;
+    font-size: 1.5em;
+}
+
+.type-container-mobile {
+    background-color: rgb(97, 97, 97, 0.5);
+    padding: 1em;
+    list-style-type: none;
+    justify-content: center;
+    border-radius: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 650px;
+    max-width: 750px;
+}
+
+.type-container-mobile .chat-bubble-container {
+    font-size: 1em !important;
+}
+
+.type-container-mobile li:nth-child(4),
+.type-container-mobile li:nth-child(7) {
+    margin-left: 1.9em;
+}
+
+.type-container-mobile li:nth-child(3) {
+    margin-left: -0.8em;
+}
+
+.type-container-mobile li:last-child {
+    margin: 0.6em 0.6em 0 0.6em;
+    position: relative;
+}
+
+.type-container-mobile img {
+    user-drag: none;
+    -webkit-user-drag: none;
+}
+
+.type-container-mobile .chat-bubble-container {
+    border-radius: 1.1em;
+    font-size: 1.5em;
+    margin: 0.3em 0.3em;
+}
+
+#rotate-button-video,
+#rotate-button {
+    position: absolute;
+    padding: 10px;
+    bottom: 20px;
+    right: 10px;
+}
+
+
+/* 오류보고 폼 화면 세로모드에 맞추기 */
+.mobile-form-container {
+    position: fixed;
+    width: 95vw;
+    height: 100vw;
+    z-index: 50;
+}
+
+.mobile-form-container #form-title {
+    font-size: 16px !important;
+}
+
+.mobile-form-container #toast {
+    top: 0;
+    width: 100%;
+    text-align: center;
+}
