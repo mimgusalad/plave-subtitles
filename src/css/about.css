@@ -25,11 +25,7 @@
     max-width: 650px;
     word-break: keep-all;
     padding: 10px;
-    overflow: hidden;
-}
-
-.about-content:hover {
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .about-content span {

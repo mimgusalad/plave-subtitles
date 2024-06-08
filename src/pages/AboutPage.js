@@ -1,6 +1,6 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import content from "../about-content";
 import "../css/about.css";
@@ -11,6 +11,19 @@ function AboutPage() {
   const [isSubtitleOpen, setIsSubtitleOpen] = useState(false);
   const [isTranslationOpen, setIsTranslationOpen] = useState(false);
   const [isDevelopmentOpen, setIsDevelopmentOpen] = useState(false);
+
+  const handleJapanese = () => {
+    const element = document.getElementsByClassName("about-content")[0];
+    if (selectedLang === "ja") {
+      element.style.wordBreak = "break-all";
+    } else {
+      element.style.wordBreak = "keep-all";
+    }
+  };
+
+  useEffect(() => {
+    handleJapanese();
+  }, [selectedLang]);
 
   return (
     <>
