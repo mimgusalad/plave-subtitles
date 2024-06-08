@@ -25,13 +25,7 @@ function WhiteFontWithTail({ message: line }) {
               alt="symbol"
               draggable="false"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
-              style={{
-                height: `${
-                  nameConverter(result.speaker) === "eunho"
-                    ? "2.68em"
-                    : "2.65em"
-                }`,
-              }}
+              style={{ height: "3em" }}
             />
           </i>
           <div
@@ -86,8 +80,8 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-1.7em",
-  top: "-0.45em", // -0.5em
+  left: "-2em",
+  top: "-0.7em", // -0.5em
 };
 
 const ChatBubble = (colors, speaker) => ({

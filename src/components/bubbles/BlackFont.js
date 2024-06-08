@@ -24,11 +24,7 @@ function BlackFont({ message: line }) {
             <img
               alt="symbol"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
-              style={{
-                height: `${
-                  nameConverter(result.speaker) === "eunho" ? "3em" : "3em"
-                }`,
-              }}
+              style={{ height: "3em" }}
             />
           </i>
           <div
@@ -69,7 +65,7 @@ const IconStyle = {
   position: "absolute",
   width: "fit-content",
   left: "-0.8em",
-  top: "-0.8em",
+  top: "-0.7em",
   zIndex: "1",
 };
 
@@ -92,7 +88,6 @@ const ChatBubble = (colors, speaker) => ({
 
 const SpeakerLabel = {
   color: "black",
-  // marginLeft: "1.4em",
   paddingLeft: "0",
 };
 

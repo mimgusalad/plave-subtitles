@@ -23,11 +23,7 @@ function WhiteFont({ message: line }) {
             <img
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
-                height: `${
-                  nameConverter(result.speaker) === "eunho"
-                    ? "2.68em"
-                    : "2.65em"
-                }`,
+                height: "3em",
               }}
             />
           </i>
@@ -68,20 +64,21 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-0.31em",
-  top: "-0.59em",
+  left: "-0.8em",
+  top: "-0.8em",
   zIndex: "1",
 };
 
 const ChatBubble = (colors, speaker) => ({
   backgroundColor: colors[speaker][0],
   borderRadius: speaker === "bamby" ? "1.1em 1.1em 1.1em 0" : "1.1em",
-  padding: "2px 1em 2px 1.5em",
+  padding: "1px 1em 1px 1.5em",
   display: "flex",
   alignItems: "center",
   maxWidth: "100vw",
   wordWrap: "break-word",
   position: "relative",
+
   margin: "0.2em 0",
 });
 

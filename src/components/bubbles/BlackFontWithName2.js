@@ -24,11 +24,7 @@ function BlackFontWithName2({ message: line }) {
               alt="symbol"
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
-                height: `${
-                  nameConverter(result.speaker) === "eunho"
-                    ? "2.68em"
-                    : "2.65em"
-                }`,
+                height: "3em",
               }}
             />
           </i>
@@ -77,8 +73,8 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-0.31em",
-  top: "-0.59em", // -0.5em
+  left: "-0.9em",
+  top: "-0.8em", // -0.5em
   zIndex: "1",
 };
 
@@ -92,12 +88,12 @@ const ChatBubble = (colors, speaker) => ({
   position: "relative",
   margin: "0.2em 0",
 
-  padding: "0 0.8em 0 0",
+  padding: "1px 1em 1px 0",
 });
 
 const SpeakerLabel = {
   color: "black",
-  marginLeft: "1.3em",
+  marginLeft: "1em",
   paddingLeft: "0",
 };
 

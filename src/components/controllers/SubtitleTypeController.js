@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   BlackFont,
   BlackFont2,
+  BlackFontWithName,
   BlackFontWithName2,
   WhiteFont,
   WhiteFontWithName,
@@ -54,6 +55,9 @@ function SubtitleTypeController({ handleTypeChange, lang }) {
       </li>
       <li onClick={() => handleTypeChange("8")}>
         <BlackFontWithName2 message={text[lang][3]} />
+      </li>
+      <li onClick={() => handleTypeChange("3")}>
+        <BlackFontWithName message={text[lang][2]} />
       </li>
     </ul>
   );
