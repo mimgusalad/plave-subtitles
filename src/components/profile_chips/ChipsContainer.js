@@ -47,6 +47,9 @@ function ChipsContainer({
   //     }
   //   });
   // };
+  useEffect(() => {
+    console.log(videoData);
+  }, [videoData]);
 
   const filteredVideos = () => {
     if (!videoData) return [];
@@ -54,10 +57,7 @@ function ChipsContainer({
       if (selectedOptions.length === 0) {
         return [];
       } else {
-        const actors = video.Members.split(",").map((actor) => actor.trim());
-        return selectedOptions.every((actor) =>
-          actors.includes(actor.toLowerCase())
-        );
+        return selectedOptions.every((actor) => video.Members.includes(actor));
       }
     });
   };

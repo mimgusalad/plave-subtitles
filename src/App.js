@@ -44,6 +44,12 @@ function App() {
         const sortedData = response.data.sort(
           (a, b) => new Date(b.Date) - new Date(a.Date)
         );
+        sortedData.forEach((item) => {
+          item["Members"] = item["Members"]
+            .split(",")
+            .map((member) => member.trim());
+        });
+
         setData(sortedData);
         setLoading(false);
       } catch (error) {
@@ -55,6 +61,10 @@ function App() {
     setScreenSize();
     fetchData();
   }, []);
+
+  useEffect(() => {
+    data.forEach((item) => console.log("data item: ", item));
+  }, [data]);
 
   const style = {
     display: "flex",
