@@ -12,17 +12,11 @@ import {
 import { Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import "./css/font.css";
-import "./css/intro.css";
 import PreloadImages from "./utils/preloadImages";
 lazy(() => import("./css/desktop.css"));
 lazy(() => import("./css/style.css"));
 lazy(() => import("./css/tablet.css"));
 lazy(() => import("./css/mobile.css"));
-lazy(() => import("./css/desktop-video.css"));
-lazy(() => import("./css/mobile-video.css"));
-lazy(() => import("./css/tablet-video.css"));
-lazy(() => import("./css/drawer.css"));
-lazy(() => import("./css/modal.css"));
 
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const DesktopHomePage = lazy(() => import("./pages/DesktopHomePage"));

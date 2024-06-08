@@ -30,3 +30,21 @@
     border-radius: 10px;
     pointer-events: none;
 }
+
+.tablet-video-page #drawer-button{
+    position: absolute;
+    top: 0;
+    right: 40px;
+    padding: 6px 8px;
+    margin-right: 9px;
+    z-index: 2;
+    font-size: 1.3em;
+    background-color: transparent;
+    border: none;
+}
+
+.tablet-video-page #tooltip2{
+    position: relative;
+    top: 0;
+    right: 40px;
+}
