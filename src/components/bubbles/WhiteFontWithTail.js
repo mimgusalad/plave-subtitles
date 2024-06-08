@@ -100,7 +100,7 @@ const ChatBubble = (colors, speaker) => ({
   wordWrap: "break-word",
   outline: `0.09em solid snow`,
   outlineOffset: "-0.25em",
-  // boxShadow: `0 0 0 0.04em ${colors[speaker][0]}`,
+
   position: "relative",
   margin: "0.1em 0",
   zIndex: "2",

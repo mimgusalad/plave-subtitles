@@ -85,7 +85,6 @@ const BubbleContainer = {
   position: "relative",
   display: "flex",
   alignItems: "flex-end",
-  justifyContent: "flex-end",
 };
 
 const IconStyle = {

@@ -26,9 +26,7 @@ function BlackFont({ message: line }) {
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
                 height: `${
-                  nameConverter(result.speaker) === "eunho"
-                    ? "2.68em"
-                    : "2.65em"
+                  nameConverter(result.speaker) === "eunho" ? "3em" : "3em"
                 }`,
               }}
             />
@@ -70,8 +68,8 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-0.55em",
-  top: "-0.5em",
+  left: "-0.8em",
+  top: "-0.8em",
   zIndex: "1",
 };
 

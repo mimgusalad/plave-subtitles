@@ -163,6 +163,7 @@
     position:fixed;
     width: 95vw;
     height: 100vw;
+    z-index: 50;
 }
 
 .mobile-form-container #form-title{
