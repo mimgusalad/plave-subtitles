@@ -38,15 +38,18 @@
     /* height: calc(var(--vh, 1vh) * 74); */
     height: 74dvh;
     overflow-y: scroll;
+    position: relative;
+    
 }
 
 .mobile-card {
     margin: 0.2em auto;
+    display: flex;
+    justify-content: center;
 }
 
 .mobile-card img {
-    width: 100%;
-    display: block;
+    width: 80%;
     border-radius: 10px;
 }
 
