@@ -23,7 +23,9 @@ const MobileHomePage = lazy(() => import("./pages/MobileHomePage"));
 const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
 
 function App() {
-  const [videoData, setVideoData] = useState([]);
+  const [data, setData] = useState([]);
+  const sheetID = "17WmAumFfDfk7PGuipE5KJiYmVEBs8MarhrRfSaTUc0Y";
+  const tabName = "Database";
   localStorage.setItem("lang", "ko");
   sessionStorage.setItem("fontSize", isMobile && !isTablet ? 14 : 16);
   sessionStorage.setItem("offset", isMobile ? (!isTablet ? -5 : -30) : -100);
@@ -31,15 +33,15 @@ function App() {
   localStorage.setItem("type", "b");
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get("https://mimgusalad.github.io/plave/img/data.json")
-        .then((res) => {
-          setVideoData(res.data.info);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://opensheet.elk.sh/" + sheetID + "/" + tabName
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     setScreenSize();
@@ -49,15 +51,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <PreloadImages videoData={videoData} />
+        <PreloadImages videoData={data} />
         <GlobalStyle />
         <BrowserView>
           <Suspense>
             <Routes>
-              <Route
-                path="/"
-                element={<DesktopHomePage videoData={videoData} />}
-              />
+              <Route path="/" element={<DesktopHomePage videoData={data} />} />
               <Route path="/watch" element={<YouTubePlayer />} />
               <Route path="/about" element={<AboutPage />} />
             </Routes>
@@ -66,7 +65,7 @@ function App() {
         <MobileView>
           <Suspense>
             <Routes>
-              <Route path="/" element={<MobileHomePage />} />
+              <Route path="/" element={<MobileHomePage videoData={data} />} />
               {isMobile && !isTablet && (
                 <Route path="/watch" element={<YouTubePlayer />} />
               )}
@@ -79,10 +78,7 @@ function App() {
         <TabletView>
           <Suspense>
             <Routes>
-              <Route
-                path="/"
-                element={<DesktopHomePage videoData={videoData} />}
-              />
+              <Route path="/" element={<DesktopHomePage videoData={data} />} />
               <Route path="/watch" element={<YouTubePlayer />} />
               <Route path="/about" element={<AboutPage />} />
             </Routes>
@@ -96,10 +92,9 @@ function App() {
 export default App;
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
   @font-face {
     font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    src: url('/font/Pretendard-Regular.subset.woff2') format('woff2'), url('/font/Pretendard-Regular.subset.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF, U+3200-32FF, U+FF00-FFEF;

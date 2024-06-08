@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { isTablet } from "react-device-detect";
 import { Link } from "react-router-dom";
@@ -7,8 +6,7 @@ import LanguageSettingController from "../components/controllers/LanguageSetting
 import ChipsContainer from "../components/profile_chips/ChipsContainer";
 import { resetHtml } from "../utils/changeRotation";
 import IntroPage from "./IntroPage";
-function MobileHomePage() {
-  const [videoData, setVideoData] = useState([]);
+function MobileHomePage({ videoData }) {
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState(
     localStorage.getItem("lang")
@@ -16,6 +14,10 @@ function MobileHomePage() {
   const [isOpen, setIsOpen] = useState(
     sessionStorage.getItem("isOpen") === "false" ? false : true
   );
+
+  useEffect(() => {
+    setFilteredVideos(videoData);
+  }, [videoData]);
 
   const handleClickEnter = () => {
     setIsOpen(false);
@@ -32,19 +34,6 @@ function MobileHomePage() {
   };
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get("https://mimgusalad.github.io/plave/img/data.json")
-        .then((res) => {
-          setFilteredVideos(res.data.info);
-          setVideoData(res.data.info);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    fetchData();
     resetHtml();
     setMobileHtml();
   }, []);

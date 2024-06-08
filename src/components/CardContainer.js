@@ -5,7 +5,7 @@ import getClassName from "../utils/getClassName";
 function CardContainer({ videoData }) {
   const cards = useMemo(() => {
     return videoData.map((video) => (
-      <Card key={video.videoId} videoId={video.videoId} />
+      <Card key={video.VideoId} videoId={video.VideoId} />
     ));
   }, [videoData]);
 
@@ -23,8 +23,12 @@ function Card(props) {
   return (
     <div className={getClassName()} onClick={handleNavigation}>
       <img
+        srcset={`https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg 300w,
+            https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg 250w`}
+        sizes="(max-width: 768px) 300px,
+            250px"
+        src={`https://img.youtube.com/vi/${props.videoId}/maxresdefault.jpg`}
         alt="thumbnail"
-        src={`https://mimgusalad.github.io/plave/thumbnail/${props.videoId}.avif`}
       ></img>
     </div>
   );

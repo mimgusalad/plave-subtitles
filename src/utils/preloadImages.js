@@ -8,13 +8,15 @@ function PreloadImages({ videoData }) {
     <div id="preload">
       {videoData.map((video) => (
         <img
-          key={video.videoId}
-          src={`https://mimgusalad.github.io/plave/thumbnail/${video.videoId}.avif`}
-          alt="preload"
-          style={{ display: "none" }}
+          srcset={`https://img.youtube.com/vi/${video.VideoId}/maxresdefault.jpg 300w,
+             https://img.youtube.com/vi/${video.VideoId}/maxresdefault.jpg 250w`}
+          sizes="(max-width: 768px) 300px,
+             250px"
+          src={`https://img.youtube.com/vi/${video.VideoId}/maxresdefault.jpg`}
+          alt="thumbnail"
           width={1}
           height={1}
-        />
+        ></img>
       ))}
       {images.map((image) => (
         <img

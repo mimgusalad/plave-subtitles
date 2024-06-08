@@ -13,8 +13,6 @@ const leftHandRotation = () => {
   // document.body.style.width = "calc(var(--vh, 1vh) * 100)";
   document.body.style.width = "100dvh";
   document.body.style.height = "100dvw";
-  document.body.style.fontFamily =
-    "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif";
 };
 
 const rightHandRotation = () => {
@@ -31,8 +29,6 @@ const rightHandRotation = () => {
   // document.body.style.width = "calc(var(--vh, 1vh) * 100)";
   document.body.style.width = "100dvh";
   document.body.style.height = "100dvw";
-  document.body.style.fontFamily =
-    "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif";
 };
 
 const resetHtml = () => {
@@ -48,8 +44,6 @@ const resetHtml = () => {
   document.body.style.width = "100dvw";
   // document.body.style.height = "calc(var(--vh, 1vh) * 100)";
   document.body.style.height = "100dvh";
-  document.body.style.fontFamily =
-    "Roboto, Yu Gothic UI, Pretendard-Regular, sans-serif";
 };
 
 export { leftHandRotation, resetHtml, rightHandRotation };

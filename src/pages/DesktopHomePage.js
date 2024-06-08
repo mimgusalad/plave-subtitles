@@ -6,7 +6,6 @@ import ChipsContainer from "../components/profile_chips/ChipsContainer";
 import IntroPage from "./IntroPage";
 
 function DesktopHomePage({ videoData }) {
-  // const [videoData, setVideoData] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [isOpen, setIsOpen] = useState(
     sessionStorage.getItem("isOpen") === "false" ? false : true
