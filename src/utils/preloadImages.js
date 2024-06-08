@@ -3,6 +3,16 @@ function PreloadImages({ videoData }) {
 
   return (
     <div id="preload">
+      {videoData.map((video) => (
+        <img
+          key={video.videoId}
+          src={`https://mimgusalad.github.io/plave/thumbnail/${video.VideoId}.avif`}
+          alt="preload"
+          style={{ display: "none" }}
+          width={1}
+          height={1}
+        />
+      ))}
       {images.map((image) => (
         <img
           key={image}

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import axios from "axios";
 import { Suspense, lazy, useEffect, useState } from "react";
@@ -24,6 +25,7 @@ const YouTubePlayer = lazy(() => import("./pages/VideoPage"));
 
 function App() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const sheetID = "17WmAumFfDfk7PGuipE5KJiYmVEBs8MarhrRfSaTUc0Y";
   const tabName = "Database";
   localStorage.setItem("lang", "ko");
@@ -39,8 +41,10 @@ function App() {
           "https://opensheet.elk.sh/" + sheetID + "/" + tabName
         );
         setData(response.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
 
@@ -48,42 +52,67 @@ function App() {
     fetchData();
   }, []);
 
+  const style = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    width: "100vw",
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <PreloadImages videoData={data} />
-        <GlobalStyle />
-        <BrowserView>
-          <Suspense>
-            <Routes>
-              <Route path="/" element={<DesktopHomePage videoData={data} />} />
-              <Route path="/watch" element={<YouTubePlayer />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Routes>
-          </Suspense>
-        </BrowserView>
-        <MobileView>
-          <Suspense>
-            <Routes>
-              <Route path="/" element={<MobileHomePage videoData={data} />} />
-              {isMobile && !isTablet && (
-                <Route path="/watch" element={<YouTubePlayer />} />
-              )}
-              {isMobile && !isTablet && (
-                <Route path="/about" element={<AboutPage />} />
-              )}
-            </Routes>
-          </Suspense>
-        </MobileView>
-        <TabletView>
-          <Suspense>
-            <Routes>
-              <Route path="/" element={<DesktopHomePage videoData={data} />} />
-              <Route path="/watch" element={<YouTubePlayer />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Routes>
-          </Suspense>
-        </TabletView>
+        {loading ? (
+          <div style={style}>
+            <CircularProgress sx={{ color: "snow" }} />
+          </div>
+        ) : (
+          <>
+            <PreloadImages videoData={data} />
+            <GlobalStyle />
+            <BrowserView>
+              <Suspense>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<DesktopHomePage videoData={data} />}
+                  />
+                  <Route path="/watch" element={<YouTubePlayer />} />
+                  <Route path="/about" element={<AboutPage />} />
+                </Routes>
+              </Suspense>
+            </BrowserView>
+            <MobileView>
+              <Suspense>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<MobileHomePage videoData={data} />}
+                  />
+                  {isMobile && !isTablet && (
+                    <Route path="/watch" element={<YouTubePlayer />} />
+                  )}
+                  {isMobile && !isTablet && (
+                    <Route path="/about" element={<AboutPage />} />
+                  )}
+                </Routes>
+              </Suspense>
+            </MobileView>
+            <TabletView>
+              <Suspense>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<DesktopHomePage videoData={data} />}
+                  />
+                  <Route path="/watch" element={<YouTubePlayer />} />
+                  <Route path="/about" element={<AboutPage />} />
+                </Routes>
+              </Suspense>
+            </TabletView>
+          </>
+        )}
       </div>
     </ThemeProvider>
   );
