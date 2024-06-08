@@ -55,6 +55,7 @@ function AboutPage() {
           {isDevelopmentOpen && (
             <p>{content[selectedLang]["development"]["content"]}</p>
           )}
+          <p></p>
           <p>{content[selectedLang]["p2"]}</p>
           <p>{content[selectedLang]["last"]}</p>
           <p>{content[selectedLang]["p3"]}</p>
