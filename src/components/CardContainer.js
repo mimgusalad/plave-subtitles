@@ -27,7 +27,18 @@ function Card(props) {
 
   return (
     <div className={getClassName()} onClick={handleNavigation}>
-      {loading && <CircularProgress sx={{ color: "snow" }} />}
+      {loading && (
+        <CircularProgress
+          sx={{
+            color: "snow",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            marginTop: "-20px",
+            marginLeft: "-20px",
+          }}
+        />
+      )}
       <img
         key={props.videoId}
         src={`https://mimgusalad.github.io/plave/thumbnail/${props.videoId}.avif`}

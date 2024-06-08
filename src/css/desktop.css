@@ -11,6 +11,26 @@ body {
     position: fixed;
 }
 
+body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
 /* 타이틀 */
 .title {
     display: flex;
@@ -46,35 +66,45 @@ body {
 }
 
 .card-container-container {
+    position: absolute;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: auto;
+    align-items: first baseline;
+    width: 100vw;
+    height: calc((100vh - 300px));
+    max-height: 640px;
     margin-top: 1em;
+    overflow-y: scroll;
 }
 
 /* 동영상 카드 컨테이너 */
 .desktop-card-container {
-    margin-top: 1em;
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
-    grid-template-rows: auto;
-    justify-content: center;
-    align-items: flex-start;
-    height: auto;
-    overflow-y: scroll;
-    width: 1000px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 1100px;
+    height: 100%;
 }
 
 /* 동영상 카드 한 줄에 3개씩 보이게 하기 */
 .desktop-card {
+    position: relative;
+    flex: 1 1 1;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     margin: 5px;
     text-align: center;
     cursor: pointer;
 }
 
 .desktop-card img {
-    width: 100%;
+    width: 250px;
+    height: 150px;
     border-radius: 10px;
     pointer-events: none;
 }

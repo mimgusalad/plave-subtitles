@@ -35,20 +35,24 @@ function ChipsContainer({
   const filteredVideos = () => {
     if (!videoData) return [];
     return videoData.filter((video) => {
+      const actors = video.Members.toLowerCase()
+        .split(", ")
+        .map((actor) => actor.trim());
       if (selectedOptions.length === 0) {
         return [];
       } else {
-        return selectedOptions.every((actor) =>
-          video.actors.includes(actor.toLowerCase())
+        return selectedOptions.every((selectedOption) =>
+          actors.includes(selectedOption.toLowerCase())
         );
       }
     });
   };
 
   useEffect(() => {
-    onFilterChange(filteredVideos);
     if (selectedOptions.length === 0) {
       onFilterChange(originalData);
+    } else {
+      onFilterChange(filteredVideos());
     }
   }, [selectedOptions]);
 

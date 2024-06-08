@@ -47,6 +47,9 @@ function App() {
         setLoading(false);
       }
     };
+    console.log(data);
+    data.sort((a, b) => new Date(b.Date) - new Date(a.Date));
+    console.log(data);
 
     setScreenSize();
     fetchData();
