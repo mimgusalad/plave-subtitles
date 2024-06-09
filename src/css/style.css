@@ -98,7 +98,7 @@ ul.language-selector li {
 }
 
 /* 이건 drawer 버튼 */
-#drawer-button {
+.drawer #drawer-button {
   position: absolute;
   top: 40px;
   right: 0;
@@ -108,6 +108,7 @@ ul.language-selector li {
   font-size: 1.3em;
   background-color: transparent;
   border: none;
+  cursor: pointer !important;
 }
 
 .form-container {
@@ -116,7 +117,6 @@ ul.language-selector li {
   align-items: center;
   height: max-content;
   width: max-content;
-  /* flex-direction: column; */
   position: absolute;
   padding: 20px;
   z-index: 2;
@@ -127,7 +127,9 @@ ul.language-selector li {
   position: fixed;
   z-index: 1;
   top: 10px;
-  width: max-content;
+  width: 100%;
+  min-width: 100px;
+  max-width: 300px;
   padding: 5px 1em;
   align-items: center;
   justify-content: center;
@@ -137,12 +139,11 @@ ul.language-selector li {
   color: black;
   font-size: 14px;
   font-weight: 400;
-  transition: all 0.2s
 }
 
 #toast.show {
   visibility: visible;
-  animation: fadein 0.2s, fadeout 0.2s 2s;
+  animation: fadein 0.2s, fadeout 0.2s 1.5s;
 }
 
 @keyframes fadein {

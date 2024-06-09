@@ -40,9 +40,9 @@ function Form({ rotation, videoId, timecode, lang }) {
     form.reset();
 
     setFormData({
-      Timestamp: new Date().toLocaleString(),
-      VideoId: videoId,
-      Timecode: timecode,
+      Timestamp: "",
+      VideoId: "",
+      Timecode: "",
       Message: "",
     });
 
@@ -51,9 +51,8 @@ function Form({ rotation, videoId, timecode, lang }) {
     setTimeout(() => {
       setIsSubmitted(true);
       toast.classList.remove("show");
-      const element = document.getElementById("form-button");
-      element.style.display = "";
-    }, 1000);
+      setIsOpen(false);
+    }, 1500);
   };
 
   const handleCancel = () => {
@@ -104,14 +103,6 @@ function Form({ rotation, videoId, timecode, lang }) {
         {!isSubmitted && (
           <StyledBox>
             <form id="form" style={FormStyle} onSubmit={handleSubmit}>
-              <input type="hidden" name="VideoId" value={formData.VideoId} />
-              <input type="hidden" name="Timecode" value={formData.Timecode} />
-              <input
-                type="hidden"
-                name="Timestamp"
-                value={formData.Timestamp}
-              />
-              <input type="hidden" name="Message" value={formData.Message} />
               <span id="form-title" style={TitleStyle}>
                 🔔 {titleText[lang]} 🔔
               </span>{" "}
@@ -141,7 +132,6 @@ function Form({ rotation, videoId, timecode, lang }) {
                 style={{ margin: "1em" }}
                 placeholder={informationText[lang]}
                 onChange={handleChange}
-                // value={formData.Message}
               />
               <button type="submit" style={ButtonStyle}>
                 {submitText[lang]}
