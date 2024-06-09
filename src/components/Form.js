@@ -18,7 +18,7 @@ function Form({ rotation, videoId, timecode, lang }) {
     setFormData({
       Timestamp: new Date().toLocaleString(),
       VideoId: videoId,
-      Timecode: secondsToHms(timecode),
+      Timecode: timecode,
       Message: e.target.value,
     });
   };
