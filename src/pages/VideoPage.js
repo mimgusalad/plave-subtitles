@@ -1,5 +1,4 @@
 import ScreenRotationIcon from "@mui/icons-material/ScreenRotation";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useRef, useState } from "react";
 import { isMobile, isTablet } from "react-device-detect";
 import { useLocation } from "react-router-dom";
