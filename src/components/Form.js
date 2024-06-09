@@ -67,25 +67,29 @@ function Form({ rotation, videoId, timecode, lang }) {
   };
 
   useEffect(() => {
-    const formContainer = document.getElementsByClassName(
-      "mobile-form-container"
-    )[0];
-    if (isOpen) {
-      formContainer.style.zIndex = "10";
-    } else {
-      formContainer.style.zIndex = "-1";
+    if (isMobile && !isTablet) {
+      const formContainer = document.getElementsByClassName(
+        "mobile-form-container"
+      )[0];
+      if (isOpen) {
+        formContainer.style.zIndex = "10";
+      } else {
+        formContainer.style.zIndex = "-1";
+      }
     }
   }, [isOpen]);
 
   useEffect(() => {
-    const formContainer = document.getElementsByClassName(
-      "mobile-form-container"
-    )[0];
     if (isMobile && !isTablet) {
-      if (rotation === "1") {
-        formContainer.style.transform = "rotate(90deg)";
-      } else {
-        formContainer.style.transform = "rotate(-90deg)";
+      const formContainer = document.getElementsByClassName(
+        "mobile-form-container"
+      )[0];
+      if (isMobile && !isTablet) {
+        if (rotation === "1") {
+          formContainer.style.transform = "rotate(90deg)";
+        } else {
+          formContainer.style.transform = "rotate(-90deg)";
+        }
       }
     }
   }, [rotation]);

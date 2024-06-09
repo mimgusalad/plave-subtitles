@@ -181,7 +181,6 @@ body {
 
 /* 이미지 드래그 금지 */
 .type-container img {
-    user-drag: none;
     -webkit-user-drag: none;
 }
 
