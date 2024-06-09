@@ -28,7 +28,7 @@ function Form({ rotation, videoId, timecode, lang }) {
     setIsSubmitted(true);
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbzvwiuDkdY_co4Wbmec0Mh-JSHxx2HFsDcj5VloDhaYN1i0y_rgygpkLawGw3iSKELAng/exec",
+      "https://script.google.com/macros/s/AKfycbwBy1K1Aj7uSWqxZFpsTJH487FEUfgcEYoJfKcOO3n93CSQbaeT7_53jVjMfvKT88n5tQ/exec",
       {
         method: "POST",
         body: JSON.stringify(formData),
