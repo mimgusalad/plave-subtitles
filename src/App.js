@@ -30,7 +30,7 @@ function App() {
   const tabName = "Database";
   localStorage.setItem("lang", "ko");
   sessionStorage.setItem("fontSize", isMobile && !isTablet ? 14 : 18);
-  sessionStorage.setItem("offset", isMobile ? (!isTablet ? -5 : -30) : -50);
+  sessionStorage.setItem("offset", isMobile ? (!isTablet ? 15 : -10) : -30);
   localStorage.setItem("modal", "true");
   localStorage.setItem("type", "b");
 

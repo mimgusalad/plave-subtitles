@@ -12,6 +12,7 @@ function Form({ rotation, videoId, timecode, lang }) {
     Timecode: "",
     Message: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -50,16 +51,31 @@ function Form({ rotation, videoId, timecode, lang }) {
     setTimeout(() => {
       setIsSubmitted(true);
       toast.classList.remove("show");
+      const element = document.getElementById("form-button");
+      element.style.display = "";
     }, 1000);
   };
 
   const handleCancel = () => {
     setIsSubmitted(true);
+    setIsOpen(false);
   };
 
   const toggleForm = () => {
     setIsSubmitted(!isSubmitted);
+    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const formContainer = document.getElementsByClassName(
+      "mobile-form-container"
+    )[0];
+    if (isOpen) {
+      formContainer.style.zIndex = "10";
+    } else {
+      formContainer.style.zIndex = "-1";
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const formContainer = document.getElementsByClassName(
