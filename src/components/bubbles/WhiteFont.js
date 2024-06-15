@@ -23,13 +23,19 @@ function WhiteFont({ message: line }) {
             <img
               src={process.env.PUBLIC_URL + "/img/symbol/" + speakerImage}
               style={{
-                height: "3em",
+                height: "2.6em",
               }}
             />
           </i>
           <div
             className="chat-bubble"
-            style={ChatBubble(colors, nameConverter(result.speaker))}
+            style={ChatBubble(
+              colors,
+              nameConverter(result.speaker),
+              speakerRadius,
+              speakerPadding,
+              speakerMargin
+            )}
           >
             <span className="speaker-label" style={SpeakerLabel}></span>
             <span className="speech" style={Speech}>
@@ -64,28 +70,58 @@ const BubbleContainer = {
 const IconStyle = {
   position: "absolute",
   width: "fit-content",
-  left: "-0.8em",
-  top: "-0.8em",
+  left: "-0.1em",
+  top: "-0.6em",
   zIndex: "1",
 };
 
-const ChatBubble = (colors, speaker) => ({
+const speakerRadius = {
+  bamby: "2em 1.1em 1.1em 0",
+  noah: "1.1em 1.1em 1.1em 1.1em",
+  yejun: "0 1.1em 1.1em 0",
+  eunho: "1.1em 1.1em 1.1em 0",
+  hamin: "1.1em 1.1em 1.1em 0",
+};
+
+const speakerPadding = {
+  bamby: "3px 14px 3px 1.6em",
+  noah: "3px 14px 3px 1.6em",
+  yejun: "3px 14px 3px 1.1em",
+  eunho: "3px 14px 3px 1.6em",
+  hamin: "3px 14px 3px 1.6em",
+};
+
+const speakerMargin = {
+  bamby: "0.2em 0",
+  noah: "0.2em 0",
+  yejun: "0.2em 0 0.2em 0.5em",
+  eunho: "0.2em 0",
+  hamin: "0.2em 0",
+};
+
+const ChatBubble = (
+  colors,
+  speaker,
+  speakerRadius,
+  speakerPadding,
+  speakerMargin
+) => ({
   backgroundColor: colors[speaker][0],
-  borderRadius: speaker === "bamby" ? "1.1em 1.1em 1.1em 0" : "1.1em",
-  padding: "1px 1em 1px 1.5em",
+  borderRadius: speakerRadius[speaker],
+  padding: speakerPadding[speaker],
   display: "flex",
   alignItems: "center",
   maxWidth: "100vw",
   wordWrap: "break-word",
   position: "relative",
 
-  margin: "0.2em 0",
+  margin: speakerMargin[speaker],
 });
 
 const DefaultChatBubble = (colors) => ({
   backgroundColor: "rgb(0,0,0,0.8)",
   borderRadius: "1.1em",
-  padding: "0 1em",
+  padding: "0 12px",
   display: "flex",
   alignItems: "center",
   maxWidth: "100vw",

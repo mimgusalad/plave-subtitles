@@ -9,8 +9,7 @@ export async function getSubtitles(videoId, subtitleCode) {
     const subtitleHashTable = {};
     for (let i = 0; i < subtitles.length; i++) {
       const subtitle = subtitles[i];
-      const startTimeInSeconds = subtitle.startTime;
-      subtitleHashTable[startTimeInSeconds] = subtitle;
+      subtitleHashTable[subtitle.startTime] = subtitle;
     }
     return subtitleHashTable;
   } catch (e) {

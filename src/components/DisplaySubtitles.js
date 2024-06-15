@@ -32,19 +32,7 @@ function DisplaySubtitles({ subtitles, type }) {
           case "8":
             return <BlackFontWithName2 key={index} message={trimmedLine} />;
           default:
-            return (
-              <div
-                className="default-subtitle"
-                style={{
-                  backgroundColor: "rgba(0,0,0,0.8)",
-                  padding: "0.1em 0.5em",
-                  color: "white",
-                  height: "fit-content",
-                }}
-              >
-                {trimmedLine}
-              </div>
-            );
+            return <DefaultStyle key={index} trimmedLine={trimmedLine} />;
         }
       })}
     </>
@@ -52,3 +40,19 @@ function DisplaySubtitles({ subtitles, type }) {
 }
 
 export default DisplaySubtitles;
+
+const DefaultStyle = ({ trimmedLine }) => {
+  return (
+    <div
+      className="default-subtitle"
+      style={{
+        backgroundColor: "rgba(0,0,0,0.8)",
+        padding: "0.1em 0.5em",
+        color: "white",
+        height: "fit-content",
+      }}
+    >
+      {trimmedLine}
+    </div>
+  );
+};

@@ -181,19 +181,48 @@ function YouTubePlayer() {
   useEffect(() => {
     if (player) {
       const interval = setInterval(() => {
-        setCurrentTime(Math.floor(player.getCurrentTime()));
-      }, 100);
+        setCurrentTime(player.getCurrentTime().toFixed(2));
+      }, 10);
+
       return () => clearInterval(interval);
     }
   }, [player]);
 
   /* 동영상 현재 시간에 따른 자막 송출 */
   useEffect(() => {
-    if (subtitleHashTable && currentTime in subtitleHashTable) {
-      const subtitleText = subtitleHashTable[currentTime].text;
-      // Split by speaker labels and keep the labels
-      const parsedSubtitles = subtitleText.split(/(?=\[.*?\])/).filter(Boolean);
-      setSubtitles(parsedSubtitles);
+    const subtitleContainer =
+      document.getElementsByClassName("subtitle-container")[0];
+
+    if (!subtitleContainer) {
+      return;
+    }
+
+    subtitleContainer.style.display = "none";
+
+    if (subtitleHashTable) {
+      for (const key in subtitleHashTable) {
+        const {
+          text: subtitleText,
+          startTime,
+          endTime,
+        } = subtitleHashTable[key];
+
+        // Check if the current time falls within the start and end times
+        if (
+          parseFloat(currentTime) >= parseFloat(startTime) &&
+          parseFloat(currentTime) <= parseFloat(endTime)
+        ) {
+          if (subtitleText !== "null") {
+            subtitleContainer.style.display = "block";
+            // Split by speaker labels and keep the labels
+            const parsedSubtitles = subtitleText
+              .split(/(?=\[.*?\])/)
+              .filter(Boolean);
+            setSubtitles(parsedSubtitles);
+          }
+          break;
+        }
+      }
     }
   }, [currentTime, subtitleHashTable]);
 
