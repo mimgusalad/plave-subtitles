@@ -161,16 +161,16 @@ function YouTubePlayer() {
       let selectedSubtitles;
       switch (language) {
         case "ko":
-          selectedSubtitles = await getSubtitles(videoId, "korean");
+          selectedSubtitles = await getSubtitles(videoId, "ko");
           break;
         case "en":
-          selectedSubtitles = await getSubtitles(videoId, "english");
+          selectedSubtitles = await getSubtitles(videoId, "en");
           break;
         case "ja":
-          selectedSubtitles = await getSubtitles(videoId, "japanese");
+          selectedSubtitles = await getSubtitles(videoId, "ja");
           break;
         default:
-          selectedSubtitles = await getSubtitles(videoId, "korean");
+          selectedSubtitles = await getSubtitles(videoId, "ko");
       }
       subtitleCache.current[language] = selectedSubtitles;
       return selectedSubtitles;

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function getSubtitles(videoId, subtitleCode) {
+export async function getSubtitles(videoId, langCode) {
   try {
-    const response = await axios.get(
-      `https://mimgusalad.github.io/plave/subtitle/${videoId}/${subtitleCode}.json`
-    );
+    const response = await axios.get("http://localhost:8080/file/subtitle", {
+      params: { videoId, langCode },
+    });
     const subtitles = response.data;
     const subtitleHashTable = {};
     for (let i = 0; i < subtitles.length; i++) {
