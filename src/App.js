@@ -60,6 +60,7 @@ function App() {
 
     setScreenSize();
     fetchData();
+    fetchPlaylistItems();
   }, []);
 
   const style = {
@@ -162,4 +163,25 @@ const theme = createTheme({
 const setScreenSize = () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+
+const fetchPlaylistItems = async () => {
+  const API_KEY = "AIzaSyBgR_nlX6og5FA6WKatAY-bDEFg8nthuD4";
+  const PLAYLIST_ID = "PLbdyoOZYSLOq226mMTKcKzYhfY_p3DcTR";
+  try {
+    const response = await axios.get(
+      "https://www.googleapis.com/youtube/v3/playlistItems",
+      {
+        params: {
+          part: "snippet",
+          maxResults: 25,
+          playlistId: PLAYLIST_ID,
+          key: API_KEY,
+        },
+      }
+    );
+    console.log("Response Data:", response.data.items);
+  } catch (e) {
+    console.error(e);
+  }
 };

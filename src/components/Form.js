@@ -11,6 +11,7 @@ function Form({ rotation, videoId, timecode, lang }) {
     VideoId: "",
     Timecode: "",
     Message: "",
+    SheetName: "Feedback",
   });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,8 +19,9 @@ function Form({ rotation, videoId, timecode, lang }) {
     setFormData({
       Timestamp: new Date().toLocaleString(),
       VideoId: videoId,
-      Timecode: timecode,
+      Timecode: secondsToHms(timecode),
       Message: e.target.value,
+      SheetName: "Feedback",
     });
   };
 
@@ -28,22 +30,29 @@ function Form({ rotation, videoId, timecode, lang }) {
     setIsSubmitted(true);
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbwBy1K1Aj7uSWqxZFpsTJH487FEUfgcEYoJfKcOO3n93CSQbaeT7_53jVjMfvKT88n5tQ/exec",
+      "https://script.google.com/macros/s/AKfycbyMzogKSSRM0JnmU0pcb22vN-2IVO48lmEaoJvp3o9O59JJ8_R4iuLVBj2pYx-N3fx84w/exec",
       {
         method: "POST",
         body: JSON.stringify(formData),
         mode: "no-cors",
       }
-    );
-
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
     const form = document.getElementById("form");
-    form.reset();
+    // form.reset();
 
     setFormData({
       Timestamp: "",
       VideoId: "",
       Timecode: "",
       Message: "",
+      SheetName: "Feedback",
     });
 
     const toast = document.getElementById("toast");

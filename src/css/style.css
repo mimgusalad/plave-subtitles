@@ -139,11 +139,13 @@ ul.language-selector li {
   color: black;
   font-size: 14px;
   font-weight: 400;
+  text-align: center;
 }
 
 #toast.show {
   visibility: visible;
   animation: fadein 0.2s, fadeout 0.2s 1.5s;
+  text-align: center;
 }
 
 @keyframes fadein {
