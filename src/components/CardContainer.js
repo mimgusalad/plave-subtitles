@@ -5,9 +5,7 @@ import getClassName from "../utils/getClassName";
 
 function CardContainer({ videoData }) {
   const cards = useMemo(() => {
-    return videoData.map((video) => (
-      <Card key={video.VideoId} videoId={video.VideoId} />
-    ));
+    return videoData.map((video) => <Card key={video.VideoId} data={video} />);
   }, [videoData]);
 
   return <>{cards}</>;
@@ -19,12 +17,11 @@ function Card(props) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const handleNavigation = () => {
-    navigate("/watch?videoId=" + props.videoId);
+    navigate("/watch?videoId=" + props.data.VideoId);
   };
   const handleImageLoad = () => {
     setLoading(false);
   };
-
   return (
     <div className={getClassName()} onClick={handleNavigation}>
       {loading && (
@@ -41,7 +38,8 @@ function Card(props) {
       )}
       <img
         key={props.videoId}
-        src={`https://mimgusalad.github.io/plave/thumbnail/${props.videoId}.avif`}
+        src={props.data.Thumbnail}
+        width={400}
         alt="thumbnail"
         onLoad={handleImageLoad}
         style={loading ? { display: "none" } : {}}

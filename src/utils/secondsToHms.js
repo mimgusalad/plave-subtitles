@@ -5,8 +5,9 @@ function secondsToHms(d) {
   const s = Math.floor(d % 60);
 
   const hDisplay = h > 0 ? h + ":" : "";
-  const mDisplay = m > 0 ? m + ":" : "00:";
-  const sDisplay = s > 0 ? (s < 10 ? "0" : "") + s : "00";
+  const mDisplay = m < 10 ? "0" + m + ":" : m + ":";
+  const sDisplay = s < 10 ? "0" + s : s;
+
   return hDisplay + mDisplay + sDisplay;
 }
 

@@ -14,12 +14,13 @@ function Form({ rotation, videoId, timecode, lang }) {
     SheetName: "Feedback",
   });
   const [isOpen, setIsOpen] = useState(false);
-
+  const scriptUrl =
+    "https://script.google.com/macros/s/AKfycbyDPazGVKNm8UnqkOlsCaVHfGBUyX364esXIt4G_gxtspx3RAvfviljVxp5Nptk0OHvZg/exec";
   const handleChange = (e) => {
     setFormData({
       Timestamp: new Date().toLocaleString(),
       VideoId: videoId,
-      Timecode: secondsToHms(timecode),
+      Timecode: "d" + secondsToHms(timecode),
       Message: e.target.value,
       SheetName: "Feedback",
     });
@@ -29,14 +30,11 @@ function Form({ rotation, videoId, timecode, lang }) {
     e.preventDefault();
     setIsSubmitted(true);
 
-    fetch(
-      "https://script.google.com/macros/s/AKfycbyMzogKSSRM0JnmU0pcb22vN-2IVO48lmEaoJvp3o9O59JJ8_R4iuLVBj2pYx-N3fx84w/exec",
-      {
-        method: "POST",
-        body: JSON.stringify(formData),
-        mode: "no-cors",
-      }
-    )
+    fetch(scriptUrl, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      mode: "no-cors",
+    })
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
