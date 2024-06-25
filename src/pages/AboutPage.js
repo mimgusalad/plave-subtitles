@@ -10,7 +10,6 @@ function AboutPage() {
   const [isViewOpen, setIsViewOpen] = useState(false);
   const [isSubtitleOpen, setIsSubtitleOpen] = useState(false);
   const [isTranslationOpen, setIsTranslationOpen] = useState(false);
-  const [isDevelopmentOpen, setIsDevelopmentOpen] = useState(false);
 
   const handleJapanese = () => {
     const element = document.getElementsByClassName("about-content")[0];
