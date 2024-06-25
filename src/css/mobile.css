@@ -35,7 +35,6 @@
     justify-content: first baseline;
     align-items: center;
     margin: 0 10px;
-    /* height: calc(var(--vh, 1vh) * 74); */
     height: 74dvh;
     overflow-y: scroll;
     position: relative;

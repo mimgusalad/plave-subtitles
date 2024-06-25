@@ -61,14 +61,6 @@ function AboutPage() {
             <p>{content[selectedLang]["translation"]["content"]}</p>
           )}
           <p></p>
-          <span onClick={() => setIsDevelopmentOpen(!isDevelopmentOpen)}>
-            {`📃 `}
-            {content[selectedLang]["development"]["title"]}
-          </span>
-          {isDevelopmentOpen && (
-            <p>{content[selectedLang]["development"]["content"]}</p>
-          )}
-          <p></p>
           <p>{content[selectedLang]["p2"]}</p>
           <p>{content[selectedLang]["last"]}</p>
           <p>{content[selectedLang]["p3"]}</p>
