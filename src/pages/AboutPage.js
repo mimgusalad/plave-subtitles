@@ -2,7 +2,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { IconButton, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import content from "../about-content";
+// import content from "../about-content";
 import "../css/about.css";
 
 function AboutPage() {
@@ -36,7 +36,8 @@ function AboutPage() {
       </ul>
       <div id="about-page">
         <div className="about-content">
-          <p>{content[selectedLang]["intro"]}</p>
+          테스트 중입니다.
+          {/* <p>{content[selectedLang]["intro"]}</p>
           <p>{content[selectedLang]["p1"]}</p>
           <span onClick={() => setIsViewOpen(!isViewOpen)}>
             {`📃 `}
@@ -64,7 +65,7 @@ function AboutPage() {
           <p>{content[selectedLang]["last"]}</p>
           <p>{content[selectedLang]["p3"]}</p>
           <p>{content[selectedLang]["p4"]}</p>
-          <p>{content[selectedLang]["p5"]}</p>
+          <p>{content[selectedLang]["p5"]}</p> */}
           <Email />
         </div>
       </div>
