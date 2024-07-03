@@ -36,7 +36,7 @@ function AboutPage() {
       </ul>
       <div id="about-page">
         <div className="about-content">
-          테스트 중입니다.
+          테스트 중입니다. / Testing / テスト中です。
           {/* <p>{content[selectedLang]["intro"]}</p>
           <p>{content[selectedLang]["p1"]}</p>
           <span onClick={() => setIsViewOpen(!isViewOpen)}>
